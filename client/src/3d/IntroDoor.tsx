@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Volume2, VolumeX, ArrowRight, Sparkles, MoveHorizontal, ChevronDown } from 'lucide-react';
+import { Volume2, VolumeX, ArrowRight, Sparkles } from 'lucide-react';
 import { soundManager } from '../lib/audio';
 
 interface IntroDoorProps {
@@ -12,6 +12,8 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isMuted, setIsMuted] = useState(soundManager.getMuted());
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [showInvitation, setShowInvitation] = useState(false);
 
   // Refs for physics and interpolation
   const targetProgressRef = useRef(0);
@@ -25,6 +27,31 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   const isPointerDownRef = useRef(false);
   const startXRef = useRef(0);
   const startProgressRef = useRef(0);
+
+  // Lock body scrolling and detect touch device
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    const prevTouchAction = document.body.style.touchAction;
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+
+    const hasTouch =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    setIsTouchDevice(hasTouch);
+
+    // Short calm moment before displaying the invitation CTA
+    const timer = setTimeout(() => {
+      setShowInvitation(true);
+    }, 450);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.touchAction = prevTouchAction;
+      clearTimeout(timer);
+    };
+  }, []);
 
   // Reduced motion detection
   useEffect(() => {
@@ -87,33 +114,36 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     };
   }, [isMuted, triggerComplete]);
 
-  // Wheel & Trackpad scroll listener (intercepts scroll to control progress)
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      // Prevent browser from scrolling main page behind the intro
-      e.preventDefault();
+  // Dedicated tap-to-enter trigger (smoothly animates doors open)
+  const handleEnter = useCallback(() => {
+    if (isCompletingRef.current) return;
+    targetProgressRef.current = 1;
+    setHasInteracted(true);
+  }, []);
 
+  // Desktop-only Wheel & Trackpad scroll listener (active ONLY while intro is mounted)
+  useEffect(() => {
+    if (isTouchDevice) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
       if (isCompletingRef.current) return;
       setHasInteracted(true);
 
-      // Normalize delta across mice vs smooth trackpads
       const rawDelta = e.deltaY;
-      const normalizedDelta = Math.sign(rawDelta) * Math.min(Math.abs(rawDelta) * 0.0016, 0.065);
-
+      const normalizedDelta = Math.sign(rawDelta) * Math.min(Math.abs(rawDelta) * 0.0018, 0.075);
       targetProgressRef.current = Math.min(1, Math.max(0, targetProgressRef.current + normalizedDelta));
     };
 
-    const container = containerRef.current || window;
-    container.addEventListener('wheel', handleWheel as any, { passive: false });
-
+    window.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      container.removeEventListener('wheel', handleWheel as any);
+      window.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [isTouchDevice]);
 
-  // Pointer / Touch / Mouse Drag handlers for direct physical touch control
+  // Pointer Drag handlers for desktop mouse interaction
   const handlePointerDown = (e: React.PointerEvent) => {
-    if (isCompletingRef.current) return;
+    if (isCompletingRef.current || e.pointerType === 'touch') return;
     isPointerDownRef.current = true;
     startXRef.current = e.clientX;
     startProgressRef.current = targetProgressRef.current;
@@ -121,35 +151,18 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isPointerDownRef.current || isCompletingRef.current) {
-      // On desktop mouse hover (without drag), subtly influence progress if user moves across center
+    if (!isPointerDownRef.current || isCompletingRef.current || e.pointerType === 'touch') {
       return;
     }
 
     const deltaX = Math.abs(e.clientX - startXRef.current);
-    // Dragging outward from initial grab point opens the door
-    const progressGain = (deltaX / 300);
+    const progressGain = deltaX / 300;
     targetProgressRef.current = Math.min(1, Math.max(0, startProgressRef.current + progressGain));
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (e.pointerType === 'touch') return;
     isPointerDownRef.current = false;
-  };
-
-  // Touch Swipe for mobile devices
-  const touchStartYRef = useRef(0);
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartYRef.current = e.touches[0].clientY;
-    setHasInteracted(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isCompletingRef.current) return;
-    const currentY = e.touches[0].clientY;
-    const deltaY = (touchStartYRef.current - currentY) * 0.0035; // Swipe upward opens door
-    touchStartYRef.current = currentY;
-
-    targetProgressRef.current = Math.min(1, Math.max(0, targetProgressRef.current + deltaY));
   };
 
   // Ambient floating gold particles
@@ -235,8 +248,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
       style={{
         position: 'fixed',
         inset: 0,
@@ -247,13 +258,14 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        cursor: progress < 0.95 ? 'grab' : 'default',
+        cursor: progress < 0.95 ? 'pointer' : 'default',
         userSelect: 'none',
         transition: 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
         opacity: isFadingOut ? 0 : 1,
-        pointerEvents: isFadingOut ? 'none' : 'auto'
+        pointerEvents: isFadingOut ? 'none' : 'auto',
+        touchAction: 'none'
       }}
-      aria-label="Welcome to Mitrangan Rehabilitation Kendra - User Controlled Door Opening"
+      aria-label="Welcome to Mitrangan Rehabilitation Kendra - Door Opening Intro"
     >
       {/* Background Particle Canvas */}
       <canvas
@@ -387,15 +399,25 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
           </p>
         </div>
 
-        {/* 2. SYMMETRICAL 3D DOUBLE-DOOR PORTAL (CONTROLLED BY USER PROGRESS) */}
+        {/* 2. SYMMETRICAL 3D DOUBLE-DOOR PORTAL (TAP OR CLICK TO OPEN) */}
         <div
+          onClick={handleEnter}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleEnter();
+            }
+          }}
           style={{
             position: 'relative',
             width: 'clamp(300px, 85vw, 420px)',
             height: 'clamp(410px, 56vh, 530px)',
             perspective: '1500px',
-            perspectiveOrigin: 'center center'
+            perspectiveOrigin: 'center center',
+            cursor: progress < 0.95 ? 'pointer' : 'default'
           }}
+          title={isTouchDevice ? 'Tap to open the door' : 'Click to open the door'}
         >
           {/* Architectural Arch Outer Frame */}
           <div
@@ -716,38 +738,43 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* 3. INTERACTIVE AFFORDANCE HINT (Fades out as user interacts) */}
-        <div
-          onClick={() => {
-            // Clicking advances progress
-            targetProgressRef.current = Math.min(1, targetProgressRef.current + 0.35);
-            setHasInteracted(true);
+        {/* 3. DEDICATED INVITATION / ENTER BUTTON */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleEnter();
           }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.6rem',
-            padding: '0.55rem 1.4rem',
+            gap: '0.65rem',
+            padding: isTouchDevice ? '0.75rem 1.85rem' : '0.62rem 1.6rem',
             borderRadius: '9999px',
-            background: 'rgba(7, 18, 13, 0.85)',
-            border: '1px solid rgba(212, 175, 55, 0.35)',
-            backdropFilter: 'blur(12px)',
-            color: 'var(--accent-gold)',
-            fontSize: '0.85rem',
+            background: 'linear-gradient(135deg, rgba(26, 77, 54, 0.95) 0%, rgba(7, 18, 13, 0.98) 100%)',
+            border: '1.5px solid var(--accent-gold)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            color: 'var(--text-ivory)',
+            fontSize: isTouchDevice ? '0.96rem' : '0.88rem',
             fontWeight: 600,
             letterSpacing: '0.06em',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.6)',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.8), 0 0 24px rgba(212, 175, 55, 0.28)',
             cursor: 'pointer',
-            opacity: Math.max(0, 1 - progress * 6),
-            transform: `translateY(${progress * -15}px)`,
-            transition: 'opacity 0.3s ease, transform 0.3s ease',
-            pointerEvents: progress > 0.15 ? 'none' : 'auto'
+            opacity: showInvitation ? Math.max(0, 1 - progress * 4.5) : 0,
+            transform: `translateY(${progress * -15}px) scale(${showInvitation ? 1 : 0.92})`,
+            transition: 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease',
+            pointerEvents: progress > 0.15 ? 'none' : 'auto',
+            outline: 'none'
           }}
+          aria-label={isTouchDevice ? 'Tap to enter Mitrangan website' : 'Click or scroll to enter Mitrangan website'}
         >
-          <MoveHorizontal size={16} />
-          <span>Scroll down or drag to open the door</span>
-          <ChevronDown size={15} style={{ animation: 'bounce 1.5s infinite' }} />
-        </div>
+          <Sparkles size={16} color="var(--accent-gold)" />
+          <span style={{ color: 'var(--accent-gold)' }}>
+            {isTouchDevice ? 'Tap to Enter' : 'Click or Scroll to Enter'}
+          </span>
+          <ArrowRight size={15} color="var(--text-ivory)" />
+        </button>
       </div>
     </div>
   );

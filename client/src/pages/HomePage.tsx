@@ -13,11 +13,23 @@ import { Link } from 'wouter';
 import { Heart, ShieldCheck, Phone, CheckCircle2, ArrowRight, Sparkles, MapPin, MessageCircle, HeartHandshake } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
-  // Always play the door intro experience on initial page load / refresh
-  const [showIntro, setShowIntro] = useState(true);
+  // One-time door intro: only plays on first entrance per browser session
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return !sessionStorage.getItem('mitrangan_door_intro_shown');
+    } catch {
+      return false;
+    }
+  });
   const [aboutVisualMode, setAboutVisualMode] = useState<'sanctuary' | 'actual'>('sanctuary');
 
   const handleIntroComplete = () => {
+    try {
+      sessionStorage.setItem('mitrangan_door_intro_shown', 'true');
+    } catch {
+      // ignore in storage-restricted contexts
+    }
     setShowIntro(false);
   };
 

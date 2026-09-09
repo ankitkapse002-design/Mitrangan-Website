@@ -285,10 +285,9 @@ export const MitranganChatbot: React.FC = () => {
           position: fixed;
           bottom: 86px;
           right: 24px;
-          width: clamp(355px, 24vw, 385px);
-          height: clamp(480px, 58vh, 545px);
-          max-height: min(545px, calc(100vh - 180px));
-          max-width: calc(100vw - 48px);
+          width: 380px;
+          height: min(525px, calc(100vh - 120px));
+          max-width: calc(100vw - 32px);
           z-index: 96;
           background: rgba(7, 18, 13, 0.97);
           border: 1px solid rgba(212, 175, 55, 0.35);
@@ -320,10 +319,9 @@ export const MitranganChatbot: React.FC = () => {
           .kartik-panel {
             bottom: 80px;
             right: 20px;
-            width: min(360px, calc(100vw - 40px));
-            height: clamp(460px, 56vh, 510px);
-            max-height: min(510px, calc(100vh - 170px));
-            max-width: calc(100vw - 40px);
+            width: min(370px, calc(100vw - 36px));
+            height: min(495px, calc(100vh - 110px));
+            max-width: calc(100vw - 36px);
           }
           .kartik-greeting-bubble {
             bottom: 60px;
@@ -340,12 +338,14 @@ export const MitranganChatbot: React.FC = () => {
             height: 48px;
           }
           .kartik-panel {
-            bottom: 72px;
-            right: 14px;
-            width: calc(100vw - 28px);
-            height: clamp(440px, 62vh, 490px);
-            max-height: min(490px, calc(100vh - 165px));
-            max-width: calc(100vw - 28px);
+            bottom: 74px;
+            right: 12px;
+            left: 12px;
+            width: auto;
+            max-width: 380px;
+            margin-left: auto;
+            height: min(470px, calc(100dvh - 90px), calc(100vh - 90px));
+            border-radius: 16px;
           }
           .kartik-greeting-bubble {
             bottom: 56px;
