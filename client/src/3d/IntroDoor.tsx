@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Volume2, VolumeX, ArrowRight, Sparkles } from 'lucide-react';
-import { soundManager } from '../lib/audio';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface IntroDoorProps {
   onComplete: () => void;
@@ -10,7 +9,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   // Central normalized door progress: 0.0 (closed) -> 1.0 (fully open)
   const [progress, setProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [isMuted, setIsMuted] = useState(soundManager.getMuted());
   const [hasInteracted, setHasInteracted] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [showInvitation, setShowInvitation] = useState(false);
@@ -18,7 +16,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   // Refs for physics and interpolation
   const targetProgressRef = useRef(0);
   const currentProgressRef = useRef(0);
-  const hasChimedRef = useRef(false);
   const isCompletingRef = useRef(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -67,15 +64,10 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     isCompletingRef.current = true;
     setIsFadingOut(true);
 
-    if (!isMuted && !hasChimedRef.current) {
-      soundManager.playGentleChime();
-      hasChimedRef.current = true;
-    }
-
     setTimeout(() => {
       onComplete();
     }, 700);
-  }, [isMuted, onComplete]);
+  }, [onComplete]);
 
   // Physics animation loop: smoothly interpolates currentProgress -> targetProgress
   useEffect(() => {
@@ -93,12 +85,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
       // Update React state
       setProgress(currentProgressRef.current);
 
-      // Play chime when unlatching (passed 15% open)
-      if (currentProgressRef.current > 0.15 && !hasChimedRef.current && !isMuted) {
-        soundManager.playGentleChime();
-        hasChimedRef.current = true;
-      }
-
       // Check for completion threshold (~95% open)
       if (currentProgressRef.current >= 0.95 && !isCompletingRef.current) {
         triggerComplete();
@@ -112,7 +98,7 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     return () => {
       cancelAnimationFrame(animId);
     };
-  }, [isMuted, triggerComplete]);
+  }, [triggerComplete]);
 
   // Dedicated tap-to-enter trigger (smoothly animates doors open)
   const handleEnter = useCallback(() => {
@@ -220,11 +206,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     };
   }, []);
 
-  const toggleSound = () => {
-    const muted = soundManager.toggleMute();
-    setIsMuted(muted);
-  };
-
   const handleSkip = () => {
     triggerComplete();
   };
@@ -291,31 +272,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
           zIndex: 60
         }}
       >
-        <button
-          onClick={e => {
-            e.stopPropagation();
-            toggleSound();
-          }}
-          style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(212, 175, 55, 0.3)',
-            borderRadius: '9999px',
-            color: '#FAF8F5',
-            padding: '0.45rem 0.9rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            cursor: 'pointer',
-            fontSize: '0.85rem',
-            backdropFilter: 'blur(8px)',
-            transition: 'all 0.2s ease'
-          }}
-          title={isMuted ? 'Turn Sound On' : 'Turn Sound Off'}
-          aria-label={isMuted ? 'Turn Sound On' : 'Turn Sound Off'}
-        >
-          {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} color="#D4AF37" />}
-          <span style={{ fontSize: '0.82rem' }}>{isMuted ? 'Sound Off' : 'Sound On'}</span>
-        </button>
 
         <button
           onClick={e => {
