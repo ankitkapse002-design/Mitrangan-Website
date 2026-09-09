@@ -1,0 +1,32 @@
+[build]
+  command = "npm run build"
+  publish = "dist/public"
+  functions = "netlify/functions"
+
+# Route API requests to Netlify serverless function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+
+# Legacy SEO redirects
+[[redirects]]
+  from = "/about-us"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/press-or-government-program"
+  to = "/press"
+  status = 301
+
+# Single Page App fallback for React client routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

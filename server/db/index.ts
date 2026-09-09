@@ -2,24 +2,38 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 import pg from 'pg';
+import dotenv from 'dotenv';
 import type { RegistrationRecord, AdmissionStatus, StatsOverview, AuditLogEntry, AdminUser, BlogPostRecord } from '../../shared/types.js';
 import type { BlogPostInput } from '../../shared/schema.js';
 
+dotenv.config();
+
 const { Pool } = pg;
 
-// Check if PostgreSQL DATABASE_URL is configured
-const dbUrl = process.env.DATABASE_URL?.trim();
 let pgPool: pg.Pool | null = null;
 
-if (dbUrl) {
-  try {
-    pgPool = new Pool({ connectionString: dbUrl, ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined });
-    console.log('[DB] Connecting to PostgreSQL database...');
-  } catch (err) {
-    console.warn('[DB] Could not initialize PostgreSQL Pool, falling back to durable local storage:', err);
-    pgPool = null;
+// Get or initialize PostgreSQL pool with Supabase SSL support
+export function getPgPool(): pg.Pool | null {
+  if (pgPool) return pgPool;
+  const dbUrl = process.env.DATABASE_URL?.trim();
+  if (dbUrl) {
+    try {
+      const isSslNeeded = dbUrl.includes('supabase') || dbUrl.includes('sslmode=require') || process.env.NODE_ENV === 'production';
+      pgPool = new Pool({
+        connectionString: dbUrl,
+        ssl: isSslNeeded ? { rejectUnauthorized: false } : undefined
+      });
+      console.log('[DB] Connecting to PostgreSQL database...');
+    } catch (err) {
+      console.warn('[DB] Could not initialize PostgreSQL Pool, falling back to durable local storage:', err);
+      pgPool = null;
+    }
   }
+  return pgPool;
 }
+
+// Initial probe
+getPgPool();
 
 // Fallback JSON storage setup
 const DATA_DIR = path.resolve(process.cwd(), 'server/data');
@@ -157,10 +171,11 @@ export async function initDatabase() {
   const initialAdminPass = process.env.ADMIN_INITIAL_PASSWORD || '@kartik9767';
   const passwordHash = await bcrypt.hash(initialAdminPass, 10);
 
-  if (pgPool) {
+  const pool = getPgPool();
+  if (pool) {
     try {
       // Create PostgreSQL tables
-      await pgPool.query(`
+      await pool.query(`
         CREATE TABLE IF NOT EXISTS registrations (
           id SERIAL PRIMARY KEY,
           user_id VARCHAR(30) UNIQUE NOT NULL,
@@ -191,14 +206,55 @@ export async function initDatabase() {
           details JSONB,
           timestamp TIMESTAMPTZ DEFAULT NOW()
         );
+
+        CREATE TABLE IF NOT EXISTS blogs (
+          id SERIAL PRIMARY KEY,
+          slug VARCHAR(200) UNIQUE NOT NULL,
+          title VARCHAR(300) NOT NULL,
+          subtitle VARCHAR(300),
+          category VARCHAR(100) DEFAULT 'Recovery Guide',
+          date VARCHAR(100),
+          author VARCHAR(150) DEFAULT 'Mitrangan Clinical Editorial Team',
+          read_time VARCHAR(50) DEFAULT '5 min read',
+          excerpt TEXT,
+          cover_image TEXT,
+          content JSONB NOT NULL,
+          created_at TIMESTAMPTZ DEFAULT NOW(),
+          updated_at TIMESTAMPTZ DEFAULT NOW()
+        );
       `);
 
       // Seed initial admin if not exists
-      const checkAdmin = await pgPool.query('SELECT id FROM admin_users WHERE username = $1', [initialAdminUser]);
+      const checkAdmin = await pool.query('SELECT id FROM admin_users WHERE username = $1', [initialAdminUser]);
       if (checkAdmin.rowCount === 0) {
-        await pgPool.query('INSERT INTO admin_users (username, password_hash) VALUES ($1, $2)', [initialAdminUser, passwordHash]);
+        await pool.query('INSERT INTO admin_users (username, password_hash) VALUES ($1, $2)', [initialAdminUser, passwordHash]);
         console.log(`[DB] Seeded initial administrator: ${initialAdminUser}`);
       }
+
+      // Seed initial blogs if not exists
+      const checkBlogs = await pool.query('SELECT count(*) as count FROM blogs');
+      if (parseInt(checkBlogs.rows[0].count, 10) === 0) {
+        for (const b of INITIAL_BLOGS) {
+          await pool.query(`
+            INSERT INTO blogs (slug, title, subtitle, category, date, author, read_time, excerpt, cover_image, content)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            ON CONFLICT (slug) DO NOTHING
+          `, [
+            b.slug,
+            b.title,
+            b.subtitle,
+            b.category,
+            b.date,
+            b.author,
+            b.read_time,
+            b.excerpt,
+            b.cover_image,
+            JSON.stringify(b.content)
+          ]);
+        }
+        console.log(`[DB] Seeded initial clinical blogs in PostgreSQL.`);
+      }
+
       console.log('[DB] PostgreSQL initialized successfully.');
       return;
     } catch (err) {
@@ -536,31 +592,134 @@ export async function getAuditLogs(limit: number = 30): Promise<AuditLogEntry[]>
 // Dynamic Blog Platform Operations
 // -------------------------------------------------------------
 export async function getBlogs(): Promise<BlogPostRecord[]> {
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM blogs ORDER BY created_at DESC');
+    return res.rows.map(r => ({
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      subtitle: r.subtitle,
+      category: r.category,
+      date: r.date,
+      author: r.author,
+      read_time: r.read_time,
+      excerpt: r.excerpt,
+      cover_image: r.cover_image,
+      content: r.content,
+      created_at: r.created_at.toISOString(),
+      updated_at: r.updated_at.toISOString()
+    }));
+  }
   const db = loadLocalDB();
   return [...db.blogs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 }
 
 export async function getBlogBySlug(slug: string): Promise<BlogPostRecord | null> {
-  const db = loadLocalDB();
   const cleanSlug = slug.trim().toLowerCase();
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM blogs WHERE LOWER(slug) = $1', [cleanSlug]);
+    if (res.rowCount === 0) return null;
+    const r = res.rows[0];
+    return {
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      subtitle: r.subtitle,
+      category: r.category,
+      date: r.date,
+      author: r.author,
+      read_time: r.read_time,
+      excerpt: r.excerpt,
+      cover_image: r.cover_image,
+      content: r.content,
+      created_at: r.created_at.toISOString(),
+      updated_at: r.updated_at.toISOString()
+    };
+  }
+  const db = loadLocalDB();
   const found = db.blogs.find(b => b.slug.toLowerCase() === cleanSlug);
   return found || null;
 }
 
 export async function getLatestBlogs(limit: number = 3): Promise<BlogPostRecord[]> {
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM blogs ORDER BY created_at DESC LIMIT $1', [limit]);
+    return res.rows.map(r => ({
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      subtitle: r.subtitle,
+      category: r.category,
+      date: r.date,
+      author: r.author,
+      read_time: r.read_time,
+      excerpt: r.excerpt,
+      cover_image: r.cover_image,
+      content: r.content,
+      created_at: r.created_at.toISOString(),
+      updated_at: r.updated_at.toISOString()
+    }));
+  }
   const all = await getBlogs();
   return all.slice(0, limit);
 }
 
 export async function createBlog(data: BlogPostInput, performedBy: string = 'Admin'): Promise<BlogPostRecord> {
-  const db = loadLocalDB();
+  const pool = getPgPool();
   const now = new Date().toISOString();
-  
-  // Format readable date e.g. "September 8, 2026"
   const formattedDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-  // Generate unique slug if duplicate
   let slug = data.slug.trim().toLowerCase();
+
+  if (pool) {
+    let counter = 1;
+    while (true) {
+      const existing = await pool.query('SELECT id FROM blogs WHERE LOWER(slug) = $1', [slug]);
+      if (existing.rowCount === 0) break;
+      slug = `${data.slug.trim().toLowerCase()}-${counter++}`;
+    }
+
+    const res = await pool.query(`
+      INSERT INTO blogs (slug, title, subtitle, category, date, author, read_time, excerpt, cover_image, content, created_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      RETURNING *
+    `, [
+      slug,
+      data.title.trim(),
+      data.subtitle?.trim() || null,
+      data.category || 'Recovery Guide',
+      formattedDate,
+      data.author || 'Mitrangan Clinical Editorial Team',
+      data.read_time || '5 min read',
+      data.excerpt.trim(),
+      data.cover_image.trim(),
+      JSON.stringify(data.content),
+      now,
+      now
+    ]);
+    const r = res.rows[0];
+    await logAudit('BLOG_CREATED', performedBy, String(r.id), { title: r.title, slug: r.slug });
+    return {
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      subtitle: r.subtitle,
+      category: r.category,
+      date: r.date,
+      author: r.author,
+      read_time: r.read_time,
+      excerpt: r.excerpt,
+      cover_image: r.cover_image,
+      content: r.content,
+      created_at: r.created_at.toISOString(),
+      updated_at: r.updated_at.toISOString()
+    };
+  }
+
+  const db = loadLocalDB();
   let counter = 1;
   while (db.blogs.some(b => b.slug.toLowerCase() === slug)) {
     slug = `${data.slug.trim().toLowerCase()}-${counter++}`;
@@ -589,13 +748,55 @@ export async function createBlog(data: BlogPostInput, performedBy: string = 'Adm
 }
 
 export async function updateBlog(id: number, data: Partial<BlogPostInput>, performedBy: string = 'Admin'): Promise<BlogPostRecord | null> {
+  const pool = getPgPool();
+  const now = new Date().toISOString();
+
+  if (pool) {
+    const existingRes = await pool.query('SELECT * FROM blogs WHERE id = $1', [id]);
+    if (existingRes.rowCount === 0) return null;
+    const existing = existingRes.rows[0];
+
+    const title = data.title ? data.title.trim() : existing.title;
+    const slug = data.slug ? data.slug.trim().toLowerCase() : existing.slug;
+    const subtitle = data.subtitle !== undefined ? data.subtitle?.trim() || null : existing.subtitle;
+    const category = data.category !== undefined ? data.category : existing.category;
+    const author = data.author !== undefined ? data.author : existing.author;
+    const readTime = data.read_time !== undefined ? data.read_time : existing.read_time;
+    const excerpt = data.excerpt ? data.excerpt.trim() : existing.excerpt;
+    const coverImage = data.cover_image ? data.cover_image.trim() : existing.cover_image;
+    const content = data.content ? JSON.stringify(data.content) : JSON.stringify(existing.content);
+
+    const res = await pool.query(`
+      UPDATE blogs
+      SET title = $1, slug = $2, subtitle = $3, category = $4, author = $5, read_time = $6, excerpt = $7, cover_image = $8, content = $9, updated_at = $10
+      WHERE id = $11
+      RETURNING *
+    `, [title, slug, subtitle, category, author, readTime, excerpt, coverImage, content, now, id]);
+
+    const r = res.rows[0];
+    await logAudit('BLOG_UPDATED', performedBy, String(id), { title: r.title, slug: r.slug });
+    return {
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      subtitle: r.subtitle,
+      category: r.category,
+      date: r.date,
+      author: r.author,
+      read_time: r.read_time,
+      excerpt: r.excerpt,
+      cover_image: r.cover_image,
+      content: r.content,
+      created_at: r.created_at.toISOString(),
+      updated_at: r.updated_at.toISOString()
+    };
+  }
+
   const db = loadLocalDB();
   const index = db.blogs.findIndex(b => b.id === id);
   if (index === -1) return null;
 
-  const now = new Date().toISOString();
   const existing = db.blogs[index];
-
   const updated: BlogPostRecord = {
     ...existing,
     title: data.title ? data.title.trim() : existing.title,
@@ -617,6 +818,15 @@ export async function updateBlog(id: number, data: Partial<BlogPostInput>, perfo
 }
 
 export async function deleteBlog(id: number, performedBy: string = 'Admin'): Promise<boolean> {
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('DELETE FROM blogs WHERE id = $1 RETURNING title, slug', [id]);
+    if (res.rowCount === 0) return false;
+    const deleted = res.rows[0];
+    await logAudit('BLOG_DELETED', performedBy, String(id), { title: deleted.title, slug: deleted.slug });
+    return true;
+  }
+
   const db = loadLocalDB();
   const index = db.blogs.findIndex(b => b.id === id);
   if (index === -1) return false;
