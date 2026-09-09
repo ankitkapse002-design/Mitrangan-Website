@@ -9,8 +9,12 @@ const serverlessHandler = serverless(app);
 export const handler = async (event: any, context: any) => {
   // Ensure database schema and seeds are initialized once per lambda instance
   if (!dbInitialized) {
-    await initDatabase();
-    dbInitialized = true;
+    try {
+      await initDatabase();
+      dbInitialized = true;
+    } catch (err) {
+      console.error('[Netlify-Function] Database init error:', err);
+    }
   }
   return serverlessHandler(event, context);
 };

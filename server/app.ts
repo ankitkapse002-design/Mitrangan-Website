@@ -36,13 +36,18 @@ app.use(legacyRedirects);
 // Static assets from public
 app.use(express.static(path.resolve(rootDir, 'client/public')));
 
-// API Routes
+// API Routes - mounted at both /api and root / to support any proxy/rewrite path
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api', registrationRoutes);
+app.use('/', registrationRoutes);
+
 app.use('/api', blogRoutes);
+app.use('/', blogRoutes);
 
 // Health check
-app.get('/api/health', (_req, res) => {
+app.get(['/api/health', '/health'], (_req, res) => {
   res.json({ status: 'ok', service: 'Mitrangan Rehabilitation API', timestamp: new Date().toISOString() });
 });
 

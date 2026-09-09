@@ -12,22 +12,27 @@ const { Pool } = pg;
 
 let pgPool: pg.Pool | null = null;
 
-// Get or initialize PostgreSQL pool with Supabase SSL support
+// Get or initialize PostgreSQL pool with Supabase SSL and pooler support
 export function getPgPool(): pg.Pool | null {
   if (pgPool) return pgPool;
   const dbUrl = process.env.DATABASE_URL?.trim();
   if (dbUrl) {
     try {
-      const isSslNeeded = dbUrl.includes('supabase') || dbUrl.includes('sslmode=require') || process.env.NODE_ENV === 'production';
+      const isSslNeeded = dbUrl.includes('supabase') || dbUrl.includes('pooler') || dbUrl.includes('sslmode=require') || process.env.NODE_ENV === 'production';
       pgPool = new Pool({
         connectionString: dbUrl,
-        ssl: isSslNeeded ? { rejectUnauthorized: false } : undefined
+        ssl: isSslNeeded ? { rejectUnauthorized: false } : undefined,
+        max: 5,
+        connectionTimeoutMillis: 10000,
+        idleTimeoutMillis: 10000
       });
       console.log('[DB] Connecting to PostgreSQL database...');
     } catch (err) {
-      console.warn('[DB] Could not initialize PostgreSQL Pool, falling back to durable local storage:', err);
+      console.error('[DB] Could not initialize PostgreSQL Pool, falling back to local storage:', err);
       pgPool = null;
     }
+  } else {
+    console.warn('[DB] No DATABASE_URL provided. Falling back to local storage.');
   }
   return pgPool;
 }
@@ -35,8 +40,9 @@ export function getPgPool(): pg.Pool | null {
 // Initial probe
 getPgPool();
 
-// Fallback JSON storage setup
-const DATA_DIR = path.resolve(process.cwd(), 'server/data');
+// Fallback JSON storage setup (safe for serverless read-only filesystems)
+const isServerless = !!(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+const DATA_DIR = isServerless ? path.resolve('/tmp', 'mitrangan_data') : path.resolve(process.cwd(), 'server/data');
 const DATA_FILE = path.join(DATA_DIR, 'database.json');
 
 interface LocalDatabaseState {
@@ -48,36 +54,40 @@ interface LocalDatabaseState {
 }
 
 function loadLocalDB(): LocalDatabaseState {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(DATA_FILE)) {
-    const initialState: LocalDatabaseState = {
-      registrations: [],
-      admins: [],
-      auditLogs: [],
-      blogs: [],
-      nextId: { registrations: 1, admins: 1, auditLogs: 1, blogs: 1 }
-    };
-    fs.writeFileSync(DATA_FILE, JSON.stringify(initialState, null, 2), 'utf-8');
-    return initialState;
-  }
   try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(DATA_FILE)) {
+      const initialState: LocalDatabaseState = {
+        registrations: [],
+        admins: [],
+        auditLogs: [],
+        blogs: [],
+        nextId: { registrations: 1, admins: 1, auditLogs: 1, blogs: 1 }
+      };
+      fs.writeFileSync(DATA_FILE, JSON.stringify(initialState, null, 2), 'utf-8');
+      return initialState;
+    }
     const raw = fs.readFileSync(DATA_FILE, 'utf-8');
     const parsed = JSON.parse(raw);
     if (!parsed.blogs) parsed.blogs = [];
     if (!parsed.nextId.blogs) parsed.nextId.blogs = 1;
     return parsed;
-  } catch {
+  } catch (e) {
     return { registrations: [], admins: [], auditLogs: [], blogs: [], nextId: { registrations: 1, admins: 1, auditLogs: 1, blogs: 1 } };
   }
 }
 
 function saveLocalDB(state: LocalDatabaseState) {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn('[DB-Local] Could not write to local storage:', err);
   }
-  fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2), 'utf-8');
 }
 
 const INITIAL_BLOGS = [
@@ -318,7 +328,8 @@ export async function generateUniqueUserId(fullName: string): Promise<string> {
 
 // Database API operations
 export async function getRegistrations(filter?: { status?: string; search?: string }): Promise<RegistrationRecord[]> {
-  if (pgPool) {
+  const pool = getPgPool();
+  if (pool) {
     let query = 'SELECT * FROM registrations WHERE 1=1';
     const params: any[] = [];
 
@@ -332,7 +343,7 @@ export async function getRegistrations(filter?: { status?: string; search?: stri
     }
 
     query += ' ORDER BY created_at DESC';
-    const res = await pgPool.query(query, params);
+    const res = await pool.query(query, params);
     return res.rows.map(r => ({
       id: r.id,
       user_id: r.user_id,
@@ -369,8 +380,9 @@ export async function getRegistrations(filter?: { status?: string; search?: stri
 
 export async function getRegistrationByUserId(userId: string): Promise<RegistrationRecord | null> {
   const cleanId = userId.trim().toUpperCase();
-  if (pgPool) {
-    const res = await pgPool.query('SELECT * FROM registrations WHERE UPPER(user_id) = $1', [cleanId]);
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM registrations WHERE UPPER(user_id) = $1', [cleanId]);
     if (res.rowCount === 0) return null;
     const r = res.rows[0];
     return {
@@ -404,9 +416,10 @@ export async function createRegistration(data: {
 }): Promise<RegistrationRecord> {
   const userId = await generateUniqueUserId(data.fullName);
   const now = new Date().toISOString();
+  const pool = getPgPool();
 
-  if (pgPool) {
-    const res = await pgPool.query(`
+  if (pool) {
+    const res = await pool.query(`
       INSERT INTO registrations 
         (user_id, full_name, age, mobile_number, address, program_preference, pickup_required, admission_status, created_at, updated_at)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -470,13 +483,14 @@ export async function updateRegistrationStatus(
 ): Promise<RegistrationRecord | null> {
   const cleanId = userId.trim().toUpperCase();
   const now = new Date().toISOString();
+  const pool = getPgPool();
 
-  if (pgPool) {
-    const prevRes = await pgPool.query('SELECT * FROM registrations WHERE UPPER(user_id) = $1', [cleanId]);
+  if (pool) {
+    const prevRes = await pool.query('SELECT * FROM registrations WHERE UPPER(user_id) = $1', [cleanId]);
     if (prevRes.rowCount === 0) return null;
     const oldStatus = prevRes.rows[0].admission_status;
 
-    const res = await pgPool.query(`
+    const res = await pool.query(`
       UPDATE registrations 
       SET admission_status = $1, notes = COALESCE($2, notes), updated_at = $3
       WHERE UPPER(user_id) = $4
@@ -530,8 +544,9 @@ export async function getStats(): Promise<StatsOverview> {
 
 export async function getAdminByUsername(username: string): Promise<{ id: number; username: string; password_hash: string } | null> {
   const cleanUser = username.trim().toLowerCase();
-  if (pgPool) {
-    const res = await pgPool.query('SELECT * FROM admin_users WHERE LOWER(username) = $1', [cleanUser]);
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM admin_users WHERE LOWER(username) = $1', [cleanUser]);
     if (res.rowCount === 0) return null;
     return res.rows[0];
   }
@@ -543,9 +558,10 @@ export async function getAdminByUsername(username: string): Promise<{ id: number
 
 export async function logAudit(action: string, performedBy: string, targetId?: string, details?: any) {
   const now = new Date().toISOString();
-  if (pgPool) {
+  const pool = getPgPool();
+  if (pool) {
     try {
-      await pgPool.query(
+      await pool.query(
         'INSERT INTO audit_logs (action, performed_by, target_id, details, timestamp) VALUES ($1, $2, $3, $4, $5)',
         [action, performedBy, targetId || null, details ? JSON.stringify(details) : null, now]
       );
@@ -572,8 +588,9 @@ export async function logAudit(action: string, performedBy: string, targetId?: s
 }
 
 export async function getAuditLogs(limit: number = 30): Promise<AuditLogEntry[]> {
-  if (pgPool) {
-    const res = await pgPool.query('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT $1', [limit]);
+  const pool = getPgPool();
+  if (pool) {
+    const res = await pool.query('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT $1', [limit]);
     return res.rows.map(r => ({
       id: r.id,
       action: r.action,
