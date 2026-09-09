@@ -7,6 +7,11 @@ let dbInitialized = false;
 const serverlessHandler = serverless(app);
 
 export const handler = async (event: any, context: any) => {
+  // Prevent PostgreSQL connection pool idle sockets from keeping lambda alive
+  if (context) {
+    context.callbackWaitsForEmptyEventLoop = false;
+  }
+
   // Ensure database schema and seeds are initialized once per lambda instance
   if (!dbInitialized) {
     try {

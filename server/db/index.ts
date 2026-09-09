@@ -26,6 +26,9 @@ export function getPgPool(): pg.Pool | null {
         connectionTimeoutMillis: 10000,
         idleTimeoutMillis: 10000
       });
+      pgPool.on('error', (err) => {
+        console.error('[DB] Unexpected error on idle PostgreSQL client:', err);
+      });
       console.log('[DB] Connecting to PostgreSQL database...');
     } catch (err) {
       console.error('[DB] Could not initialize PostgreSQL Pool, falling back to local storage:', err);
@@ -268,8 +271,8 @@ export async function initDatabase() {
       console.log('[DB] PostgreSQL initialized successfully.');
       return;
     } catch (err) {
-      console.warn('[DB] PostgreSQL connection error. Falling back to local file storage.', err);
-      pgPool = null;
+      console.warn('[DB] PostgreSQL initialization warning:', err);
+      // Retain pgPool as tables and seeds may already exist
     }
   }
 

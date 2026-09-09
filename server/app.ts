@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -10,10 +9,6 @@ import blogRoutes from './routes/blogs.js';
 import legacyRedirects from './routes/redirects.js';
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, '..');
 
 export const app = express();
 
@@ -25,7 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 // Normalize path if Netlify prefixes with /.netlify/functions/api
 app.use((req, _res, next) => {
   if (req.url.startsWith('/.netlify/functions/api')) {
-    req.url = req.url.replace('/.netlify/functions/api', '') || '/';
+    let stripped = req.url.replace('/.netlify/functions/api', '');
+    if (!stripped.startsWith('/')) {
+      stripped = '/' + stripped;
+    }
+    req.url = stripped;
   }
   next();
 });
@@ -33,8 +32,15 @@ app.use((req, _res, next) => {
 // Legacy SEO URL Redirects
 app.use(legacyRedirects);
 
-// Static assets from public
-app.use(express.static(path.resolve(rootDir, 'client/public')));
+// Static assets from public (only in standalone Node runtime, Netlify CDN serves publish directory directly)
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+if (!isServerless) {
+  try {
+    app.use(express.static(path.resolve(process.cwd(), 'client/public')));
+  } catch {
+    // ignore
+  }
+}
 
 // API Routes - mounted at both /api and root / to support any proxy/rewrite path
 app.use('/api/auth', authRoutes);

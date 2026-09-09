@@ -43,7 +43,12 @@ export const StatusPage: React.FC = () => {
 
     try {
       const res = await fetch(`/api/status/${encodeURIComponent(cleanId)}`);
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // Fallback for non-JSON response
+      }
 
       if (!res.ok) {
         throw new Error(data.error || 'No admission record found with this ID.');

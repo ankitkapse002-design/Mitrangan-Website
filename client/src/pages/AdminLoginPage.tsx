@@ -26,9 +26,19 @@ export const AdminLoginPage: React.FC = () => {
         body: JSON.stringify({ username: username.trim(), password })
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // Fallback for non-JSON responses
+      }
+
       if (!res.ok) {
-        throw new Error(data.error || 'Authentication failed.');
+        throw new Error(data.error || 'Authentication failed. Please check your credentials.');
+      }
+
+      if (data.token) {
+        localStorage.setItem('mitrangan_admin_token', data.token);
       }
 
       setLocation('/admin');

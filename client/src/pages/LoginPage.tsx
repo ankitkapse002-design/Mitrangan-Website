@@ -33,9 +33,19 @@ export const LoginPage: React.FC = () => {
         })
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // Fallback if response is not JSON
+      }
+
       if (!res.ok) {
-        throw new Error(data.error || 'Login verification failed.');
+        throw new Error(data.error || 'Login verification failed. Please check your credentials.');
+      }
+
+      if (data.token) {
+        localStorage.setItem('mitrangan_patient_token', data.token);
       }
 
       // Redirect to patient dashboard

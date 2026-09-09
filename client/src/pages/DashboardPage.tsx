@@ -13,9 +13,16 @@ export const DashboardPage: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('/api/patient/record');
+        const token = localStorage.getItem('mitrangan_patient_token');
+        const headers: Record<string, string> = {};
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const res = await fetch('/api/patient/record', { headers });
         if (!res.ok) {
           if (res.status === 401) {
+            localStorage.removeItem('mitrangan_patient_token');
             setLocation('/login');
             return;
           }
@@ -34,7 +41,12 @@ export const DashboardPage: React.FC = () => {
   }, [setLocation]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/user/logout', { method: 'POST' });
+    localStorage.removeItem('mitrangan_patient_token');
+    try {
+      await fetch('/api/auth/user/logout', { method: 'POST' });
+    } catch {
+      // ignore network errors on logout
+    }
     setLocation('/login');
   };
 

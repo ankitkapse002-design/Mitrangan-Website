@@ -54,9 +54,15 @@ export const RegisterPage: React.FC = () => {
         })
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // Fallback for non-JSON response
+      }
+
       if (!res.ok) {
-        throw new Error(data.error || 'Registration failed');
+        throw new Error(data.error || 'Failed to submit registration. Please verify your connection.');
       }
 
       // Redirect to confirmation page with generated User ID

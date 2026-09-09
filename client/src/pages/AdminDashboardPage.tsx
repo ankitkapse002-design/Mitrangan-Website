@@ -88,20 +88,30 @@ export const AdminDashboardPage: React.FC = () => {
   const [blogSaving, setBlogSaving] = useState(false);
   const [blogFeedback, setBlogFeedback] = useState<string | null>(null);
 
+  const adminFetch = (url: string, options: RequestInit = {}) => {
+    const token = localStorage.getItem('mitrangan_admin_token');
+    const headers = new Headers(options.headers || {});
+    if (token && !headers.has('Authorization')) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return fetch(url, { ...options, headers });
+  };
+
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
       setError(null);
 
       // Verify session
-      const authRes = await fetch('/api/auth/admin/me');
+      const authRes = await adminFetch('/api/auth/admin/me');
       if (!authRes.ok) {
+        localStorage.removeItem('mitrangan_admin_token');
         setLocation('/admin/login');
         return;
       }
 
       // Fetch stats
-      const statsRes = await fetch('/api/admin/stats');
+      const statsRes = await adminFetch('/api/admin/stats');
       if (statsRes.ok) {
         setStats(await statsRes.json());
       }
@@ -113,14 +123,14 @@ export const AdminDashboardPage: React.FC = () => {
       if (searchQuery.trim()) params.append('search', searchQuery.trim());
       if (params.toString()) url += `?${params.toString()}`;
 
-      const regRes = await fetch(url);
+      const regRes = await adminFetch(url);
       if (regRes.ok) {
         const data = await regRes.json();
         setRegistrations(data.registrations || []);
       }
 
       // Fetch audit logs
-      const auditRes = await fetch('/api/admin/audit-logs');
+      const auditRes = await adminFetch('/api/admin/audit-logs');
       if (auditRes.ok) {
         const aData = await auditRes.json();
         setAuditLogs(aData.logs || []);
@@ -149,7 +159,12 @@ export const AdminDashboardPage: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    await fetch('/api/auth/admin/logout', { method: 'POST' });
+    localStorage.removeItem('mitrangan_admin_token');
+    try {
+      await fetch('/api/auth/admin/logout', { method: 'POST' });
+    } catch {
+      // ignore network errors on logout
+    }
     setLocation('/admin/login');
   };
 
@@ -168,7 +183,7 @@ export const AdminDashboardPage: React.FC = () => {
     setUpdating(true);
     setUpdateMsg(null);
     try {
-      const res = await fetch(`/api/admin/registrations/${encodeURIComponent(activeRecord.user_id)}/status`, {
+      const res = await adminFetch(`/api/admin/registrations/${encodeURIComponent(activeRecord.user_id)}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus, notes: statusNotes })
@@ -284,13 +299,13 @@ export const AdminDashboardPage: React.FC = () => {
     try {
       let res: Response;
       if (editingBlogId) {
-        res = await fetch(`/api/admin/blogs/${editingBlogId}`, {
+        res = await adminFetch(`/api/admin/blogs/${editingBlogId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
       } else {
-        res = await fetch('/api/admin/blogs', {
+        res = await adminFetch('/api/admin/blogs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -320,7 +335,7 @@ export const AdminDashboardPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch(`/api/admin/blogs/${id}`, { method: 'DELETE' });
+      const res = await adminFetch(`/api/admin/blogs/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (!res.ok) {
         alert(data.error || 'Failed to delete article.');
