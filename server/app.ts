@@ -22,6 +22,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Normalize path if Netlify prefixes with /.netlify/functions/api
+app.use((req, _res, next) => {
+  if (req.url.startsWith('/.netlify/functions/api')) {
+    req.url = req.url.replace('/.netlify/functions/api', '') || '/';
+  }
+  next();
+});
+
 // Legacy SEO URL Redirects
 app.use(legacyRedirects);
 
