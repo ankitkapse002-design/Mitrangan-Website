@@ -10,7 +10,7 @@ import { FAQSection } from '../components/home/FAQSection';
 import { IntroDoor } from '../3d/IntroDoor';
 import { CORE_VALUES, MITRANGAN_CENTERS } from '../content/siteContent';
 import { Link } from 'wouter';
-import { Heart, ShieldCheck, Phone, CheckCircle2, ArrowRight, Sparkles, MapPin, MessageCircle, HeartHandshake } from 'lucide-react';
+import { ShieldCheck, Phone, ArrowRight, MapPin, MessageCircle, HeartHandshake } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   // One-time door intro: only plays on first entrance per browser session

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRoute, Link } from 'wouter';
 import { BLOG_POSTS } from '../content/blogs';
-import { Calendar, Clock, User, ArrowLeft, Phone, HeartHandshake, CheckCircle2, MessageCircle, Share2, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, ArrowLeft, Phone, HeartHandshake, CheckCircle2, MessageCircle, Sparkles } from 'lucide-react';
 
 export const BlogPostPage: React.FC = () => {
   const [, params] = useRoute('/blogs/:slug');

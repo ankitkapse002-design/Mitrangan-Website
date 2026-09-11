@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GALLERY_ITEMS, type GalleryItem } from '../content/gallery';
-import { X, ZoomIn, Image as ImageIcon } from 'lucide-react';
+import { X, ZoomIn } from 'lucide-react';
 
 export const GalleryPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'campus' | 'therapy' | 'events' | 'press'>('all');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Newspaper, Flag, Music, Award, ArrowRight } from 'lucide-react';
+import { Flag, Music, ArrowRight } from 'lucide-react';
 
 export const PressPage: React.FC = () => {
   return (

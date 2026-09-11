@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
-import { ShieldCheck, Search, Clock, CheckCircle2, AlertCircle, Phone, ArrowRight, User, Calendar, MapPin } from 'lucide-react';
+import { ShieldCheck, Search, Clock, CheckCircle2, AlertCircle, Phone, User, Calendar, MapPin } from 'lucide-react';
 import type { AdmissionStatus } from '@shared/types';
 
 interface StatusResult {

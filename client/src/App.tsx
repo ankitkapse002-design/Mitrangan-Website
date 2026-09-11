@@ -23,7 +23,6 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-import { FloatingHelpWidget } from './components/layout/FloatingHelpWidget';
 import { MitranganChatbot } from './chatbot';
 
 export const App: React.FC = () => {
@@ -67,10 +66,7 @@ export const App: React.FC = () => {
       </div>
 
       {!isAdminRoute && (
-        <>
-          <FloatingHelpWidget />
-          <MitranganChatbot />
-        </>
+        <MitranganChatbot />
       )}
 
       <Footer />

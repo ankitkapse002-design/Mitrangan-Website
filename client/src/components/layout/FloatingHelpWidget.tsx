@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, ShieldCheck, X, LifeBuoy, HeartHandshake } from 'lucide-react';
+import { Phone, MessageCircle, X, HeartHandshake } from 'lucide-react';
 import { Link } from 'wouter';
 
 export const FloatingHelpWidget: React.FC = () => {
@@ -11,8 +11,8 @@ export const FloatingHelpWidget: React.FC = () => {
         className="floating-help-widget-container"
         style={{
           position: 'fixed',
-          bottom: '24px',
-          right: '88px',
+          bottom: '30px',
+          right: '168px',
           zIndex: 90,
           display: 'flex',
           flexDirection: 'column',
@@ -119,14 +119,14 @@ export const FloatingHelpWidget: React.FC = () => {
     <style>{`
       @media (max-width: 1023px) and (min-width: 641px) {
         .floating-help-widget-container {
-          bottom: 20px !important;
-          right: 80px !important;
+          bottom: 26px !important;
+          right: 148px !important;
         }
       }
       @media (max-width: 640px) {
         .floating-help-widget-container {
-          bottom: 16px !important;
-          right: 70px !important;
+          bottom: 20px !important;
+          right: 122px !important;
         }
       }
     `}</style>

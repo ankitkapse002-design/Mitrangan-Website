@@ -1,14 +1,15 @@
 import { QuickReply } from '../types';
 
 export const hiLocale = {
-  kartikName: 'कार्तिक',
+  mitraName: 'मित्रा',
   assistantTitle: 'Mitrangan सहायक',
   onlineBadge: 'ऑनलाइन • 24/7 सहायता',
   langSelectorTitle: 'भाषा',
   welcomeHeader: 'Mitrangan नशामुक्ति एवं पुनर्वास केंद्र',
   welcomeMessage:
-    "Mitrangan De-Addiction & Rehabilitation Center में आपका स्वागत है।\n\nनमस्ते, मैं कार्तिक हूँ। मैं आपको नशामुक्ति, पुनर्वास, एडमिशन और आगे के अगले कदम को समझने में मदद कर सकता हूँ।\n\nक्या आप खुद के लिए मदद खोज रहे हैं, या परिवार के किसी सदस्य के लिए?",
-  inputPlaceholder: 'कार्तिक से कुछ भी पूछें (एडमिशन, इलाज, मदद)...',
+    "Mitrangan De-Addiction & Rehabilitation Center में आपका स्वागत है।\n\nनमस्ते, मैं मित्रा हूँ। मैं आपको नशामुक्ति, पुनर्वास, एडमिशन और आगे के अगले कदम को समझने में मदद कर सकता हूँ।\n\nक्या आप खुद के लिए मदद खोज रहे हैं, या परिवार के किसी सदस्य के लिए?",
+  inputPlaceholder: 'मित्रा से कुछ भी पूछें (एडमिशन, इलाज, मदद)...',
+  typingIndicator: 'मित्रा लिख रहे हैं...',
   sendButton: 'भेजें',
   resetChatTooltip: 'बातचीत दोबारा शुरू करें',
   closeTooltip: 'चैट बंद करें',

@@ -48,21 +48,21 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             gap: '0.5rem',
             margin: '0.4rem 0'
           }}
+          role="status"
+          aria-label="Mitra is typing..."
         >
           <div
             style={{
               width: '26px',
               height: '26px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #1A4D36 0%, #07120D 100%)',
-              border: '1px solid var(--accent-gold)',
+              background: 'transparent',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0
             }}
           >
-            <img src="/assets/shield_icon.png" alt="Kartik" style={{ width: '14px', height: '14px' }} />
+            <img src="/assets/Hello Chat Bot.gif" alt="Mitra" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div
             style={{

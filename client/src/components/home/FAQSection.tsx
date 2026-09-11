@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MITRANGAN_FAQS } from '../../content/faqs';
-import { ChevronDown, HelpCircle, PhoneCall } from 'lucide-react';
+import { ChevronDown, PhoneCall } from 'lucide-react';
 
 export const FAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

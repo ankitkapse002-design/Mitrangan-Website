@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Phone, Mail, MapPin, Shield, Lock, ArrowUpRight, Heart, ExternalLink } from 'lucide-react';
-import { MITRANGAN_CENTERS } from '../../content/siteContent';
+import { Phone, Mail, MapPin, Shield, Lock } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const quickNavCol1 = [

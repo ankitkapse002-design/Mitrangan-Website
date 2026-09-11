@@ -99,22 +99,20 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
         }}
       >
         {isBot && (
-          <div
-            style={{
-              width: '22px',
-              height: '22px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #1A4D36 0%, #07120D 100%)',
-              border: '1px solid var(--accent-gold)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              marginTop: '3px'
-            }}
-          >
-            <img src="/assets/shield_icon.png" alt="Kartik" style={{ width: '12px', height: '12px' }} />
-          </div>
+            <div
+              style={{
+                width: '24px',
+                height: '24px',
+                background: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                marginTop: '3px'
+              }}
+            >
+              <img src="/assets/Hello Chat Bot.gif" alt="Mitra" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </div>
         )}
 
         <div

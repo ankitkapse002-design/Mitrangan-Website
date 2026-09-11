@@ -1,6 +1,6 @@
 import React from 'react';
 import { SOCIAL_CAUSES } from '../content/causes';
-import { Heart, Sparkles, CheckCircle2, Shield, Users, Trees, Stethoscope, HandHeart } from 'lucide-react';
+import { CheckCircle2, HandHeart } from 'lucide-react';
 import { Link } from 'wouter';
 
 export const CausesPage: React.FC = () => {

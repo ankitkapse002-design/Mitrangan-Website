@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
-import { HeartHandshake, ShieldCheck, Phone, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { HeartHandshake, AlertCircle, Loader2 } from 'lucide-react';
 
 export const RegisterPage: React.FC = () => {
   const [, setLocation] = useLocation();

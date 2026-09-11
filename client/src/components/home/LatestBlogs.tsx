@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { Calendar, Clock, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
 import { BLOG_POSTS } from '../../content/blogs';
-import type { BlogPostRecord } from '@shared/types';
 
 export const LatestBlogs: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchLatest = async () => {
@@ -23,8 +21,6 @@ export const LatestBlogs: React.FC = () => {
         setBlogs(BLOG_POSTS.slice(0, 3));
       } catch {
         setBlogs(BLOG_POSTS.slice(0, 3));
-      } finally {
-        setLoading(false);
       }
     };
 

@@ -3,7 +3,7 @@ import path from 'path';
 import bcrypt from 'bcryptjs';
 import pg from 'pg';
 import dotenv from 'dotenv';
-import type { RegistrationRecord, AdmissionStatus, StatsOverview, AuditLogEntry, AdminUser, BlogPostRecord } from '../../shared/types.js';
+import type { RegistrationRecord, AdmissionStatus, StatsOverview, AuditLogEntry, BlogPostRecord } from '../../shared/types.js';
 import type { BlogPostInput } from '../../shared/schema.js';
 
 dotenv.config();

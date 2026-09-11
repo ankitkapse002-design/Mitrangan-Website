@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'wouter';
 import {
-  Shield,
   Users,
   Clock,
   CheckCircle2,
-  AlertCircle,
   Search,
-  Filter,
   LogOut,
   Edit3,
-  FileText,
-  Loader2,
   X,
   History,
-  Phone,
-  Calendar,
   Check,
   Plus,
   Trash2,
@@ -64,8 +57,6 @@ export const AdminDashboardPage: React.FC = () => {
   const [registrations, setRegistrations] = useState<RegistrationRecord[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [blogs, setBlogs] = useState<BlogPostRecord[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Active Main Tab: registrations | blogs | audit
   const [activeTab, setActiveTab] = useState<'registrations' | 'blogs' | 'audit'>('registrations');
@@ -99,9 +90,6 @@ export const AdminDashboardPage: React.FC = () => {
 
   const fetchDashboardData = async () => {
     try {
-      setLoading(true);
-      setError(null);
-
       // Verify session
       const authRes = await adminFetch('/api/auth/admin/me');
       if (!authRes.ok) {
@@ -142,10 +130,8 @@ export const AdminDashboardPage: React.FC = () => {
         const bData = await blogRes.json();
         setBlogs(bData.blogs || []);
       }
-    } catch (err: any) {
-      setError(err.message || 'Failed to load administration data.');
-    } finally {
-      setLoading(false);
+    } catch {
+      // error handled silently or via alert on mutating action
     }
   };
 

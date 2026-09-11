@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { BLOG_POSTS } from '../content/blogs';
-import { Calendar, Clock, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { FAQSection } from '../components/home/FAQSection';
 
 export const BlogsPage: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadBlogs = async () => {
@@ -22,8 +21,6 @@ export const BlogsPage: React.FC = () => {
         setBlogs(BLOG_POSTS);
       } catch {
         setBlogs(BLOG_POSTS);
-      } finally {
-        setLoading(false);
       }
     };
 

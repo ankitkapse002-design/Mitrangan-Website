@@ -33,26 +33,23 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         flexShrink: 0
       }}
     >
-      {/* Left: Kartik Avatar & Name */}
+      {/* Left: Mitra Avatar & Name */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
         <div style={{ position: 'relative' }}>
           <div
             style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #1A4D36 0%, #07120D 100%)',
-              border: '1.2px solid var(--accent-gold)',
+              width: '38px',
+              height: '38px',
+              background: 'transparent',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
+              justifyContent: 'center'
             }}
           >
             <img
-              src="/assets/shield_icon.png"
-              alt="Kartik"
-              style={{ width: '18px', height: '18px', objectFit: 'contain' }}
+              src="/assets/Hello Chat Bot.gif"
+              alt="Mitra"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
           </div>
           <span
@@ -81,7 +78,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
                 color: 'var(--text-ivory)'
               }}
             >
-              {locale.kartikName}
+              {locale.mitraName}
             </span>
             <span
               style={{

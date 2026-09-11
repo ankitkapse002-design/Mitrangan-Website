@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MITRANGAN_CENTERS } from '../content/siteContent';
-import { Phone, Mail, MapPin, Shield, CheckCircle2, Clock, Send, MessageSquare, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, CheckCircle2, Clock, Send, MessageSquare, MessageCircle } from 'lucide-react';
 import { Link } from 'wouter';
 
 export const ContactPage: React.FC = () => {

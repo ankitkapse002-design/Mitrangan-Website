@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'wouter';
-import { UserCheck, ShieldCheck, Calendar, Phone, MapPin, LogOut, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
+import { UserCheck, ShieldCheck, Phone, LogOut, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
 import type { RegistrationRecord } from '@shared/types';
 import { MITRANGAN_CENTERS } from '../content/siteContent';
 

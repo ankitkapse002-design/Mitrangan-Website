@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
-import { CheckCircle2, Copy, Check, ShieldCheck, ArrowRight, Phone } from 'lucide-react';
+import { Link } from 'wouter';
+import { CheckCircle2, Copy, Check, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export const RegisterSuccessPage: React.FC = () => {
   const [copied, setCopied] = useState(false);

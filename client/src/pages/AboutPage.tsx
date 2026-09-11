@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { CORE_VALUES, MITRANGAN_STATS, MITRANGAN_CENTERS } from '../content/siteContent';
-import { ShieldCheck, Heart, Users, Sparkles, CheckCircle2, Phone, ArrowRight, MapPin } from 'lucide-react';
+import { CORE_VALUES } from '../content/siteContent';
+import { CheckCircle2, Phone, ArrowRight } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
   const whyChooseUsPoints = [

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { RECOVERY_STEPS } from '../../content/siteContent';
-import { ArrowRight, Phone, Sparkles, Sun, Moon, Compass, HeartHandshake, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Phone, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const RecoveryPathway: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);

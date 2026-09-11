@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { ALL_PROGRAMS, RELAPSE_PREVENTION_PILLARS } from '../content/programs';
+import { RELAPSE_PREVENTION_PILLARS } from '../content/programs';
 import { ProgramsGrid } from '../components/home/ProgramsGrid';
-import { Phone, ShieldCheck, HeartHandshake, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Phone, HeartHandshake, Sparkles } from 'lucide-react';
 
 export const ServicesPage: React.FC = () => {
   return (

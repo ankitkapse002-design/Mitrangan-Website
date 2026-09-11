@@ -27,6 +27,34 @@ export const MitranganChatbot: React.FC = () => {
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const hasShownGreetingRef = useRef(false);
 
+  // Subtle desktop mouse tilt tracking ( restrained 3D interaction )
+  const [mouseTilt, setMouseTilt] = useState({ rotateX: 0, rotateY: 0 });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let rafId: number;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isOpen) return;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const normX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const normY = (e.clientY / window.innerHeight - 0.5) * 2;
+        // Subtle restrained tilt: max 4.5deg
+        const tiltY = Math.max(-4.5, Math.min(4.5, normX * 4.5));
+        const tiltX = Math.max(-4.5, Math.min(4.5, -normY * 4));
+        setMouseTilt({ rotateX: tiltX, rotateY: tiltY });
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, [isOpen]);
+
   // Initialize opening welcome message
   useEffect(() => {
     const locale = getLocale(currentLang);
@@ -198,18 +226,18 @@ export const MitranganChatbot: React.FC = () => {
     switch (currentLang) {
       case 'hi':
         return {
-          title: 'नमस्ते, मैं कार्तिक हूँ 👋',
+          title: 'नमस्ते, मैं मित्रा हूँ 👋',
           subtitle: 'मैं आज आपकी किस तरह मदद कर सकता हूँ?'
         };
       case 'mr':
         return {
-          title: 'नमस्कार, मी कार्तिक आहे 👋',
+          title: 'नमस्कार, मी मित्रा आहे 👋',
           subtitle: 'मी आज तुम्हाला कशी मदत करू शकतो?'
         };
       case 'en':
       default:
         return {
-          title: "Hi, I'm Kartik 👋",
+          title: "Hi, I'm Mitra 👋",
           subtitle: 'How can I assist you today?'
         };
     }
@@ -219,16 +247,25 @@ export const MitranganChatbot: React.FC = () => {
 
   return (
     <>
-      {/* Dynamic Keyframes & Responsive Layout for Kartik Chatbot */}
+      {/* Dynamic Keyframes & Responsive Layout for Mitra Chatbot */}
       <style>{`
-        @keyframes kartikFloat {
+        @keyframes mitraCalmFloat {
           0%, 100% {
             transform: translateY(0);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 16px rgba(212, 175, 55, 0.3);
           }
           50% {
             transform: translateY(-4px);
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.75), 0 0 24px rgba(212, 175, 55, 0.48);
+          }
+        }
+
+        @keyframes mitraEntrance {
+          0% {
+            opacity: 0;
+            transform: translateY(14px) scale(0.94);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
           }
         }
 
@@ -265,7 +302,7 @@ export const MitranganChatbot: React.FC = () => {
           }
         }
 
-        .kartik-launcher-container {
+        .mitra-launcher-container {
           position: fixed;
           bottom: 24px;
           right: 24px;
@@ -274,17 +311,28 @@ export const MitranganChatbot: React.FC = () => {
           flex-direction: column;
           align-items: flex-end;
           pointer-events: auto;
+          animation: mitraEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .kartik-launcher-btn {
-          width: 52px;
-          height: 52px;
+        .mitra-launcher-btn {
+          width: 140px;
+          height: 140px;
+          perspective: 600px;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), width 0.2s ease, height 0.2s ease;
         }
 
-        .kartik-panel {
+        .mitra-launcher-btn:hover {
+          transform: translateY(-5px) scale(1.04);
+        }
+
+        .mitra-launcher-btn:hover .mitra-robot-img {
+          filter: drop-shadow(0 12px 26px rgba(78, 205, 196, 0.65)) brightness(1.1) !important;
+        }
+
+        .mitra-panel {
           position: fixed;
           bottom: 86px;
-          right: 24px;
+          right: 20px;
           width: 380px;
           height: min(525px, calc(100vh - 120px));
           max-width: calc(100vw - 32px);
@@ -302,58 +350,54 @@ export const MitranganChatbot: React.FC = () => {
           animation: chatPanelOpen 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .kartik-greeting-bubble {
-          bottom: 64px;
+        .mitra-greeting-bubble {
+          bottom: calc(100% + 8px);
           right: 0px;
         }
 
         @media (max-width: 1023px) and (min-width: 641px) {
-          .kartik-launcher-container {
-            bottom: 20px;
-            right: 20px;
+          .mitra-launcher-container {
+            bottom: 16px;
+            right: 16px;
           }
-          .kartik-launcher-btn {
-            width: 50px;
-            height: 50px;
+          .mitra-launcher-btn {
+            width: 120px;
+            height: 120px;
           }
-          .kartik-panel {
+          .mitra-panel {
             bottom: 80px;
-            right: 20px;
+            right: 16px;
             width: min(370px, calc(100vw - 36px));
             height: min(495px, calc(100vh - 110px));
             max-width: calc(100vw - 36px);
           }
-          .kartik-greeting-bubble {
-            bottom: 60px;
-          }
         }
 
         @media (max-width: 640px) {
-          .kartik-launcher-container {
-            bottom: 16px;
-            right: 14px;
+          .mitra-launcher-container {
+            bottom: 12px;
+            right: 10px;
           }
-          .kartik-launcher-btn {
-            width: 48px;
-            height: 48px;
+          .mitra-launcher-btn {
+            width: 100px;
+            height: 100px;
           }
-          .kartik-panel {
+          .mitra-panel {
             bottom: 74px;
-            right: 12px;
-            left: 12px;
+            right: 10px;
+            left: 10px;
             width: auto;
-            max-width: 380px;
-            margin-left: auto;
+            max-width: none;
             height: min(470px, calc(100dvh - 90px), calc(100vh - 90px));
             border-radius: 16px;
-          }
-          .kartik-greeting-bubble {
-            bottom: 56px;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .kartik-launcher-btn, .kartik-greeting-bubble, .kartik-panel {
+          .mitra-launcher-container,
+          .mitra-launcher-btn,
+          .mitra-greeting-bubble,
+          .mitra-panel {
             animation: none !important;
             transition: none !important;
             transform: none !important;
@@ -362,11 +406,11 @@ export const MitranganChatbot: React.FC = () => {
       `}</style>
 
       {/* 1. Floating Launcher Container */}
-      <div className="kartik-launcher-container">
+      <div className="mitra-launcher-container">
         {/* Language-Aware Greeting Bubble (Appears briefly after page load, then fades) */}
         {!isOpen && showGreeting && (
           <div
-            className="kartik-greeting-bubble"
+            className="mitra-greeting-bubble"
             onClick={() => {
               setIsOpen(true);
               dismissGreeting();
@@ -447,51 +491,62 @@ export const MitranganChatbot: React.FC = () => {
 
         {/* Circular Assistant Launcher Button */}
         <button
-          className="kartik-launcher-btn"
+          className="mitra-launcher-btn"
           onClick={() => {
             setIsOpen(!isOpen);
             if (showGreeting) dismissGreeting();
           }}
           style={{
-            borderRadius: '50%',
+            width: isOpen ? '46px' : undefined,
+            height: isOpen ? '46px' : undefined,
+            borderRadius: isOpen ? '50%' : '0',
             background: isOpen
               ? 'rgba(7, 18, 13, 0.96)'
-              : 'linear-gradient(135deg, #1A4D36 0%, #07120D 100%)',
-            border: '1.5px solid var(--accent-gold)',
+              : 'transparent',
+            border: isOpen ? '1.5px solid var(--accent-gold)' : 'none',
             color: 'var(--accent-gold)',
             padding: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
-            animation: !isOpen ? 'kartikFloat 4.5s ease-in-out infinite' : 'none',
-            outline: 'none'
+            animation: !isOpen ? 'mitraCalmFloat 4.5s ease-in-out infinite' : 'none',
+            outline: 'none',
+            overflow: 'visible'
           }}
           aria-expanded={isOpen}
           aria-label="Open Mitrangan Assistant"
-          title="Kartik — Mitrangan Assistant"
+          title="Mitra — Mitrangan Assistant"
         >
           {isOpen ? (
             <X size={20} color="var(--accent-gold)" />
           ) : (
-            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div
+              className="mitra-robot-tilt-container"
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transform: `perspective(320px) rotateX(${mouseTilt.rotateX}deg) rotateY(${mouseTilt.rotateY}deg)`,
+                transition: 'transform 0.18s cubic-bezier(0.2, 1, 0.4, 1)'
+              }}
+            >
               <img
-                src="/assets/shield_icon.png"
-                alt="Kartik"
-                style={{ width: '25px', height: '25px', objectFit: 'contain' }}
-              />
-              <span
+                src="/assets/Hello Chat Bot.gif"
+                alt="Mitra"
+                className="mitra-robot-img"
                 style={{
-                  position: 'absolute',
-                  top: '-2px',
-                  right: '-2px',
-                  width: '9px',
-                  height: '9px',
-                  backgroundColor: '#10B981',
-                  borderRadius: '50%',
-                  border: '1.5px solid #07120D',
-                  boxShadow: '0 0 6px #10B981'
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                  display: 'block',
+                  transform: 'scale(1.22)',
+                  filter: 'drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55))',
+                  transition: 'filter 0.25s ease, transform 0.25s ease'
                 }}
               />
             </div>
@@ -502,9 +557,9 @@ export const MitranganChatbot: React.FC = () => {
       {/* 2. Elevated Floating Chat Panel (Strictly Anchored to Bottom-Right) */}
       {isOpen && (
         <div
-          className="kartik-panel"
+          className="mitra-panel"
           role="dialog"
-          aria-label="Mitrangan Virtual Assistant Chat"
+          aria-label="Mitra — Mitrangan Virtual Assistant Chat"
         >
           <ChatHeader
             language={currentLang}

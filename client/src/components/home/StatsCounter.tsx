@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MITRANGAN_STATS, type StatItem } from '../../content/siteContent';
+import { MITRANGAN_STATS } from '../../content/siteContent';
 import { Shield, Sparkles, HeartPulse, Award, Clock } from 'lucide-react';
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -134,7 +134,7 @@ export const StatsCounter: React.FC = () => {
           }}
           className="stats-grid-container"
         >
-          {MITRANGAN_STATS.map((stat, idx) => {
+          {MITRANGAN_STATS.map(stat => {
             const isStatic = stat.targetNumber === null;
             const displayValue = isStatic
               ? stat.staticValue

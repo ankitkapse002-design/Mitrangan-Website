@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
-import { Lock, Shield, AlertCircle, Loader2 } from 'lucide-react';
+import { Lock, AlertCircle, Loader2 } from 'lucide-react';
 
 export const AdminLoginPage: React.FC = () => {
   const [, setLocation] = useLocation();

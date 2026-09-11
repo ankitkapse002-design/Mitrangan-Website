@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { RECOVERY_STEPS } from '../content/siteContent';
-import { Clock, Sun, Moon, Utensils, Users, Heart, ShieldCheck, Phone, ArrowRight } from 'lucide-react';
+import { Clock, Sun, Moon, Utensils, Users, Heart, Phone, ArrowRight } from 'lucide-react';
 
 export const JourneyPage: React.FC = () => {
   const dailySchedule = [

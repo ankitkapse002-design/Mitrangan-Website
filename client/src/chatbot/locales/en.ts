@@ -1,14 +1,15 @@
 import { QuickReply } from '../types';
 
 export const enLocale = {
-  kartikName: 'Kartik',
+  mitraName: 'Mitra',
   assistantTitle: 'Mitrangan Assistant',
   onlineBadge: 'Online • 24/7 Support',
   langSelectorTitle: 'Language',
   welcomeHeader: 'Welcome to Mitrangan De-Addiction & Rehabilitation Center',
   welcomeMessage:
-    "Welcome to Mitrangan De-Addiction & Rehabilitation Center.\n\nHi, I'm Kartik. I'm here to help you understand recovery, rehabilitation, admission, and the next step.\n\nAre you looking for help for yourself, or for someone in your family?",
-  inputPlaceholder: 'Ask Kartik anything (admission, programs, help)...',
+    "Welcome to Mitrangan De-Addiction & Rehabilitation Center.\n\nHi, I'm Mitra. I'm here to help you understand recovery, rehabilitation, admission, and the next step.\n\nAre you looking for help for yourself, or for someone in your family?",
+  inputPlaceholder: 'Ask Mitra anything (admission, programs, help)...',
+  typingIndicator: 'Mitra is typing...',
   sendButton: 'Send',
   resetChatTooltip: 'Restart conversation',
   closeTooltip: 'Close chat',

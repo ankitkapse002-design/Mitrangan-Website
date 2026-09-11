@@ -60,7 +60,7 @@ router.get('/admin/me', requireAdmin, (req: AuthenticatedAdminRequest, res) => {
 });
 
 // Admin Logout
-router.post('/admin/logout', (req, res) => {
+router.post('/admin/logout', (_req, res) => {
   res.clearCookie('admin_token');
   return res.json({ success: true, message: 'Logged out successfully.' });
 });
@@ -127,7 +127,7 @@ router.get('/user/me', requirePatient, async (req: AuthenticatedPatientRequest, 
 });
 
 // Patient Logout
-router.post('/user/logout', (req, res) => {
+router.post('/user/logout', (_req, res) => {
   res.clearCookie('patient_token');
   return res.json({ success: true, message: 'Logged out successfully.' });
 });

@@ -9,7 +9,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   // Central normalized door progress: 0.0 (closed) -> 1.0 (fully open)
   const [progress, setProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [showInvitation, setShowInvitation] = useState(false);
 
@@ -104,7 +103,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
   const handleEnter = useCallback(() => {
     if (isCompletingRef.current) return;
     targetProgressRef.current = 1;
-    setHasInteracted(true);
   }, []);
 
   // Desktop-only Wheel & Trackpad scroll listener (active ONLY while intro is mounted)
@@ -114,7 +112,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       if (isCompletingRef.current) return;
-      setHasInteracted(true);
 
       const rawDelta = e.deltaY;
       const normalizedDelta = Math.sign(rawDelta) * Math.min(Math.abs(rawDelta) * 0.0018, 0.075);
@@ -133,7 +130,6 @@ export const IntroDoor: React.FC<IntroDoorProps> = ({ onComplete }) => {
     isPointerDownRef.current = true;
     startXRef.current = e.clientX;
     startProgressRef.current = targetProgressRef.current;
-    setHasInteracted(true);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
