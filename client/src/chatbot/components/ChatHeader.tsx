@@ -33,7 +33,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         flexShrink: 0
       }}
     >
-      {/* Left: Mitra Avatar & Name */}
+      {/* Left: Aasha Avatar & Name */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
         <div style={{ position: 'relative' }}>
           <div
@@ -48,7 +48,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
           >
             <img
               src="/assets/Hello Chat Bot.gif"
-              alt="Mitra"
+              alt="Aasha"
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
           </div>

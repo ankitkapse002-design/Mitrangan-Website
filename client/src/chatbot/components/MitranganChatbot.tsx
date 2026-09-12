@@ -226,18 +226,18 @@ export const MitranganChatbot: React.FC = () => {
     switch (currentLang) {
       case 'hi':
         return {
-          title: 'नमस्ते, मैं मित्रा हूँ 👋',
+          title: 'नमस्ते, मैं आशा हूँ 👋',
           subtitle: 'मैं आज आपकी किस तरह मदद कर सकता हूँ?'
         };
       case 'mr':
         return {
-          title: 'नमस्कार, मी मित्रा आहे 👋',
+          title: 'नमस्कार, मी आशा आहे 👋',
           subtitle: 'मी आज तुम्हाला कशी मदत करू शकतो?'
         };
       case 'en':
       default:
         return {
-          title: "Hi, I'm Mitra 👋",
+          title: "Hi, I'm Aasha 👋",
           subtitle: 'How can I assist you today?'
         };
     }
@@ -247,7 +247,7 @@ export const MitranganChatbot: React.FC = () => {
 
   return (
     <>
-      {/* Dynamic Keyframes & Responsive Layout for Mitra Chatbot */}
+      {/* Dynamic Keyframes & Responsive Layout for Aasha Chatbot */}
       <style>{`
         @keyframes mitraCalmFloat {
           0%, 100% {
@@ -516,7 +516,7 @@ export const MitranganChatbot: React.FC = () => {
           }}
           aria-expanded={isOpen}
           aria-label="Open Mitrangan Assistant"
-          title="Mitra — Mitrangan Assistant"
+          title="Aasha — Mitrangan Assistant"
         >
           {isOpen ? (
             <X size={20} color="var(--accent-gold)" />
@@ -536,7 +536,7 @@ export const MitranganChatbot: React.FC = () => {
             >
               <img
                 src="/assets/Hello Chat Bot.gif"
-                alt="Mitra"
+                alt="Aasha"
                 className="mitra-robot-img"
                 style={{
                   width: '100%',
@@ -559,7 +559,7 @@ export const MitranganChatbot: React.FC = () => {
         <div
           className="mitra-panel"
           role="dialog"
-          aria-label="Mitra — Mitrangan Virtual Assistant Chat"
+          aria-label="Aasha — Mitrangan Virtual Assistant Chat"
         >
           <ChatHeader
             language={currentLang}

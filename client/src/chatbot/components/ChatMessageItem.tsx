@@ -111,7 +111,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
                 marginTop: '3px'
               }}
             >
-              <img src="/assets/Hello Chat Bot.gif" alt="Mitra" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <img src="/assets/Hello Chat Bot.gif" alt="Aasha" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
         )}
 

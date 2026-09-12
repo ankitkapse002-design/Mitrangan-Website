@@ -49,7 +49,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             margin: '0.4rem 0'
           }}
           role="status"
-          aria-label="Mitra is typing..."
+          aria-label="Aasha is typing..."
         >
           <div
             style={{
@@ -62,7 +62,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
               flexShrink: 0
             }}
           >
-            <img src="/assets/Hello Chat Bot.gif" alt="Mitra" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src="/assets/Hello Chat Bot.gif" alt="Aasha" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div
             style={{

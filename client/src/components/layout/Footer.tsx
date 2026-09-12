@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Phone, Mail, MapPin, Shield, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, Shield, Lock, ArrowRight, Instagram, Facebook } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const quickNavCol1 = [
@@ -38,19 +38,19 @@ export const Footer: React.FC = () => {
           top: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '600px',
-          height: '250px',
-          background: 'radial-gradient(circle, rgba(42, 102, 79, 0.15) 0%, transparent 70%)',
+          width: '700px',
+          height: '280px',
+          background: 'radial-gradient(circle, rgba(42, 102, 79, 0.16) 0%, transparent 70%)',
           pointerEvents: 'none'
         }}
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        {/* Main Three-Column Grid */}
+        {/* Main Three-Column Layout: Brand, Quick Links, Our Centers + Socials */}
         <div className="footer-main-grid">
-          {/* COLUMN 1: Brand, Philosophy, 24x7 Pickup & Quick Navigation */}
+          {/* COLUMN 1: Brand Identity & 24x7 Assistance */}
           <div className="footer-col-1" style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* Top Brand Header aligned with location headers */}
+            {/* Top Brand Header */}
             <div
               style={{
                 minHeight: '52px',
@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
             {/* Description */}
             <p
               style={{
-                fontSize: '0.92rem',
+                fontSize: '0.9rem',
                 color: 'var(--text-muted)',
                 lineHeight: 1.7,
                 marginBottom: '1.35rem'
@@ -107,11 +107,11 @@ export const Footer: React.FC = () => {
             {/* 24x7 Pickup Assistance Card */}
             <div
               style={{
-                padding: '0.85rem 1.1rem',
-                background: 'rgba(212, 175, 55, 0.08)',
+                padding: '0.9rem 1.15rem',
+                background: 'rgba(212, 175, 55, 0.07)',
                 borderRadius: '10px',
-                border: '1px solid rgba(212, 175, 55, 0.2)',
-                marginBottom: '1.75rem'
+                border: '1px solid rgba(212, 175, 55, 0.22)',
+                marginTop: 'auto'
               }}
             >
               <div
@@ -122,91 +122,20 @@ export const Footer: React.FC = () => {
                   color: 'var(--accent-gold)',
                   fontWeight: 600,
                   fontSize: '0.86rem',
-                  marginBottom: '0.25rem'
+                  marginBottom: '0.3rem'
                 }}
               >
                 <Shield size={16} />
-                <span>*24x7 Pickup Assistance</span>
+                <span>24x7 Discrete Pickup Assistance</span>
               </div>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-cream)', lineHeight: 1.5 }}>
-                Immediate confidential response for admissions across Maharashtra and Chhattisgarh.
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
+                Immediate confidential ambulance response for admissions across Maharashtra and Chhattisgarh.
               </p>
-            </div>
-
-            {/* Quick Navigation: Clean Two-Column Grid */}
-            <div
-              style={{
-                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                paddingTop: '1.35rem'
-              }}
-            >
-              <h5
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  color: 'var(--accent-gold)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  marginBottom: '1rem'
-                }}
-              >
-                Quick Navigation
-              </h5>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  columnGap: '2rem',
-                  rowGap: '0.7rem',
-                  fontSize: '0.88rem'
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                  {quickNavCol1.map(link => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      style={{
-                        color: link.isSpecial ? 'var(--accent-gold)' : 'var(--text-cream)',
-                        fontWeight: link.isSpecial ? 600 : 400,
-                        textDecoration: 'none',
-                        lineHeight: 1.4,
-                        transition: 'color 0.2s ease',
-                        display: 'inline-flex',
-                        alignItems: 'center'
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                  {quickNavCol2.map(link => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      style={{
-                        color: link.isSpecial ? 'var(--accent-gold)' : 'var(--text-cream)',
-                        fontWeight: link.isSpecial ? 600 : 400,
-                        textDecoration: 'none',
-                        lineHeight: 1.4,
-                        transition: 'color 0.2s ease',
-                        display: 'inline-flex',
-                        alignItems: 'center'
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
 
-          {/* COLUMN 2: Nagpur Center */}
+          {/* COLUMN 2: Quick Links */}
           <div className="footer-col-2" style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* Location Heading aligned with Col 1 and Col 3 */}
             <div
               style={{
                 minHeight: '52px',
@@ -222,139 +151,322 @@ export const Footer: React.FC = () => {
                   color: 'var(--accent-gold)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
+                  fontWeight: 600,
                   margin: 0
                 }}
               >
-                <MapPin size={17} />
-                <span>Nagpur Center (Headquarters)</span>
+                Quick Links
               </h4>
             </div>
 
-            {/* Address */}
-            <div className="footer-address-block">
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-cream)', lineHeight: 1.6, margin: 0 }}>
-                Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
-              </p>
-            </div>
-
-            {/* Contact Rows (Phone & Email) */}
+            {/* Two-Subcolumn Links Arrangement */}
             <div
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.75rem',
-                fontSize: '0.9rem',
-                marginTop: '1.25rem'
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                columnGap: '1.5rem',
+                rowGap: '0.75rem',
+                fontSize: '0.88rem'
               }}
             >
-              <a
-                href="tel:+919767362388"
-                style={{
-                  color: 'var(--text-ivory)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  transition: 'color 0.2s ease'
-                }}
-              >
-                <Phone size={15} color="#D4AF37" />
-                <span>+91 9767362388</span>
-              </a>
-              <a
-                href="mailto:mitranganrehab@gmail.com"
-                style={{
-                  color: 'var(--text-ivory)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  transition: 'color 0.2s ease'
-                }}
-              >
-                <Mail size={15} color="#D4AF37" />
-                <span>mitranganrehab@gmail.com</span>
-              </a>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {quickNavCol1.map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="footer-nav-link"
+                    style={{
+                      color: link.isSpecial ? 'var(--accent-gold)' : 'var(--text-cream)',
+                      fontWeight: link.isSpecial ? 600 : 400,
+                      textDecoration: 'none',
+                      lineHeight: 1.4,
+                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    <span>{link.label}</span>
+                  </Link>
+                ))}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {quickNavCol2.map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="footer-nav-link"
+                    style={{
+                      color: link.isSpecial ? 'var(--accent-gold)' : 'var(--text-cream)',
+                      fontWeight: link.isSpecial ? 600 : 400,
+                      textDecoration: 'none',
+                      lineHeight: 1.4,
+                      transition: 'color 0.2s ease, transform 0.2s ease',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    <span>{link.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* COLUMN 3: Durg Center */}
+          {/* COLUMN 3: Our Centers, Google Maps Action & Social Links */}
           <div className="footer-col-3" style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* Location Heading aligned with Col 1 and Col 2 */}
+            {/* Section Header: Our Centers */}
             <div
               style={{
                 minHeight: '52px',
                 display: 'flex',
                 alignItems: 'center',
+                gap: '0.5rem',
                 marginBottom: '1.25rem'
               }}
             >
+              <MapPin size={19} color="var(--accent-gold)" />
               <h4
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '1.05rem',
+                  fontSize: '1.08rem',
                   color: 'var(--accent-gold)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
+                  fontWeight: 700,
                   margin: 0
                 }}
               >
-                <MapPin size={17} />
-                <span>Durg Center</span>
+                Our Centers
               </h4>
             </div>
 
-            {/* Address */}
-            <div className="footer-address-block">
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-cream)', lineHeight: 1.6, margin: 0 }}>
-                Janardan Prasad, near Sharma Sahu Sadan, Ward No. 40, Durg - 491001, Chhattisgarh
-              </p>
+            {/* Nagpur & Durg Centers Cards Subgrid */}
+            <div className="footer-centers-subgrid">
+              {/* Nagpur Center */}
+              <div className="footer-center-card">
+                <h5
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '0.96rem',
+                    fontWeight: 600,
+                    color: 'var(--text-ivory)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    margin: '0 0 0.5rem 0'
+                  }}
+                >
+                  <MapPin size={15} color="var(--accent-gold)" />
+                  <span>Nagpur Center</span>
+                </h5>
+                <p
+                  style={{
+                    fontSize: '0.84rem',
+                    color: 'var(--text-cream)',
+                    lineHeight: 1.55,
+                    margin: '0 0 0.75rem 0'
+                  }}
+                >
+                  Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
+                  <a
+                    href="tel:+919767362388"
+                    className="footer-contact-item"
+                    style={{
+                      color: 'var(--text-ivory)',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'color 0.2s ease'
+                    }}
+                  >
+                    <Phone size={14} color="#D4AF37" />
+                    <span>+91 9767362388</span>
+                  </a>
+                  <a
+                    href="mailto:mitranganrehab@gmail.com"
+                    className="footer-contact-item"
+                    style={{
+                      color: 'var(--text-ivory)',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'color 0.2s ease'
+                    }}
+                  >
+                    <Mail size={14} color="#D4AF37" />
+                    <span>mitranganrehab@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Durg Center */}
+              <div className="footer-center-card">
+                <h5
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '0.96rem',
+                    fontWeight: 600,
+                    color: 'var(--text-ivory)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    margin: '0 0 0.5rem 0'
+                  }}
+                >
+                  <MapPin size={15} color="var(--accent-gold)" />
+                  <span>Durg Center</span>
+                </h5>
+                <p
+                  style={{
+                    fontSize: '0.84rem',
+                    color: 'var(--text-cream)',
+                    lineHeight: 1.55,
+                    margin: '0 0 0.75rem 0'
+                  }}
+                >
+                  Janardan Prasad, near Sharma Sahu Sadan, Ward No. 40, Durg - 491001, Chhattisgarh
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
+                  <a
+                    href="tel:+917666890795"
+                    className="footer-contact-item"
+                    style={{
+                      color: 'var(--text-ivory)',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'color 0.2s ease'
+                    }}
+                  >
+                    <Phone size={14} color="#D4AF37" />
+                    <span>+91 7666890795</span>
+                  </a>
+                  <a
+                    href="mailto:mitranganrehab@gmail.com"
+                    className="footer-contact-item"
+                    style={{
+                      color: 'var(--text-ivory)',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'color 0.2s ease'
+                    }}
+                  >
+                    <Mail size={14} color="#D4AF37" />
+                    <span>mitranganrehab@gmail.com</span>
+                  </a>
+                </div>
+              </div>
             </div>
 
-            {/* Contact Rows (Phone & Email) */}
+            {/* Single Common Google Maps Action */}
+            <div style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
+              <a
+                href="https://maps.app.goo.gl/a4ESFjDuZMCW1hsb9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-maps-action-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.55rem',
+                  padding: '0.62rem 1.15rem',
+                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(42, 102, 79, 0.18) 100%)',
+                  border: '1px solid rgba(212, 175, 55, 0.38)',
+                  borderRadius: '8px',
+                  color: 'var(--accent-gold)',
+                  fontSize: '0.86rem',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'all 0.22s ease',
+                  boxShadow: '0 3px 10px rgba(0, 0, 0, 0.35)'
+                }}
+              >
+                <MapPin size={15} color="var(--accent-gold)" />
+                <span>Find Us on Google Maps</span>
+                <ArrowRight size={15} className="maps-arrow-icon" style={{ transition: 'transform 0.2s ease' }} />
+              </a>
+            </div>
+
+            {/* Connect With Us: Instagram | Facebook */}
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.75rem',
-                fontSize: '0.9rem',
-                marginTop: '1.25rem'
+                gap: '0.5rem',
+                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                paddingTop: '1rem'
               }}
             >
-              <a
-                href="tel:+917666890795"
+              <span
                 style={{
-                  color: 'var(--text-ivory)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  transition: 'color 0.2s ease'
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '0.74rem',
+                  fontWeight: 600,
+                  color: 'var(--text-muted)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em'
                 }}
               >
-                <Phone size={15} color="#D4AF37" />
-                <span>+91 7666890795</span>
-              </a>
-              <a
-                href="mailto:mitranganrehab@gmail.com"
-                style={{
-                  color: 'var(--text-ivory)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  transition: 'color 0.2s ease'
-                }}
-              >
-                <Mail size={15} color="#D4AF37" />
-                <span>mitranganrehab@gmail.com</span>
-              </a>
+                Connect With Us
+              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <a
+                  href="https://www.instagram.com/mitrangan_rehab?utm_source=qr&stkn=MXRrZjVrZjh0bzkwOQ=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-pill"
+                  title="Follow Mitrangan Rehab on Instagram"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.45rem 0.85rem',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    borderRadius: '6px',
+                    color: 'var(--text-cream)',
+                    fontSize: '0.82rem',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Instagram size={15} color="#E1306C" />
+                  <span>@mitrangan_rehab</span>
+                </a>
+
+                <a
+                  href="https://www.facebook.com/share/18iP5btKBp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-pill"
+                  title="Follow Mitrangan Rehab on Facebook"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.45rem 0.85rem',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    borderRadius: '6px',
+                    color: 'var(--text-cream)',
+                    fontSize: '0.82rem',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Facebook size={15} color="#1877F2" />
+                  <span>Facebook</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -406,36 +518,87 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer Responsive Styles */}
+      {/* Footer Responsive & Interactive Styles */}
       <style>{`
         .footer-main-grid {
           display: grid;
-          grid-template-columns: minmax(360px, 1.4fr) minmax(250px, 1fr) minmax(250px, 1fr);
-          gap: 3.5rem;
+          grid-template-columns: minmax(300px, 1.15fr) minmax(230px, 0.85fr) minmax(460px, 1.6fr);
+          gap: 3.25rem;
           margin-bottom: 3.5rem;
         }
-        .footer-address-block {
-          min-height: 76px;
+
+        .footer-centers-subgrid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
         }
-        @media (max-width: 1023px) and (min-width: 768px) {
+
+        .footer-center-card {
+          padding: 0.95rem 1rem;
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 10px;
+          transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .footer-center-card:hover {
+          border-color: rgba(212, 175, 55, 0.25);
+          background: rgba(212, 175, 55, 0.03);
+        }
+
+        .footer-nav-link:hover {
+          color: var(--accent-gold) !important;
+          transform: translateX(3px);
+        }
+
+        .footer-contact-item:hover {
+          color: var(--accent-gold) !important;
+        }
+
+        .footer-maps-action-btn:hover {
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(42, 102, 79, 0.28) 100%) !important;
+          border-color: var(--accent-gold) !important;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15) !important;
+        }
+
+        .footer-maps-action-btn:hover .maps-arrow-icon {
+          transform: translateX(4px) !important;
+        }
+
+        .footer-social-pill:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+          border-color: rgba(212, 175, 55, 0.4) !important;
+          color: var(--text-ivory) !important;
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 1080px) and (min-width: 768px) {
           .footer-main-grid {
             grid-template-columns: 1fr 1fr;
             gap: 2.5rem;
           }
           .footer-col-1 {
-            grid-column: 1 / -1;
+            grid-column: 1 / 2;
           }
-          .footer-address-block {
-            min-height: auto;
+          .footer-col-2 {
+            grid-column: 2 / 3;
+          }
+          .footer-col-3 {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
           }
         }
+
         @media (max-width: 767px) {
           .footer-main-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
           }
-          .footer-address-block {
-            min-height: auto;
+          .footer-centers-subgrid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
           }
         }
       `}</style>
