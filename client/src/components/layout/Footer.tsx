@@ -246,31 +246,33 @@ export const Footer: React.FC = () => {
             <div className="footer-centers-subgrid">
               {/* Nagpur Center */}
               <div className="footer-center-card">
-                <h5
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.96rem',
-                    fontWeight: 600,
-                    color: 'var(--text-ivory)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    margin: '0 0 0.5rem 0'
-                  }}
-                >
-                  <MapPin size={15} color="var(--accent-gold)" />
-                  <span>Nagpur Center</span>
-                </h5>
-                <p
-                  style={{
-                    fontSize: '0.84rem',
-                    color: 'var(--text-cream)',
-                    lineHeight: 1.55,
-                    margin: '0 0 0.75rem 0'
-                  }}
-                >
-                  Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
-                </p>
+                <div>
+                  <h5
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '0.96rem',
+                      fontWeight: 600,
+                      color: 'var(--text-ivory)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      margin: '0 0 0.5rem 0'
+                    }}
+                  >
+                    <MapPin size={15} color="var(--accent-gold)" />
+                    <span>Nagpur Center</span>
+                  </h5>
+                  <p
+                    style={{
+                      fontSize: '0.84rem',
+                      color: 'var(--text-cream)',
+                      lineHeight: 1.55,
+                      margin: '0 0 0.75rem 0'
+                    }}
+                  >
+                    Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
+                  </p>
+                </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
                   <a
                     href="tel:+919767362388"
@@ -307,31 +309,23 @@ export const Footer: React.FC = () => {
 
               {/* Durg Center */}
               <div className="footer-center-card">
-                <h5
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.96rem',
-                    fontWeight: 600,
-                    color: 'var(--text-ivory)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    margin: '0 0 0.5rem 0'
-                  }}
-                >
-                  <MapPin size={15} color="var(--accent-gold)" />
-                  <span>Durg Center</span>
-                </h5>
-                <p
-                  style={{
-                    fontSize: '0.84rem',
-                    color: 'var(--text-cream)',
-                    lineHeight: 1.55,
-                    margin: '0 0 0.75rem 0'
-                  }}
-                >
-                  Janardan Prasad, near Sharma Sahu Sadan, Ward No. 40, Durg - 491001, Chhattisgarh
-                </p>
+                <div>
+                  <h5
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '0.96rem',
+                      fontWeight: 600,
+                      color: 'var(--text-ivory)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      margin: '0 0 0.5rem 0'
+                    }}
+                  >
+                    <MapPin size={15} color="var(--accent-gold)" />
+                    <span>Durg Center</span>
+                  </h5>
+                </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
                   <a
                     href="tel:+917666890795"
@@ -534,6 +528,9 @@ export const Footer: React.FC = () => {
         }
 
         .footer-center-card {
+          display: flex;
+          flex-direction: column;
+          justifyContent: space-between;
           padding: 0.95rem 1rem;
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.07);
@@ -599,6 +596,9 @@ export const Footer: React.FC = () => {
           .footer-centers-subgrid {
             grid-template-columns: 1fr;
             gap: 1.25rem;
+          }
+          .footer-center-card {
+            gap: 0.75rem;
           }
         }
       `}</style>
