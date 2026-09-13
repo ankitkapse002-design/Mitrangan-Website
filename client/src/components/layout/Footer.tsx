@@ -242,122 +242,66 @@ export const Footer: React.FC = () => {
               </h4>
             </div>
 
-            {/* Nagpur & Durg Centers Cards Subgrid */}
-            <div className="footer-centers-subgrid">
-              {/* Nagpur Center */}
-              <div className="footer-center-card">
-                <div>
-                  <h5
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '0.96rem',
-                      fontWeight: 600,
-                      color: 'var(--text-ivory)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      margin: '0 0 0.5rem 0'
-                    }}
-                  >
-                    <MapPin size={15} color="var(--accent-gold)" />
-                    <span>Nagpur Center</span>
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: '0.84rem',
-                      color: 'var(--text-cream)',
-                      lineHeight: 1.55,
-                      margin: '0 0 0.75rem 0'
-                    }}
-                  >
-                    Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
-                  </p>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
-                  <a
-                    href="tel:+919767362388"
-                    className="footer-contact-item"
-                    style={{
-                      color: 'var(--text-ivory)',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    <Phone size={14} color="#D4AF37" />
-                    <span>+91 9767362388</span>
-                  </a>
-                  <a
-                    href="mailto:mitranganrehab@gmail.com"
-                    className="footer-contact-item"
-                    style={{
-                      color: 'var(--text-ivory)',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    <Mail size={14} color="#D4AF37" />
-                    <span>mitranganrehab@gmail.com</span>
-                  </a>
-                </div>
+            {/* Nagpur Center Card */}
+            <div className="footer-center-card">
+              <div>
+                <h5
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '0.96rem',
+                    fontWeight: 600,
+                    color: 'var(--text-ivory)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    margin: '0 0 0.5rem 0'
+                  }}
+                >
+                  <MapPin size={15} color="var(--accent-gold)" />
+                  <span>Nagpur Center</span>
+                </h5>
+                <p
+                  style={{
+                    fontSize: '0.84rem',
+                    color: 'var(--text-cream)',
+                    lineHeight: 1.55,
+                    margin: '0 0 0.75rem 0'
+                  }}
+                >
+                  Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra
+                </p>
               </div>
-
-              {/* Durg Center */}
-              <div className="footer-center-card">
-                <div>
-                  <h5
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '0.96rem',
-                      fontWeight: 600,
-                      color: 'var(--text-ivory)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      margin: '0 0 0.5rem 0'
-                    }}
-                  >
-                    <MapPin size={15} color="var(--accent-gold)" />
-                    <span>Durg Center</span>
-                  </h5>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.84rem' }}>
-                  <a
-                    href="tel:+917666890795"
-                    className="footer-contact-item"
-                    style={{
-                      color: 'var(--text-ivory)',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    <Phone size={14} color="#D4AF37" />
-                    <span>+91 7666890795</span>
-                  </a>
-                  <a
-                    href="mailto:mitranganrehab@gmail.com"
-                    className="footer-contact-item"
-                    style={{
-                      color: 'var(--text-ivory)',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    <Mail size={14} color="#D4AF37" />
-                    <span>mitranganrehab@gmail.com</span>
-                  </a>
-                </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', fontSize: '0.84rem' }}>
+                <a
+                  href="tel:+919767362388"
+                  className="footer-contact-item"
+                  style={{
+                    color: 'var(--text-ivory)',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'color 0.2s ease'
+                  }}
+                >
+                  <Phone size={14} color="#D4AF37" />
+                  <span>+91 9767362388</span>
+                </a>
+                <a
+                  href="mailto:mitranganrehab@gmail.com"
+                  className="footer-contact-item"
+                  style={{
+                    color: 'var(--text-ivory)',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'color 0.2s ease'
+                  }}
+                >
+                  <Mail size={14} color="#D4AF37" />
+                  <span>mitranganrehab@gmail.com</span>
+                </a>
               </div>
             </div>
 
@@ -516,22 +460,13 @@ export const Footer: React.FC = () => {
       <style>{`
         .footer-main-grid {
           display: grid;
-          grid-template-columns: minmax(300px, 1.15fr) minmax(230px, 0.85fr) minmax(460px, 1.6fr);
+          grid-template-columns: minmax(300px, 1.2fr) minmax(240px, 0.95fr) minmax(340px, 1.35fr);
           gap: 3.25rem;
           margin-bottom: 3.5rem;
         }
 
-        .footer-centers-subgrid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
-        }
-
         .footer-center-card {
-          display: flex;
-          flex-direction: column;
-          justifyContent: space-between;
-          padding: 0.95rem 1rem;
+          padding: 1.1rem 1.25rem;
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 10px;
@@ -592,13 +527,6 @@ export const Footer: React.FC = () => {
           .footer-main-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
-          }
-          .footer-centers-subgrid {
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-          }
-          .footer-center-card {
-            gap: 0.75rem;
           }
         }
       `}</style>
