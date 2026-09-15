@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Disallow private user & administrative routes
+Disallow: /admin/
+Disallow: /admin
+Disallow: /dashboard/
+Disallow: /dashboard
+Disallow: /login/
+Disallow: /login
+Disallow: /register/success
+Disallow: /status
+
+# Sitemaps
+Sitemap: https://nagpurnashamuktikendra.com/sitemap.xml

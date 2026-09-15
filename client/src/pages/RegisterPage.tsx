@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
+import { SEO } from '../components/SEO';
 import { HeartHandshake, AlertCircle, Loader2 } from 'lucide-react';
 
 export const RegisterPage: React.FC = () => {
@@ -76,6 +77,11 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem', minHeight: '90vh' }}>
+      <SEO
+        title="Register for Admission | Nasha Mukti Kendra Nagpur"
+        description="Confidential online admission registration for alcohol and drug rehabilitation at Mitrangan Kendra, Nagpur. 24x7 discrete intake assistance."
+        canonicalPath="/register"
+      />
       <div className="container" style={{ maxWidth: '820px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>

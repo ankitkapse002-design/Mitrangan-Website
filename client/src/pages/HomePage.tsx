@@ -9,6 +9,7 @@ import { LatestBlogs } from '../components/home/LatestBlogs';
 import { FAQSection } from '../components/home/FAQSection';
 import { IntroDoor } from '../3d/IntroDoor';
 import { CORE_VALUES, MITRANGAN_CENTERS } from '../content/siteContent';
+import { SEO } from '../components/SEO';
 import { Link } from 'wouter';
 import { ShieldCheck, Phone, ArrowRight, MapPin, MessageCircle, HeartHandshake } from 'lucide-react';
 
@@ -39,6 +40,11 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Nasha Mukti Kendra in Nagpur | Mitrangan De-Addiction & Rehab Centre"
+        description="Trusted Nasha Mukti Kendra in Nagpur providing structured alcohol & drug rehabilitation, medical detox support, counseling & 24/7 discrete emergency pickup."
+        canonicalPath="/"
+      />
       {showIntro && <IntroDoor onComplete={handleIntroComplete} />}
 
       <main>

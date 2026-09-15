@@ -1,2 +1,10 @@
-/api/*    /.netlify/functions/api/:splat   200
-/*        /index.html                      200
+/api/*                             /.netlify/functions/api/:splat   200
+
+# Legacy & Canonical 301 Redirects
+/about-us                          /about                           301
+/contact-us                        /contact                         301
+/press-or-government-program       /press                           301
+
+# Single Page App fallback
+/*                                 /index.html                      200
+

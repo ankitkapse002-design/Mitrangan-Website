@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRoute, Link } from 'wouter';
 import { BLOG_POSTS } from '../content/blogs';
+import { SEO } from '../components/SEO';
 import { Calendar, Clock, User, ArrowLeft, Phone, HeartHandshake, CheckCircle2, MessageCircle, Sparkles } from 'lucide-react';
 
 export const BlogPostPage: React.FC = () => {
@@ -69,6 +70,11 @@ export const BlogPostPage: React.FC = () => {
 
   return (
     <article style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title={`${post.title} | Nasha Mukti Kendra Nagpur`}
+        description={post.excerpt || post.subtitle || 'Expert clinical guidance from Mitrangan De-Addiction Kendra Nagpur.'}
+        canonicalPath={`/blogs/${post.slug}`}
+      />
       <div className="container" style={{ maxWidth: '860px' }}>
         {/* Back Link */}
         <Link

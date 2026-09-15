@@ -13,6 +13,17 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
+# Explicitly serve static robots.txt and sitemap.xml
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
 # Legacy SEO redirects
 [[redirects]]
   from = "/about-us"
@@ -34,3 +45,24 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Headers for crawlers, search engines, and security
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+

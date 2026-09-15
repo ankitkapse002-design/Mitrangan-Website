@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { CORE_VALUES } from '../content/siteContent';
+import { SEO } from '../components/SEO';
 import { CheckCircle2, Phone, ArrowRight } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
@@ -17,6 +18,11 @@ export const AboutPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="About Us | Mitrangan Nasha Mukti Kendra Nagpur"
+        description="Learn about Mitrangan Rehabilitation Kendra in Nagpur. Discover our mission, multidisciplinary clinical team, ethical values, and holistic recovery philosophy."
+        canonicalPath="/about"
+      />
       <div className="container">
         {/* Page Hero */}
         <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 4.5rem auto' }}>

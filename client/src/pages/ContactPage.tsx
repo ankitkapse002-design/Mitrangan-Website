@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MITRANGAN_CENTERS } from '../content/siteContent';
+import { SEO } from '../components/SEO';
 import { Phone, Mail, MapPin, CheckCircle2, Clock, Send, MessageSquare, MessageCircle } from 'lucide-react';
 import { Link } from 'wouter';
 
@@ -20,6 +21,11 @@ export const ContactPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Contact Nasha Mukti Kendra Nagpur | 24/7 Emergency Helpline"
+        description="Get in touch with our 24/7 de-addiction helpline in Nagpur. Located at Godhani, Nagpur. Call +91 9767362388 for confidential addiction guidance and ambulance pickup."
+        canonicalPath="/contact"
+      />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem auto' }}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { RECOVERY_STEPS } from '../content/siteContent';
+import { SEO } from '../components/SEO';
 import { Clock, Sun, Moon, Utensils, Users, Heart, Phone, ArrowRight } from 'lucide-react';
 
 export const JourneyPage: React.FC = () => {
@@ -75,6 +76,11 @@ export const JourneyPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Recovery Journey & Daily Schedule | Nasha Mukti Kendra Nagpur"
+        description="Discover the structured daily routine, therapeutic phases, and recovery pathway at Mitrangan Rehabilitation Kendra in Nagpur."
+        canonicalPath="/journey"
+      />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem auto' }}>

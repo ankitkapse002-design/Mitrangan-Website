@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { BLOG_POSTS } from '../content/blogs';
+import { SEO } from '../components/SEO';
 import { Calendar, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { FAQSection } from '../components/home/FAQSection';
 
@@ -29,6 +30,11 @@ export const BlogsPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Addiction Recovery & Mental Health Blog | Nasha Mukti Kendra Nagpur"
+        description="Read expert clinical guides on addiction symptoms, alcohol detox timelines, family counseling, and recovery roadmaps by Mitrangan Nagpur."
+        canonicalPath="/blogs"
+      />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem auto' }}>

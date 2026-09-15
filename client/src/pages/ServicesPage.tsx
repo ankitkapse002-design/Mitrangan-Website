@@ -2,11 +2,17 @@ import React from 'react';
 import { Link } from 'wouter';
 import { RELAPSE_PREVENTION_PILLARS } from '../content/programs';
 import { ProgramsGrid } from '../components/home/ProgramsGrid';
+import { SEO } from '../components/SEO';
 import { Phone, HeartHandshake, Sparkles } from 'lucide-react';
 
 export const ServicesPage: React.FC = () => {
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="De-Addiction Services in Nagpur | Mitrangan Rehabilitation Centre"
+        description="Explore comprehensive de-addiction services in Nagpur including alcohol rehab, drug rehabilitation, detox support, psychological counseling, and relapse prevention."
+        canonicalPath="/services"
+      />
       {/* Page Hero */}
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 4rem auto' }}>

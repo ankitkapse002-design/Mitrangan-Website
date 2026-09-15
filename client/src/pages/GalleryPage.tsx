@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GALLERY_ITEMS, type GalleryItem } from '../content/gallery';
+import { SEO } from '../components/SEO';
 import { X, ZoomIn } from 'lucide-react';
 
 export const GalleryPage: React.FC = () => {
@@ -13,6 +14,11 @@ export const GalleryPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Facility Gallery & Campus Tour | Nasha Mukti Kendra Nagpur"
+        description="View authentic photographs of Mitrangan Rehabilitation Kendra campus in Godhani, Nagpur: living accommodations, therapy spaces, yoga lawn, and facilities."
+        canonicalPath="/gallery"
+      />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3.5rem auto' }}>
