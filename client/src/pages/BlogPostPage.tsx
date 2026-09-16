@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRoute, Link } from 'wouter';
 import { BLOG_POSTS } from '../content/blogs';
 import { SEO } from '../components/SEO';
-import { Calendar, Clock, User, ArrowLeft, Phone, HeartHandshake, CheckCircle2, MessageCircle, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, ArrowLeft, Phone, HeartHandshake, CheckCircle2, MessageCircle, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export const BlogPostPage: React.FC = () => {
   const [, params] = useRoute('/blogs/:slug');
@@ -68,14 +68,90 @@ export const BlogPostPage: React.FC = () => {
   const coverImage = post.cover_image || post.coverImage || '/assets/facility_walkway.jpg';
   const readTime = post.read_time || post.readTime || '5 min read';
 
+  const postSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `https://nagpurnashamuktikendra.com/blogs/${post.slug}#article`,
+        headline: post.title,
+        description: post.excerpt || post.subtitle,
+        image: `https://nagpurnashamuktikendra.com${coverImage.startsWith('/') ? coverImage : `/${coverImage}`}`,
+        datePublished: post.date,
+        dateModified: '2026-09-16',
+        author: {
+          '@type': 'Organization',
+          name: post.author || 'Mitrangan Clinical Editorial Board',
+          url: 'https://nagpurnashamuktikendra.com/about'
+        },
+        reviewedBy: {
+          '@type': 'Person',
+          name: post.reviewer || 'Dr. S. K. Deshmukh, Consulting Neuropsychiatrist',
+          jobTitle: 'Consulting Neuropsychiatrist'
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Mitrangan Nasha Mukti Kendra Nagpur',
+          url: 'https://nagpurnashamuktikendra.com/',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://nagpurnashamuktikendra.com/assets/logo.png'
+          }
+        },
+        mainEntityOfPage: `https://nagpurnashamuktikendra.com/blogs/${post.slug}`
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://nagpurnashamuktikendra.com/'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Articles & Guides',
+            item: 'https://nagpurnashamuktikendra.com/blogs'
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: `https://nagpurnashamuktikendra.com/blogs/${post.slug}`
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <article style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
       <SEO
         title={`${post.title} | Nasha Mukti Kendra Nagpur`}
         description={post.excerpt || post.subtitle || 'Expert clinical guidance from Mitrangan De-Addiction Kendra Nagpur.'}
         canonicalPath={`/blogs/${post.slug}`}
+        schemaJson={postSchema}
       />
       <div className="container" style={{ maxWidth: '860px' }}>
+        {/* Visual Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" style={{ marginBottom: '1.25rem' }}>
+          <ol style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0, margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <li>
+              <Link href="/" style={{ color: 'var(--text-cream)', textDecoration: 'none' }}>Home</Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/blogs" style={{ color: 'var(--text-cream)', textDecoration: 'none' }}>Articles</Link>
+            </li>
+            <li>/</li>
+            <li style={{ color: 'var(--accent-gold)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '380px' }}>
+              {post.title}
+            </li>
+          </ol>
+        </nav>
+
         {/* Back Link */}
         <Link
           href="/blogs"
@@ -86,7 +162,7 @@ export const BlogPostPage: React.FC = () => {
             color: 'var(--accent-gold)',
             textDecoration: 'none',
             fontSize: '0.9rem',
-            marginBottom: '2rem'
+            marginBottom: '1.5rem'
           }}
         >
           <ArrowLeft size={16} />
@@ -118,9 +194,9 @@ export const BlogPostPage: React.FC = () => {
             gap: '1.5rem',
             fontSize: '0.85rem',
             color: 'var(--text-dim)',
-            paddingBottom: '2rem',
+            paddingBottom: '1.5rem',
             borderBottom: '1px solid var(--border-subtle)',
-            marginBottom: '2.5rem'
+            marginBottom: '1.5rem'
           }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -135,6 +211,30 @@ export const BlogPostPage: React.FC = () => {
             <Clock size={15} color="var(--accent-gold)" />
             <span>{readTime}</span>
           </span>
+        </div>
+
+        {/* Medical Review E-E-A-T Attribution Card */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '1rem 1.35rem',
+            background: 'rgba(212, 175, 55, 0.07)',
+            borderRadius: '12px',
+            border: '1px solid rgba(212, 175, 55, 0.25)',
+            marginBottom: '2.5rem'
+          }}
+        >
+          <ShieldCheck size={26} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
+          <div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-ivory)', fontWeight: 600 }}>
+              Clinically Reviewed By: {post.reviewer || 'Dr. S. K. Deshmukh, Consulting Neuropsychiatrist'}
+            </div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-cream)', lineHeight: 1.4 }}>
+              Evidence-based protocol alignment with WHO addiction withdrawal standards &amp; Mental Healthcare Act (MHCA 2017).
+            </div>
+          </div>
         </div>
 
         {/* Cover Photo */}
@@ -168,6 +268,106 @@ export const BlogPostPage: React.FC = () => {
               )}
             </section>
           ))}
+        </div>
+
+        {/* Contextual Internal Linking: Related Clinical Protocols */}
+        <div style={{ marginTop: '4.5rem', paddingTop: '3rem', borderTop: '1px solid var(--border-subtle)' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="section-tag">Direct Care Pathways</span>
+            <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: 'var(--text-ivory)', margin: '0.6rem 0' }}>
+              Explore Specialized Recovery Services in Nagpur
+            </h3>
+            <p style={{ color: 'var(--text-cream)', fontSize: '0.96rem', maxWidth: '640px', margin: '0 auto' }}>
+              If you or a family member need clinical assistance, review our dedicated residential programs:
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.25rem' }}>
+            <Link
+              href="/services/alcohol-deaddiction"
+              className="glass-panel"
+              style={{
+                padding: '1.5rem',
+                borderRadius: '14px',
+                border: '1px solid var(--border-subtle)',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'border-color 0.25s ease'
+              }}
+            >
+              <div>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.4rem' }}>
+                  Alcohol De-Addiction
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
+                  Supervised medical detox, withdrawal stabilization, and 90-day residential rehab.
+                </p>
+              </div>
+              <div style={{ marginTop: '1rem', color: 'var(--accent-gold)', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span>View Alcohol Protocol</span>
+                <ArrowRight size={13} />
+              </div>
+            </Link>
+
+            <Link
+              href="/services/drug-rehabilitation"
+              className="glass-panel"
+              style={{
+                padding: '1.5rem',
+                borderRadius: '14px',
+                border: '1px solid var(--border-subtle)',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'border-color 0.25s ease'
+              }}
+            >
+              <div>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.4rem' }}>
+                  Drug Rehabilitation
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
+                  Specialized treatment for brown sugar, opioids, cannabis, and synthetic drugs.
+                </p>
+              </div>
+              <div style={{ marginTop: '1rem', color: 'var(--accent-gold)', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span>View Drug Protocol</span>
+                <ArrowRight size={13} />
+              </div>
+            </Link>
+
+            <Link
+              href="/admission-process"
+              className="glass-panel"
+              style={{
+                padding: '1.5rem',
+                borderRadius: '14px',
+                border: '1px solid var(--border-gold)',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                background: 'rgba(212, 175, 55, 0.04)',
+                transition: 'border-color 0.25s ease'
+              }}
+            >
+              <div>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.4rem' }}>
+                  Admission &amp; Checklists
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
+                  Step-by-step intake rules, documentation required, packing lists, and fees.
+                </p>
+              </div>
+              <div style={{ marginTop: '1rem', color: 'var(--accent-gold)', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span>View Admission Guide</span>
+                <ArrowRight size={13} />
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* Bottom Assistance & Emergency Actions */}
