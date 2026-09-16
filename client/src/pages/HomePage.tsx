@@ -7,6 +7,7 @@ import { FacilityPreview } from '../components/home/FacilityPreview';
 import { Testimonials } from '../components/home/Testimonials';
 import { LatestBlogs } from '../components/home/LatestBlogs';
 import { FAQSection } from '../components/home/FAQSection';
+import { LocalCatchmentSection } from '../components/home/LocalCatchmentSection';
 import { IntroDoor } from '../3d/IntroDoor';
 import { CORE_VALUES, MITRANGAN_CENTERS } from '../content/siteContent';
 import { SEO } from '../components/SEO';
@@ -319,7 +320,10 @@ export const HomePage: React.FC = () => {
         {/* 9. Latest Clinical Articles & Knowledge Hub */}
         <LatestBlogs />
 
-        {/* 10. Verified FAQs Accordion */}
+        {/* 10. Local Catchment & Vidarbha Coverage */}
+        <LocalCatchmentSection />
+
+        {/* 11. Verified FAQs Accordion */}
         <FAQSection />
 
         {/* 11. Dual Center Regional Presence & Urgent Contact Section */}

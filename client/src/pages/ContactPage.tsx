@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { MITRANGAN_CENTERS } from '../content/siteContent';
 import { SEO } from '../components/SEO';
-import { Phone, Mail, MapPin, CheckCircle2, Clock, Send, MessageSquare, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, CheckCircle2, Clock, Send, MessageSquare, MessageCircle, Navigation } from 'lucide-react';
 import { Link } from 'wouter';
+import { LocalCatchmentSection } from '../components/home/LocalCatchmentSection';
 
 export const ContactPage: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -227,6 +228,109 @@ export const ContactPage: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Google Map & Transit Guidance Section */}
+        <div style={{ marginTop: '5rem' }}>
+          <div
+            className="glass-panel"
+            style={{
+              padding: 'clamp(2rem, 4vw, 3.5rem)',
+              borderRadius: '20px',
+              border: '1px solid var(--border-gold)',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+              <div>
+                <span className="section-tag">
+                  <MapPin size={14} color="#D4AF37" />
+                  <span>Physical Center &amp; Navigation</span>
+                </span>
+                <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', margin: '0.85rem 0' }}>
+                  Locate Our Nagpur Center
+                </h2>
+                <p style={{ color: 'var(--text-cream)', fontSize: '1rem', lineHeight: 1.65, marginBottom: '1.75rem' }}>
+                  Conveniently situated in Godhani, North Nagpur, in a tranquil, recovery-oriented residential atmosphere far from urban chaos and substance temptations.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                    <MapPin size={20} color="var(--accent-gold)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <strong style={{ color: 'var(--text-ivory)', display: 'block', fontSize: '0.96rem' }}>Center Address</strong>
+                      <span style={{ color: 'var(--text-cream)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                        Plot no. 7, Manasvi Multi-speciality Hospital, Khangar Layout, Opp. Satyam Garden, Godhani, Nagpur – 441123, Maharashtra
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                    <Navigation size={20} color="#10B981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <strong style={{ color: 'var(--text-ivory)', display: 'block', fontSize: '0.96rem' }}>Transit &amp; Landmarks</strong>
+                      <span style={{ color: 'var(--text-cream)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                        • Godhani Railway Station: ~2.2 km (5 mins)<br />
+                        • Nagpur Junction Railway Station: ~9.5 km (25 mins)<br />
+                        • Nagpur International Airport (NAG): ~18 km (35 mins)<br />
+                        • Landmark: Directly opposite Satyam Garden, Khangar Layout
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  <a
+                    href="https://maps.google.com/?q=Plot+No.+7,+Manasvi+Multi-speciality+Hospital,+Khangar+Layout,+Opp.+Satyam+Garden,+Godhani,+Nagpur"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-gold"
+                    style={{ padding: '0.8rem 1.6rem', fontSize: '0.95rem' }}
+                  >
+                    <Navigation size={16} />
+                    <span>Open in Google Maps</span>
+                  </a>
+                  <a
+                    href="tel:+919767362388"
+                    className="btn btn-outline"
+                    style={{ padding: '0.8rem 1.6rem', fontSize: '0.95rem' }}
+                  >
+                    <Phone size={16} />
+                    <span>Call for Driving Directions</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Responsive Google Maps Iframe */}
+              <div
+                style={{
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid var(--border-glass)',
+                  boxShadow: '0 12px 35px rgba(0, 0, 0, 0.5)',
+                  height: '380px',
+                  width: '100%',
+                  background: 'rgba(7, 18, 13, 0.9)'
+                }}
+              >
+                <iframe
+                  title="Mitrangan Nasha Mukti Kendra Nagpur Google Map"
+                  src="https://maps.google.com/maps?q=Plot+No.+7,+Manasvi+Multi-speciality+Hospital,+Khangar+Layout,+Opp.+Satyam+Garden,+Godhani,+Nagpur&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: 'contrast(1.05) saturate(1.1)' }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Local Catchment & Emergency Response Network */}
+      <div style={{ marginTop: '2rem' }}>
+        <LocalCatchmentSection />
       </div>
     </div>
   );
