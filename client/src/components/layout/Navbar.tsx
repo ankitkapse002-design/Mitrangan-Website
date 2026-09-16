@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Phone, Menu, X, ShieldCheck, UserCheck, HeartHandshake, MessageCircle, User, Lock } from 'lucide-react';
+import { Phone, Menu, X, ShieldCheck, UserCheck, HeartHandshake, MessageCircle, User, Lock, FileText } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [location] = useLocation();
@@ -462,6 +462,11 @@ export const Navbar: React.FC = () => {
             <Link href="/register" className="btn btn-gold" style={{ width: '100%' }}>
               <HeartHandshake size={18} />
               <span>Register Admission</span>
+            </Link>
+
+            <Link href="/admission-process" className="btn btn-outline" style={{ width: '100%', borderColor: 'rgba(212, 175, 55, 0.4)' }}>
+              <FileText size={18} color="var(--accent-gold)" />
+              <span>Admission Guide &amp; Checklist</span>
             </Link>
 
             <Link href="/status" className="btn btn-outline-gold" style={{ width: '100%' }}>

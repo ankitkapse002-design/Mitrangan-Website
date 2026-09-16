@@ -36,6 +36,15 @@ const iconMap: Record<string, React.ReactNode> = {
   Compass: <Compass size={24} color="#D4AF37" />
 };
 
+const dedicatedPagesMap: Record<string, string> = {
+  'alcohol-addiction': '/services/alcohol-deaddiction',
+  'drug-addiction': '/services/drug-rehabilitation',
+  'opioid-addiction': '/services/drug-rehabilitation',
+  'cannabis-synthetic': '/services/drug-rehabilitation',
+  'prescription-dependency': '/services/drug-rehabilitation',
+  'medical-detox': '/services/detoxification-support'
+};
+
 export const ProgramsGrid: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'addiction' | 'modality' | 'holistic'>('all');
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
@@ -200,24 +209,46 @@ export const ProgramsGrid: React.FC = () => {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', borderTop: '1px solid var(--border-glass)' }}>
-                <button
-                  onClick={() => setSelectedProgram(program)}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: 'var(--accent-gold)',
-                    fontSize: '0.88rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    padding: 0
-                  }}
-                >
-                  <span>Program Details</span>
-                  <ArrowRight size={14} />
-                </button>
+                {dedicatedPagesMap[program.id] ? (
+                  <Link
+                    href={dedicatedPagesMap[program.id]}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--accent-gold)',
+                      fontSize: '0.88rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      textDecoration: 'none',
+                      padding: 0
+                    }}
+                  >
+                    <span>Clinical Protocol</span>
+                    <ArrowRight size={14} />
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => setSelectedProgram(program)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--accent-gold)',
+                      fontSize: '0.88rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      padding: 0
+                    }}
+                  >
+                    <span>Program Details</span>
+                    <ArrowRight size={14} />
+                  </button>
+                )}
 
                 <Link
                   href="/register"
@@ -310,12 +341,23 @@ export const ProgramsGrid: React.FC = () => {
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-                <Link href="/register" className="btn btn-gold" style={{ flex: 1 }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+                {dedicatedPagesMap[selectedProgram.id] && (
+                  <Link
+                    href={dedicatedPagesMap[selectedProgram.id]}
+                    className="btn btn-outline"
+                    style={{ flex: '1 1 100%', textAlign: 'center', padding: '0.7rem 1rem', fontSize: '0.92rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                    onClick={() => setSelectedProgram(null)}
+                  >
+                    <span>Read In-Depth Clinical Treatment Guide</span>
+                    <ArrowRight size={14} />
+                  </Link>
+                )}
+                <Link href="/register" className="btn btn-gold" style={{ flex: 1, minWidth: '150px' }}>
                   <span>Apply for Admission</span>
                   <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919767362388" className="btn btn-emerald" style={{ flex: 1 }}>
+                <a href="tel:+919767362388" className="btn btn-emerald" style={{ flex: 1, minWidth: '150px' }}>
                   <span>Call Consultant</span>
                 </a>
               </div>

@@ -6,17 +6,17 @@ export const Footer: React.FC = () => {
   const quickNavCol1 = [
     { label: 'About Us', href: '/about' },
     { label: 'Recovery Journey', href: '/journey' },
-    { label: 'Press & Events', href: '/press' },
+    { label: 'Admission Guide', href: '/admission-process' },
     { label: 'Articles & FAQs', href: '/blogs' },
     { label: 'Check Status', href: '/status', isSpecial: true }
   ];
 
   const quickNavCol2 = [
-    { label: 'All Services', href: '/services' },
-    { label: 'Photo Gallery', href: '/gallery' },
-    { label: 'Social Causes', href: '/causes' },
-    { label: 'Admission Form', href: '/register', isSpecial: true },
-    { label: 'Contact Us', href: '/contact' }
+    { label: 'Alcohol De-Addiction', href: '/services/alcohol-deaddiction' },
+    { label: 'Drug Rehabilitation', href: '/services/drug-rehabilitation' },
+    { label: 'Medical Detox Support', href: '/services/detoxification-support' },
+    { label: 'All Services Hub', href: '/services' },
+    { label: 'Admission Form', href: '/register', isSpecial: true }
   ];
 
   return (

@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { RELAPSE_PREVENTION_PILLARS } from '../content/programs';
 import { ProgramsGrid } from '../components/home/ProgramsGrid';
 import { SEO } from '../components/SEO';
-import { Phone, HeartHandshake, Sparkles } from 'lucide-react';
+import { Phone, HeartHandshake, Sparkles, WineOff, ShieldAlert, Stethoscope, FileText, ArrowRight } from 'lucide-react';
 
 export const ServicesPage: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ export const ServicesPage: React.FC = () => {
       />
       {/* Page Hero */}
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 4rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto 3rem auto' }}>
           <span className="section-tag">
             <Sparkles size={13} />
             <span>Clinical &amp; Holistic Programs</span>
@@ -26,6 +26,144 @@ export const ServicesPage: React.FC = () => {
           <p style={{ color: 'var(--text-cream)', fontSize: '1.15rem', lineHeight: 1.7 }}>
             Our evidence-based treatment plans combine supervised clinical detox, one-on-one counseling, group psychotherapy, and holistic lifestyle re-engineering to deliver sustainable freedom from addiction.
           </p>
+        </div>
+
+        {/* Specialized High-Intent Care Hubs */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '1.25rem',
+            marginBottom: '4rem'
+          }}
+        >
+          <Link
+            href="/services/alcohol-deaddiction"
+            className="glass-panel"
+            style={{
+              padding: '1.75rem',
+              borderRadius: '16px',
+              border: '1px solid var(--border-gold)',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.25s ease, border-color 0.25s ease',
+              background: 'linear-gradient(145deg, rgba(14, 34, 26, 0.9) 0%, rgba(7, 18, 13, 0.95) 100%)'
+            }}
+          >
+            <div>
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(212, 175, 55, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <WineOff size={22} color="#D4AF37" />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--text-ivory)', marginBottom: '0.45rem' }}>
+                Alcohol De-Addiction
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-cream)', lineHeight: 1.55, margin: 0 }}>
+                Supervised detox, withdrawal stabilization, and long-term craving therapy.
+              </p>
+            </div>
+            <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-gold)', fontSize: '0.88rem', fontWeight: 600 }}>
+              <span>View Clinical Protocol</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          <Link
+            href="/services/drug-rehabilitation"
+            className="glass-panel"
+            style={{
+              padding: '1.75rem',
+              borderRadius: '16px',
+              border: '1px solid var(--border-gold)',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.25s ease, border-color 0.25s ease',
+              background: 'linear-gradient(145deg, rgba(14, 34, 26, 0.9) 0%, rgba(7, 18, 13, 0.95) 100%)'
+            }}
+          >
+            <div>
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(212, 175, 55, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <ShieldAlert size={22} color="#D4AF37" />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--text-ivory)', marginBottom: '0.45rem' }}>
+                Drug Rehabilitation
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-cream)', lineHeight: 1.55, margin: 0 }}>
+                Rehab for opioids, brown sugar, cannabis, stimulants, and sedatives.
+              </p>
+            </div>
+            <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-gold)', fontSize: '0.88rem', fontWeight: 600 }}>
+              <span>View Clinical Protocol</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          <Link
+            href="/services/detoxification-support"
+            className="glass-panel"
+            style={{
+              padding: '1.75rem',
+              borderRadius: '16px',
+              border: '1px solid var(--border-gold)',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.25s ease, border-color 0.25s ease',
+              background: 'linear-gradient(145deg, rgba(14, 34, 26, 0.9) 0%, rgba(7, 18, 13, 0.95) 100%)'
+            }}
+          >
+            <div>
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(212, 175, 55, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <Stethoscope size={22} color="#D4AF37" />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--text-ivory)', marginBottom: '0.45rem' }}>
+                Medical Detox Support
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-cream)', lineHeight: 1.55, margin: 0 }}>
+                24/7 vitals monitoring, pain management, and hospital ICU tie-ups.
+              </p>
+            </div>
+            <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-gold)', fontSize: '0.88rem', fontWeight: 600 }}>
+              <span>View Clinical Protocol</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          <Link
+            href="/admission-process"
+            className="glass-panel"
+            style={{
+              padding: '1.75rem',
+              borderRadius: '16px',
+              border: '1px solid var(--border-gold)',
+              textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.25s ease, border-color 0.25s ease',
+              background: 'linear-gradient(145deg, rgba(14, 34, 26, 0.9) 0%, rgba(7, 18, 13, 0.95) 100%)'
+            }}
+          >
+            <div>
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(212, 175, 55, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <FileText size={22} color="#D4AF37" />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', color: 'var(--text-ivory)', marginBottom: '0.45rem' }}>
+                Admission &amp; Checklists
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-cream)', lineHeight: 1.55, margin: 0 }}>
+                Documents required, packing checklist, family visit rules, and fees.
+              </p>
+            </div>
+            <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-gold)', fontSize: '0.88rem', fontWeight: 600 }}>
+              <span>View Admission Guide</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
         </div>
       </div>
 

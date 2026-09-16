@@ -23,6 +23,12 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+// Specialized High-Intent SEO Landing Pages
+import { AlcoholDeaddictionPage } from './pages/services/AlcoholDeaddictionPage';
+import { DrugRehabilitationPage } from './pages/services/DrugRehabilitationPage';
+import { DetoxificationPage } from './pages/services/DetoxificationPage';
+import { AdmissionProcessPage } from './pages/AdmissionProcessPage';
+
 import { MitranganChatbot } from './chatbot';
 
 export const App: React.FC = () => {
@@ -45,6 +51,10 @@ export const App: React.FC = () => {
           <Route path="/about" component={AboutPage} />
           <Route path="/about-us" component={AboutPage} />
           <Route path="/services" component={ServicesPage} />
+          <Route path="/services/alcohol-deaddiction" component={AlcoholDeaddictionPage} />
+          <Route path="/services/drug-rehabilitation" component={DrugRehabilitationPage} />
+          <Route path="/services/detoxification-support" component={DetoxificationPage} />
+          <Route path="/admission-process" component={AdmissionProcessPage} />
           <Route path="/journey" component={JourneyPage} />
           <Route path="/gallery" component={GalleryPage} />
           <Route path="/press" component={PressPage} />

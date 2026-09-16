@@ -1,14 +1,27 @@
 import React, { useEffect } from 'react';
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 interface SEOProps {
   title: string;
   description: string;
   canonicalPath?: string;
+  faqSchema?: FAQItem[];
+  schemaJson?: object;
 }
 
 const BASE_URL = 'https://nagpurnashamuktikendra.com';
 
-export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath = '' }) => {
+export const SEO: React.FC<SEOProps> = ({
+  title,
+  description,
+  canonicalPath = '',
+  faqSchema,
+  schemaJson
+}) => {
   useEffect(() => {
     // 1. Update Document Title
     document.title = title;
@@ -47,7 +60,49 @@ export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath = ''
 
     const twitterDesc = document.querySelector('meta[name="twitter:description"]');
     if (twitterDesc) twitterDesc.setAttribute('content', description);
-  }, [title, description, canonicalPath]);
+
+    // 5. Dynamic Structured Data / Schema.org
+    const SCHEMA_SCRIPT_ID = 'dynamic-seo-schema';
+    let scriptTag = document.getElementById(SCHEMA_SCRIPT_ID) as HTMLScriptElement | null;
+
+    let payload: object | null = null;
+    if (schemaJson) {
+      payload = schemaJson;
+    } else if (faqSchema && faqSchema.length > 0) {
+      payload = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqSchema.map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer
+          }
+        }))
+      };
+    }
+
+    if (payload) {
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.id = SCHEMA_SCRIPT_ID;
+        scriptTag.type = 'application/ld+json';
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(payload);
+    } else if (scriptTag) {
+      scriptTag.remove();
+    }
+
+    return () => {
+      const existingScript = document.getElementById(SCHEMA_SCRIPT_ID);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [title, description, canonicalPath, faqSchema, schemaJson]);
 
   return null;
 };
+
