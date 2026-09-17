@@ -147,7 +147,7 @@ export function matchIntent(input: string): RecognizedIntent {
   if (matchesAnyKeyword(norm, ['family role', 'family support', 'परिवार का महत्व', 'कुटुंबाची भूमिका'])) {
     return 'faq_family';
   }
-  if (matchesAnyKeyword(norm, ['center', 'location', 'address', 'nagpur', 'durg', 'कहाँ है', 'कुठे आहे', 'पत्ता'])) {
+  if (matchesAnyKeyword(norm, ['center', 'location', 'address', 'nagpur', 'कहाँ है', 'कुठे आहे', 'पत्ता'])) {
     return 'faq_centers';
   }
   if (matchesAnyKeyword(norm, ['programs', 'treatment', 'treatments', 'कार्यक्रम', 'इलाज', 'उपचार'])) {

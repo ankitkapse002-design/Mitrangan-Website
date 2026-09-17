@@ -39,14 +39,14 @@ export const ContactPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Dual Physical Centers Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '4.5rem' }}>
+        {/* Center Details */}
+        <div style={{ maxWidth: '680px', margin: '0 auto 4.5rem auto' }}>
           {MITRANGAN_CENTERS.map((center, idx) => (
             <div key={idx} className="glass-panel-gold" style={{ padding: '2.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-gold)', marginBottom: '0.75rem' }}>
                 <MapPin size={20} />
                 <span style={{ fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, fontSize: '0.88rem' }}>
-                  {center.city} Center {center.isHeadquarters ? '(Headquarters)' : ''}
+                  {center.city} Center
                 </span>
               </div>
 
@@ -104,7 +104,7 @@ export const ContactPage: React.FC = () => {
               24x7 Emergency Pickup Service
             </h2>
             <p style={{ color: 'var(--text-cream)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              Families often face situations where an individual struggling with severe chemical dependency or withdrawal cannot safely travel on their own. Mitrangan operates discrete, safe pickup support across Maharashtra and Chhattisgarh.
+              Families often face situations where an individual struggling with severe chemical dependency or withdrawal cannot safely travel on their own. Mitrangan operates discrete, safe pickup support across Maharashtra and surrounding regions.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
@@ -194,18 +194,6 @@ export const ContactPage: React.FC = () => {
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
                   />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Nearest Center</label>
-                  <select
-                    className="form-select"
-                    value={formData.center}
-                    onChange={e => setFormData({ ...formData, center: e.target.value })}
-                  >
-                    <option value="Nagpur">Nagpur Center (Godhani, Nagpur)</option>
-                    <option value="Durg">Durg Center (Janardan Prasad, Durg)</option>
-                  </select>
                 </div>
 
                 <div className="form-group">

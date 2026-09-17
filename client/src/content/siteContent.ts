@@ -17,14 +17,6 @@ export const MITRANGAN_CENTERS: CenterLocation[] = [
     phoneDisplay: "+91 9767362388",
     email: "mitranganrehab@gmail.com",
     isHeadquarters: true
-  },
-  {
-    city: "Durg",
-    name: "Mitrangan Rehabilitation Center (Durg)",
-    address: "Janardan Prasad, near Sharma Sahu Sadan, Ward No. 40, Durg - 491001, Chhattisgarh",
-    phone: "+917666890795",
-    phoneDisplay: "+91 7666890795",
-    email: "mitranganrehab@gmail.com"
   }
 ];
 
@@ -50,7 +42,7 @@ export const MITRANGAN_STATS: StatItem[] = [
     targetNumber: 4,
     suffix: "+",
     label: "Years of Service",
-    description: "Dedicated de-addiction service across Maharashtra & Chhattisgarh"
+    description: "Dedicated de-addiction service across Maharashtra & Central India"
   },
   {
     id: "staff",

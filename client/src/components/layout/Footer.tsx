@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
                 marginBottom: '1.35rem'
               }}
             >
-              We are a trusted Nasha Mukti Kendra in Nagpur & Durg dedicated to helping individuals overcome addiction through structured rehabilitation, professional counseling, and holistic healing programs.
+              We are a trusted Nasha Mukti Kendra in Nagpur dedicated to helping individuals overcome addiction through structured rehabilitation, professional counseling, and holistic healing programs.
             </p>
 
             {/* 24x7 Pickup Assistance Card */}
@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
                 <span>24x7 Discrete Pickup Assistance</span>
               </div>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
-                Immediate confidential ambulance response for admissions across Maharashtra and Chhattisgarh.
+                Immediate confidential ambulance response for admissions across Maharashtra and surrounding regions.
               </p>
             </div>
           </div>

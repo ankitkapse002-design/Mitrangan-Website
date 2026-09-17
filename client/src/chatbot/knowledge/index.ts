@@ -19,11 +19,8 @@ export interface ProgramInfo {
 export const VERIFIED_CONTACTS = {
   nagpurPhone: '+919767362388',
   nagpurDisplay: '+91 9767362388',
-  durgPhone: '+917666890795',
-  durgDisplay: '+91 7666890795',
   whatsAppUrl: 'https://wa.me/919767362388?text=Hello%20Mitrangan,%20I%20need%20help%20regarding%20rehabilitation',
-  nagpurAddress: 'Mitrangan Rehabilitation Kendra, Near Besa Square, Manewada-Besa Road, Nagpur, Maharashtra - 440037',
-  durgAddress: 'Mitrangan Rehabilitation Kendra, Near Gurudwara, Station Road, Durg, Chhattisgarh - 491001'
+  nagpurAddress: 'Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra'
 };
 
 export const MITRANGAN_PROGRAMS: ProgramInfo[] = [
@@ -171,19 +168,19 @@ export const ADMISSION_STEPS = {
   en: [
     { step: 1, title: 'Confidential Call / Inquiry', desc: 'Speak to our counselors or request a callback via chat.' },
     { step: 2, title: 'Free Initial Assessment', desc: 'We understand the individual’s health condition and substance history.' },
-    { step: 3, title: 'Safe & Discrete Pickup', desc: 'Trained pickup team available 24x7 across Maharashtra & Chhattisgarh.' },
+    { step: 3, title: 'Safe & Discrete Pickup', desc: 'Trained pickup team available 24x7 across Maharashtra and surrounding regions.' },
     { step: 4, title: 'Commence Recovery', desc: 'Admission, medical evaluation, safe room allocation, and healing journey begins.' }
   ],
   hi: [
     { step: 1, title: 'गोपनीय बातचीत / फोन', desc: 'हमारे काउंसलर से सीधे फोन या चैट के जरिए संपर्क करें।' },
     { step: 2, title: 'निःशुल्क प्रारंभिक मूल्यांकन', desc: 'मरीज की स्थिति, नशे के प्रकार और स्वास्थ्य की पूरी जानकारी समझी जाती है।' },
-    { step: 3, title: 'सुरक्षित और गोपनीय पिकअप', desc: 'नागपुर, विदर्भ और दुर्ग/छत्तीसगढ़ में 24 घंटे सुरक्षित एम्बुलेंस/टीम सहायता उपलब्ध।' },
+    { step: 3, title: 'सुरक्षित और गोपनीय पिकअप', desc: 'नागपुर, विदर्भ और आसपास के क्षेत्रों में 24 घंटे सुरक्षित एम्बुलेंस/टीम सहायता उपलब्ध।' },
     { step: 4, title: 'नई शुरुआत और इलाज', desc: 'प्रवेश, मेडिकल चेकअप, आरामदायक आवास और नए जीवन की शुरुआत।' }
   ],
   mr: [
     { step: 1, title: 'गोपनीय संवाद / फोन', desc: 'आमच्या समुपदेशकांशी थेट फोन किंवा चॅटद्वारे मोफत चर्चा करा.' },
     { step: 2, title: 'विनामूल्य प्राथमिक तपासणी', desc: 'रुग्णाची सद्यस्थिती, व्यसनाचा प्रकार आणि आरोग्याची संपूर्ण माहिती घेतली जाते.' },
-    { step: 3, title: 'सुरक्षित व गोपनीय पिकअप', desc: 'नागपूर, विदर्भ आणि दुर्ग/छत्तीसगड परिसरात २४ तास सुरक्षित रुग्णवाहिका व पथक उपलब्ध.' },
+    { step: 3, title: 'सुरक्षित व गोपनीय पिकअप', desc: 'नागपूर, विदर्भ आणि लगतच्या परिसरात २४ तास सुरक्षित रुग्णवाहिका व पथक उपलब्ध.' },
     { step: 4, title: 'नवीन आयुष्याची सुरुवात', desc: 'प्रवेश, वैद्यकीय तपासणी, सुरक्षित कक्ष आणि संपूर्ण पुनर्वसन प्रक्रियेची सुरुवात.' }
   ]
 };

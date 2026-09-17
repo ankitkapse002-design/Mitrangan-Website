@@ -38,6 +38,6 @@ export const MITRANGAN_FAQS: FAQItem[] = [
   {
     category: "Emergency & Pickup",
     question: "What is the admission procedure and how do we arrange emergency pickup?",
-    answer: "The admission process is straightforward. Call our 24/7 helpline at +91 9767362388 or +91 7666890795 to discuss the situation. If needed, our trained, respectful team provides discreet 24x7 pickup assistance directly from your home to ensure safe arrival at our center."
+    answer: "The admission process is straightforward. Call our 24/7 helpline at +91 9767362388 to discuss the situation. If needed, our trained, respectful team provides discreet 24x7 pickup assistance directly from your home to ensure safe arrival at our center."
   }
 ];

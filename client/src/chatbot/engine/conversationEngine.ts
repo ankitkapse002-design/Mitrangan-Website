@@ -199,7 +199,6 @@ export async function processUserMessage(
               maskedName: payload.fullName,
               programPreference: payload.programPreference,
               phoneNagpur: VERIFIED_CONTACTS.nagpurDisplay,
-              phoneDurg: VERIFIED_CONTACTS.durgDisplay,
               whatsAppUrl: VERIFIED_CONTACTS.whatsAppUrl
             },
             quickReplies: [
@@ -339,10 +338,10 @@ export async function processUserMessage(
       const pickupStep = steps[2];
       const pickupDetail =
         lang === 'hi'
-          ? `### 24x7 सुरक्षित एवं गोपनीय पिकअप\n\n${pickupStep.desc}\n\n- **नागपुर एवं विदर्भ:** +91 9767362388\n- **दुर्ग एवं छत्तीसगढ़:** +91 7666890795\n- प्रशिक्षित मेडिकल टीम और गोपनीय एम्बुलेंस हमेशा तैयार रहती है।`
+          ? `### 24x7 सुरक्षित एवं गोपनीय पिकअप\n\n${pickupStep.desc}\n\n- **24/7 हेल्पलाइन:** +91 9767362388\n- प्रशिक्षित मेडिकल टीम और गोपनीय एम्बुलेंस हमेशा तैयार रहती है।`
           : lang === 'mr'
-          ? `### २४ तास सुरक्षित व गोपनीय पिकअप\n\n${pickupStep.desc}\n\n- **नागपूर व विदर्भ:** +91 9767362388\n- **दुर्ग व छत्तीसगड:** +91 7666890795\n- प्रशिक्षित वैद्यकीय पथक व रुग्णवाहिका सदैव सज्ज असते.`
-          : `### 24x7 Discrete & Safe Pickup Assistance\n\n${pickupStep.desc}\n\n- **Nagpur & Vidarbha:** +91 9767362388\n- **Durg & Chhattisgarh:** +91 7666890795\n- Experienced intake nurses and safe transport vehicles available round the clock.`;
+          ? `### २४ तास सुरक्षित व गोपनीय पिकअप\n\n${pickupStep.desc}\n\n- **२४/७ हेल्पलाईन:** +91 9767362388\n- प्रशिक्षित वैद्यकीय पथक व रुग्णवाहिका सदैव सज्ज असते.`
+          : `### 24x7 Discrete & Safe Pickup Assistance\n\n${pickupStep.desc}\n\n- **24/7 Helpline:** +91 9767362388\n- Experienced intake nurses and safe transport vehicles available round the clock.`;
 
       return {
         replyText: pickupDetail,
@@ -350,7 +349,6 @@ export async function processUserMessage(
         cardType: 'emergency',
         cardData: {
           phoneNagpur: VERIFIED_CONTACTS.nagpurDisplay,
-          phoneDurg: VERIFIED_CONTACTS.durgDisplay,
           whatsAppUrl: VERIFIED_CONTACTS.whatsAppUrl
         },
         quickReplies: [
@@ -407,12 +405,11 @@ export async function processUserMessage(
     case 'emergency': {
       state.scenario = 'emergency';
       return {
-        replyText: `⚠️ **${locale.emergencyPrompt}**\n\n• **Nagpur 24x7:** +91 9767362388\n• **Durg 24x7:** +91 7666890795`,
+        replyText: `⚠️ **${locale.emergencyPrompt}**\n\n• **24/7 Helpline:** +91 9767362388`,
         nextState: state,
         cardType: 'emergency',
         cardData: {
           phoneNagpur: VERIFIED_CONTACTS.nagpurDisplay,
-          phoneDurg: VERIFIED_CONTACTS.durgDisplay,
           whatsAppUrl: VERIFIED_CONTACTS.whatsAppUrl
         },
         quickReplies: [
@@ -431,7 +428,6 @@ export async function processUserMessage(
         cardType: 'contact',
         cardData: {
           phoneNagpur: VERIFIED_CONTACTS.nagpurDisplay,
-          phoneDurg: VERIFIED_CONTACTS.durgDisplay,
           whatsAppUrl: VERIFIED_CONTACTS.whatsAppUrl
         },
         quickReplies: [

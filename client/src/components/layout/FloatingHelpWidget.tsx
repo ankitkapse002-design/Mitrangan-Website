@@ -68,16 +68,7 @@ export const FloatingHelpWidget: React.FC = () => {
             style={{ width: '100%', fontSize: '0.86rem', padding: '0.6rem 0.9rem' }}
           >
             <Phone size={16} />
-            <span>Call Nagpur: +91 9767362388</span>
-          </a>
-
-          <a
-            href="tel:+917666890795"
-            className="btn btn-ghost"
-            style={{ width: '100%', fontSize: '0.86rem', padding: '0.6rem 0.9rem', justifyContent: 'center', borderColor: 'rgba(212, 175, 55, 0.3)' }}
-          >
-            <Phone size={16} color="var(--accent-gold)" />
-            <span>Call Durg: +91 7666890795</span>
+            <span>Call 24/7 Helpline: +91 9767362388</span>
           </a>
 
           {/* 24x7 Pickup Assistance */}

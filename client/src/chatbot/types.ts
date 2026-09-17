@@ -44,7 +44,6 @@ export interface CardData {
   programPreference?: string;
   registeredDate?: string;
   phoneNagpur?: string;
-  phoneDurg?: string;
   whatsAppUrl?: string;
   items?: string[];
   [key: string]: any;

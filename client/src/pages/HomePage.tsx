@@ -326,26 +326,26 @@ export const HomePage: React.FC = () => {
         {/* 11. Verified FAQs Accordion */}
         <FAQSection />
 
-        {/* 11. Dual Center Regional Presence & Urgent Contact Section */}
+        {/* 11. Regional Presence & Urgent Contact Section */}
         <section style={{ padding: '6rem 0', backgroundColor: 'rgba(7, 18, 13, 0.95)' }}>
           <div className="container">
             <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
               <span className="section-tag">Accessible Regional Care</span>
               <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.7rem)', marginBottom: '0.75rem' }}>
-                Our Two Dedicated Campuses
+                Our Dedicated Campus
               </h2>
               <p style={{ color: 'var(--text-cream)', fontSize: '1.02rem', lineHeight: 1.65 }}>
-                Operating fully equipped rehabilitation centers in Godhani, Nagpur (Maharashtra HQ) and Ward 40, Durg (Chhattisgarh).
+                Operating our fully equipped rehabilitation center in Godhani, Nagpur (Maharashtra).
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+            <div style={{ maxWidth: '680px', margin: '0 auto 4rem auto' }}>
               {MITRANGAN_CENTERS.map((center, idx) => (
                 <div key={idx} className="glass-panel-gold" style={{ padding: '2.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-gold)', marginBottom: '0.75rem' }}>
                     <MapPin size={18} />
                     <span style={{ fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.85rem', fontWeight: 600 }}>
-                      {center.city} Campus {center.isHeadquarters ? '(Headquarters)' : ''}
+                      {center.city} Campus
                     </span>
                   </div>
 

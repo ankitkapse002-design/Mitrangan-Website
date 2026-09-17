@@ -160,16 +160,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
                 style={{ fontSize: '0.78rem', padding: '0.4rem 0.65rem', width: '100%', justifyContent: 'center' }}
               >
                 <Phone size={13} />
-                <span>Nagpur: {message.cardData.phoneNagpur || '+91 9767362388'}</span>
-              </a>
-
-              <a
-                href={`tel:${message.cardData.phoneDurg || '+917666890795'}`}
-                className="btn btn-ghost"
-                style={{ fontSize: '0.78rem', padding: '0.4rem 0.65rem', width: '100%', justifyContent: 'center', borderColor: 'rgba(212, 175, 55, 0.3)' }}
-              >
-                <Phone size={13} color="var(--accent-gold)" />
-                <span>Durg: {message.cardData.phoneDurg || '+91 7666890795'}</span>
+                <span>Call Helpline: {message.cardData.phoneNagpur || '+91 9767362388'}</span>
               </a>
             </div>
           )}
@@ -192,22 +183,14 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
                 <AlertTriangle size={13} />
                 <span>24/7 Immediate Emergency Help</span>
               </div>
-              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.35rem' }}>
                 <a
                   href={`tel:${message.cardData.phoneNagpur || '+919767362388'}`}
                   className="btn btn-emerald"
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.6rem', flex: '1 1 110px', justifyContent: 'center' }}
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.6rem', width: '100%', justifyContent: 'center' }}
                 >
                   <Phone size={12} />
-                  <span>Nagpur Call</span>
-                </a>
-                <a
-                  href={`tel:${message.cardData.phoneDurg || '+917666890795'}`}
-                  className="btn btn-ghost"
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.6rem', flex: '1 1 110px', justifyContent: 'center', borderColor: 'rgba(212, 175, 55, 0.35)' }}
-                >
-                  <Phone size={12} color="var(--accent-gold)" />
-                  <span>Durg Call</span>
+                  <span>Call 24/7 Helpline: +91 9767362388</span>
                 </a>
               </div>
             </div>

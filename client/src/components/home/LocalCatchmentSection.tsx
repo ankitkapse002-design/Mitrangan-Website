@@ -48,7 +48,7 @@ const VIDARBHA_DISTRICTS: LocalityItem[] = [
 const INTERSTATE_HUBS: LocalityItem[] = [
   { name: 'Chhindwara (Madhya Pradesh)', distance: '125 km', eta: '2.0 – 2.5 hours', tag: 'MP Border Hub' },
   { name: 'Seoni (Madhya Pradesh)', distance: '130 km', eta: '2.0 – 2.5 hours', tag: 'MP Border Hub' },
-  { name: 'Durg & Bhilai (Chhattisgarh)', distance: '270 km', eta: 'Mitrangan Durg Branch', tag: 'Branch Center' },
+  { name: 'Bhilai & Surrounding Region', distance: '270 km', eta: '4.0 – 4.5 hours', tag: 'Interstate Hub' },
   { name: 'Raipur (Chhattisgarh)', distance: '295 km', eta: 'CG Capital Zone', tag: 'Interstate Hub' }
 ];
 

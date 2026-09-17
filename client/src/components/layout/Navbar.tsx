@@ -490,22 +490,14 @@ export const Navbar: React.FC = () => {
               <span>WhatsApp Confidential Support</span>
             </a>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginTop: '0.2rem' }}>
+            <div style={{ marginTop: '0.2rem' }}>
               <a
                 href="tel:+919767362388"
                 className="btn btn-emerald"
                 style={{ width: '100%', padding: '0.65rem 0.5rem', fontSize: '0.85rem', justifyContent: 'center' }}
               >
                 <Phone size={15} />
-                <span>Nagpur Call</span>
-              </a>
-              <a
-                href="tel:+917666890795"
-                className="btn btn-ghost"
-                style={{ width: '100%', padding: '0.65rem 0.5rem', fontSize: '0.85rem', justifyContent: 'center', borderColor: 'rgba(212, 175, 55, 0.4)' }}
-              >
-                <Phone size={15} color="var(--accent-gold)" />
-                <span>Durg Call</span>
+                <span>Call 24/7 Helpline: +91 9767362388</span>
               </a>
             </div>
           </div>

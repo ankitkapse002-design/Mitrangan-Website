@@ -210,7 +210,7 @@ export const Hero: React.FC<HeroProps> = ({ onReplayIntro }) => {
               textShadow: '0 2px 14px rgba(0, 0, 0, 0.95)'
             }}
           >
-            We are a trusted Nasha Mukti Kendra in Nagpur &amp; Durg dedicated to helping individuals overcome addiction through structured rehabilitation, professional counseling, and holistic healing programs. Our goal is to restore confidence, health, and purpose in every life we support.
+            We are a trusted Nasha Mukti Kendra in Nagpur dedicated to helping individuals overcome addiction through structured rehabilitation, professional counseling, and holistic healing programs. Our goal is to restore confidence, health, and purpose in every life we support.
           </p>
 
           {/* Primary Action Buttons */}
@@ -524,28 +524,7 @@ export const Hero: React.FC<HeroProps> = ({ onReplayIntro }) => {
               }}
             >
               <Phone size={18} />
-              <span>Nagpur: +91 9767362388</span>
-            </a>
-
-            {/* 3. Durg Phone */}
-            <a
-              href="tel:+917666890795"
-              className="btn btn-emerald"
-              style={{
-                width: '100%',
-                padding: '0.85rem 1.25rem',
-                fontSize: '0.96rem',
-                fontWeight: 600,
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.65rem',
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.4)'
-              }}
-            >
-              <Phone size={18} />
-              <span>Durg: +91 7666890795</span>
+              <span>Call 24/7 Helpline: +91 9767362388</span>
             </a>
           </div>
         </div>

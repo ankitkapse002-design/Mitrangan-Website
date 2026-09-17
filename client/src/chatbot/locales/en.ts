@@ -47,7 +47,7 @@ export const enLocale = {
 
   // Admission info
   admissionInfo:
-    "### Mitrangan Admission Process\n1. **Confidential Call or Inquiry**: Connect with us via chat, WhatsApp, or phone.\n2. **Free Clinical Consultation**: We assess health condition and substance history.\n3. **Safe & Discrete Pickup**: Available 24x7 across Maharashtra & Chhattisgarh.\n4. **Structured Recovery**: Safe room allocation, medical evaluation, and healing begins.",
+    "### Mitrangan Admission Process\n1. **Confidential Call or Inquiry**: Connect with us via chat, WhatsApp, or phone.\n2. **Free Clinical Consultation**: We assess health condition and substance history.\n3. **Safe & Discrete Pickup**: Available 24x7 across Maharashtra and surrounding regions.\n4. **Structured Recovery**: Safe room allocation, medical evaluation, and healing begins.",
   
   admissionQuickReplies: [
     { id: 'adm_reg', label: 'Start Registration', payload: 'register_now' },
@@ -64,7 +64,7 @@ export const enLocale = {
   registrationAskMobile:
     "Got it. **What is the primary contact mobile number?** (10 digits)",
   registrationAskAddress:
-    "Thank you. **What is your city or address?** (e.g. Nagpur, Wardha, Durg, Raipur)",
+    "Thank you. **What is your city or address?** (e.g. Nagpur, Wardha, Amravati, Chandrapur)",
   registrationAskProgram:
     "Almost done! Which recovery program are you seeking admission for?",
   registrationAskPickup:
@@ -117,12 +117,12 @@ export const enLocale = {
     { id: 'faq_rehab', label: 'How Does Rehab Work?', payload: 'faq_rehab' },
     { id: 'faq_relapse', label: 'How to Prevent Relapse?', payload: 'faq_relapse' },
     { id: 'faq_family', label: 'Why Family Support Matters?', payload: 'faq_family' },
-    { id: 'faq_centers', label: 'Where are your Centers?', payload: 'faq_centers' },
+    { id: 'faq_centers', label: 'Where is your Center?', payload: 'faq_centers' },
     { id: 'faq_back', label: 'Back to Main Menu', payload: 'back_to_menu' }
   ] as QuickReply[],
 
   faqCentersText:
-    "### Mitrangan Campus Centers\n- **Nagpur Campus:** Near Besa Square, Manewada-Besa Road, Nagpur, Maharashtra (Helpline: +91 9767362388)\n- **Durg Campus:** Near Gurudwara, Station Road, Durg, Chhattisgarh (Helpline: +91 7666890795)\n\nBoth facilities feature peaceful green campuses, round-the-clock medical care, CCTV security, healthy nutrition, and structured rehabilitation routines.",
+    "### Mitrangan Rehabilitation Center\n- **Nagpur Campus:** Plot no. 7, Manasvi Multi-speciality hospital, Khangar layout, opposite Satyam Garden, Godhani, Nagpur - 441123, Maharashtra (Helpline: +91 9767362388)\n\nOur facility features a peaceful green campus, round-the-clock medical care, CCTV security, healthy nutrition, and structured rehabilitation routines.",
 
   // Contact / Human handoff
   contactHeader: 'Talk to Mitrangan Human Support Team',
