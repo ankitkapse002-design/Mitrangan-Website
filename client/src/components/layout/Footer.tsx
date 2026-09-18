@@ -7,8 +7,9 @@ export const Footer: React.FC = () => {
     { label: 'About Us', href: '/about' },
     { label: 'Recovery Journey', href: '/journey' },
     { label: 'Admission Guide', href: '/admission-process' },
+    { label: 'Addiction Screener (Quiz)', href: '/self-assessment', isSpecial: true },
     { label: 'Articles & FAQs', href: '/blogs' },
-    { label: 'Check Status', href: '/status', isSpecial: true }
+    { label: 'Check Status', href: '/status' }
   ];
 
   const quickNavCol2 = [

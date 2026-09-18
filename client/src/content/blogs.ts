@@ -120,7 +120,8 @@ export const BLOG_POSTS: BlogPost[] = [
         sectionHeading: "What if They Still Refuse? Legal Provisions & Emergency Pickup",
         paragraphs: [
           "In situations where an individual is suffering from severe psychosis, violent outbursts, or life-threatening withdrawal, immediate intervention is essential for their safety.",
-          "Under the Mental Healthcare Act 2017, family guardians and nominated representatives can authorize medical admission for stabilization when an individual lacks capacity to make safe decisions. Mitrangan operates a 24/7 discrete crisis pickup service across Maharashtra and Vidarbha, with trained staff who de-escalate hostility calmly and ensure safe, compassionate transport."
+          "Under the Mental Healthcare Act 2017, family guardians and nominated representatives can authorize medical admission for stabilization when an individual lacks capacity to make safe decisions. Mitrangan operates a 24/7 discrete crisis pickup service across Maharashtra and Vidarbha, with trained staff who de-escalate hostility calmly and ensure safe, compassionate transport.",
+          "Before taking action, families can also complete our 2-Minute Confidential Addiction Screener to objectively calculate the severity tier (Mild, Moderate, or Severe Crisis) and obtain an immediate doctor action plan."
         ]
       }
     ]
@@ -204,7 +205,8 @@ export const BLOG_POSTS: BlogPost[] = [
         sectionHeading: "When to Seek Professional Rehabilitation",
         paragraphs: [
           "If an individual displays multiple signs and has been unable to maintain sobriety at home, professional residential rehabilitation is strongly indicated. Overcoming physical and psychological dependence requires medical supervision, emotional coaching, and a supportive community.",
-          "Mitrangan De-Addiction Kendra in Nagpur provides 24x7 admission assistance, confidential telephone consultations, and safe, respectful pickup services to assist families during this critical turning point."
+          "Mitrangan De-Addiction Kendra in Nagpur provides 24x7 admission assistance, confidential telephone consultations, and safe, respectful pickup services to assist families during this critical turning point.",
+          "Families can also take our 2-Minute Confidential Addiction Screener to benchmark symptoms and receive an immediate clinical risk tier before coordinating admission."
         ]
       }
     ]

@@ -12,7 +12,7 @@ import { IntroDoor } from '../3d/IntroDoor';
 import { CORE_VALUES, MITRANGAN_CENTERS } from '../content/siteContent';
 import { SEO } from '../components/SEO';
 import { Link } from 'wouter';
-import { ShieldCheck, Phone, ArrowRight, MapPin, MessageCircle, HeartHandshake } from 'lucide-react';
+import { ShieldCheck, Phone, ArrowRight, MapPin, MessageCircle, HeartHandshake, Activity, Sparkles } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   // One-time door intro: only plays on first entrance per browser session
@@ -258,6 +258,121 @@ export const HomePage: React.FC = () => {
 
         {/* 4. Comprehensive Programs Grid (Treatments & Modalities) */}
         <ProgramsGrid />
+
+        {/* 4B. Interactive Screener & CRO Banner */}
+        <section style={{ padding: '3.5rem 0', position: 'relative', overflow: 'hidden' }}>
+          <div className="container">
+            <div
+              className="glass-panel-gold"
+              style={{
+                padding: 'clamp(2rem, 4vw, 3.5rem)',
+                borderRadius: '24px',
+                position: 'relative',
+                overflow: 'hidden',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.7)'
+              }}
+            >
+              {/* Decorative background glow */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-40%',
+                  right: '-10%',
+                  width: '450px',
+                  height: '450px',
+                  background: 'radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(42, 102, 79, 0.08) 50%, transparent 70%)',
+                  filter: 'blur(50px)',
+                  pointerEvents: 'none',
+                  zIndex: 0
+                }}
+              />
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gap: '2.5rem',
+                  alignItems: 'center',
+                  position: 'relative',
+                  zIndex: 2
+                }}
+              >
+                <div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', marginBottom: '1rem' }}>
+                    <span className="section-tag">
+                      <Activity size={14} color="#D4AF37" />
+                      <span>2-Minute Clinical Assessment</span>
+                    </span>
+                  </div>
+
+                  <h2 style={{ fontSize: 'clamp(1.8rem, 3.2vw, 2.5rem)', lineHeight: 1.25, color: 'var(--text-ivory)', marginBottom: '1rem' }}>
+                    Not Sure If Inpatient Rehab is Needed?{' '}
+                    <span className="gold-gradient-text">Check Severity Instantly.</span>
+                  </h2>
+
+                  <p style={{ color: 'var(--text-cream)', fontSize: '1.02rem', lineHeight: 1.65, marginBottom: '1.75rem' }}>
+                    Whether you are concerned about a loved one's escalating habits or evaluating yourself, our confidential 8-question clinical screener calculates the risk tier (Mild, Moderate, or Severe Crisis) and outlines immediate next steps.
+                  </p>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                    <Link href="/self-assessment" className="btn btn-gold" style={{ padding: '0.85rem 1.6rem', fontSize: '0.95rem' }}>
+                      <Activity size={18} />
+                      <span>Take Confidential Screener</span>
+                      <ArrowRight size={16} />
+                    </Link>
+
+                    <a href="tel:+919767362388" className="btn btn-emerald" style={{ padding: '0.85rem 1.4rem', fontSize: '0.95rem' }}>
+                      <Phone size={17} />
+                      <span>Call Helpline 24/7</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: 'rgba(7, 18, 13, 0.75)',
+                    padding: '1.75rem',
+                    borderRadius: '18px',
+                    border: '1px solid rgba(212, 175, 55, 0.22)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1.15rem'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10B981', flexShrink: 0 }}>
+                      <ShieldCheck size={20} />
+                    </div>
+                    <div>
+                      <strong style={{ fontSize: '0.92rem', color: 'var(--text-ivory)', display: 'block' }}>100% Anonymous &amp; Private</strong>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>No sign-up required. Your answers remain strictly private.</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(212, 175, 55, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-gold)', flexShrink: 0 }}>
+                      <Sparkles size={20} />
+                    </div>
+                    <div>
+                      <strong style={{ fontSize: '0.92rem', color: 'var(--text-ivory)', display: 'block' }}>Validated Medical Scoring</strong>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Based on WHO ASSIST, CAGE &amp; DAST clinical criteria.</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(14, 165, 233, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0EA5E9', flexShrink: 0 }}>
+                      <MessageCircle size={20} />
+                    </div>
+                    <div>
+                      <strong style={{ fontSize: '0.92rem', color: 'var(--text-ivory)', display: 'block' }}>1-Click WhatsApp Doctor Connect</strong>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Instantly share triage results with our medical desk in Nagpur.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* 5. The Step-by-Step Recovery Pathway */}
         <RecoveryPathway />

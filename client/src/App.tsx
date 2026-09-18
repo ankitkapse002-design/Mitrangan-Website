@@ -28,6 +28,7 @@ import { AlcoholDeaddictionPage } from './pages/services/AlcoholDeaddictionPage'
 import { DrugRehabilitationPage } from './pages/services/DrugRehabilitationPage';
 import { DetoxificationPage } from './pages/services/DetoxificationPage';
 import { AdmissionProcessPage } from './pages/AdmissionProcessPage';
+import { SelfAssessmentPage } from './pages/SelfAssessmentPage';
 
 import { MitranganChatbot } from './chatbot';
 
@@ -55,6 +56,8 @@ export const App: React.FC = () => {
           <Route path="/services/drug-rehabilitation" component={DrugRehabilitationPage} />
           <Route path="/services/detoxification-support" component={DetoxificationPage} />
           <Route path="/admission-process" component={AdmissionProcessPage} />
+          <Route path="/self-assessment" component={SelfAssessmentPage} />
+          <Route path="/addiction-screener" component={SelfAssessmentPage} />
           <Route path="/journey" component={JourneyPage} />
           <Route path="/gallery" component={GalleryPage} />
           <Route path="/press" component={PressPage} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Phone, Menu, X, ShieldCheck, UserCheck, HeartHandshake, MessageCircle, User, Lock, FileText } from 'lucide-react';
+import { Phone, Menu, X, ShieldCheck, UserCheck, HeartHandshake, MessageCircle, User, Lock, FileText, Activity } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [location] = useLocation();
@@ -197,6 +197,26 @@ export const Navbar: React.FC = () => {
           {/* Header Action Buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
             <Link
+              href="/self-assessment"
+              className="btn btn-ghost"
+              style={{
+                display: 'none',
+                height: '40px',
+                padding: '0 1.05rem',
+                fontSize: '0.86rem',
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
+                lineHeight: 1,
+                border: '1px solid rgba(212, 175, 55, 0.3)',
+                color: 'var(--accent-gold)'
+              }}
+              id="desktop-screener"
+            >
+              <Activity size={15} color="#D4AF37" />
+              <span>Addiction Screener</span>
+            </Link>
+
+            <Link
               href="/status"
               className="btn btn-ghost"
               style={{
@@ -331,6 +351,37 @@ export const Navbar: React.FC = () => {
                   >
                     <ShieldCheck size={16} color="var(--accent-gold)" />
                     <span>Check Status</span>
+                  </Link>
+
+                  {/* Addiction Screener */}
+                  <Link
+                    href="/self-assessment"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    role="menuitem"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      padding: '0.6rem 0.75rem',
+                      borderRadius: '8px',
+                      color: 'var(--text-cream)',
+                      textDecoration: 'none',
+                      fontSize: '0.88rem',
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 500,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(212, 175, 55, 0.14)';
+                      e.currentTarget.style.color = 'var(--text-ivory)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-cream)';
+                    }}
+                  >
+                    <Activity size={16} color="var(--accent-gold)" />
+                    <span>Addiction Screener</span>
                   </Link>
 
                   {/* 2. Patient Login */}
@@ -469,6 +520,11 @@ export const Navbar: React.FC = () => {
               <span>Admission Guide &amp; Checklist</span>
             </Link>
 
+            <Link href="/self-assessment" className="btn btn-outline" style={{ width: '100%', borderColor: 'rgba(212, 175, 55, 0.5)' }}>
+              <Activity size={18} color="var(--accent-gold)" />
+              <span>Addiction Screener (Quiz)</span>
+            </Link>
+
             <Link href="/status" className="btn btn-outline-gold" style={{ width: '100%' }}>
               <ShieldCheck size={18} />
               <span>Check Admission Status</span>
@@ -510,6 +566,9 @@ export const Navbar: React.FC = () => {
           .desktop-nav {
             display: flex !important;
             gap: 1.05rem !important;
+          }
+          #desktop-screener {
+            display: inline-flex !important;
           }
           #desktop-check-status {
             display: inline-flex !important;

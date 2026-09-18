@@ -367,6 +367,35 @@ export const BlogPostPage: React.FC = () => {
                 <ArrowRight size={13} />
               </div>
             </Link>
+
+            <Link
+              href="/self-assessment"
+              className="glass-panel"
+              style={{
+                padding: '1.5rem',
+                borderRadius: '14px',
+                border: '1px solid rgba(16, 185, 129, 0.35)',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                background: 'rgba(16, 185, 129, 0.04)',
+                transition: 'border-color 0.25s ease'
+              }}
+            >
+              <div>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.4rem' }}>
+                  Addiction Severity Screener
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-cream)', lineHeight: 1.5, margin: 0 }}>
+                  Take our confidential 2-minute clinical quiz to calculate risk and next steps.
+                </p>
+              </div>
+              <div style={{ marginTop: '1rem', color: '#10B981', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span>Take Clinical Quiz</span>
+                <ArrowRight size={13} />
+              </div>
+            </Link>
           </div>
         </div>
 
