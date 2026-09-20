@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { CheckCircle2, Copy, Check, ShieldCheck, ArrowRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const RegisterSuccessPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -18,6 +19,11 @@ export const RegisterSuccessPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8.5rem', paddingBottom: '6rem', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
+      <SEO
+        title="Admission Registered Successfully | Mitrangan Rehabilitation"
+        description="Admission application confirmation and tracking User ID."
+        noindex={true}
+      />
       <div className="container" style={{ maxWidth: '680px' }}>
         <div
           className="glass-panel-gold"

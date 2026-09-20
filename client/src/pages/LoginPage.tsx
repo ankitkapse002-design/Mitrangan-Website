@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'wouter';
 import { UserCheck, AlertCircle, Loader2 } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const LoginPage: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -48,50 +49,53 @@ export const LoginPage: React.FC = () => {
         localStorage.setItem('mitrangan_patient_token', data.token);
       }
 
-      // Redirect to patient dashboard
       setLocation('/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please verify your credentials.');
+      setError(err.message || 'Login verification failed.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ paddingTop: '8.5rem', paddingBottom: '6rem', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-      <div className="container" style={{ maxWidth: '520px' }}>
-        <div className="glass-panel" style={{ padding: 'clamp(2rem, 5vw, 3rem)', border: '1px solid var(--border-gold)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div
-              style={{
-                width: '60px',
-                height: '60px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 1rem auto'
-              }}
-            >
-              <UserCheck size={28} color="#D4AF37" />
-            </div>
-
-            <span className="section-tag">Patient / Family Access</span>
-            <h1 style={{ fontSize: '1.9rem', marginTop: '0.4rem', color: 'var(--text-ivory)' }}>
-              Patient Portal Login
-            </h1>
-            <p style={{ color: 'var(--text-cream)', fontSize: '0.88rem', marginTop: '0.5rem' }}>
-              Access your admission profile, care plans, and rehabilitation timeline.
-            </p>
+    <div style={{ paddingTop: '9rem', paddingBottom: '7rem', minHeight: '90vh' }}>
+      <SEO
+        title="Patient Portal Login | Mitrangan Rehabilitation"
+        description="Confidential patient portal authentication."
+        noindex={true}
+      />
+      <div className="container" style={{ maxWidth: '480px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <div
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(212, 175, 55, 0.12)',
+              border: '1px solid var(--border-gold)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1rem auto'
+            }}
+          >
+            <UserCheck size={26} color="var(--accent-gold)" />
           </div>
 
+          <h1 style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>
+            Patient Portal
+          </h1>
+          <p style={{ color: 'var(--text-cream)', fontSize: '0.92rem' }}>
+            Access your admission record, counseling schedule, and program progress.
+          </p>
+        </div>
+
+        <div className="glass-panel" style={{ padding: '2.5rem', border: '1px solid var(--border-gold)' }}>
           {error && (
             <div
               style={{
-                backgroundColor: 'rgba(239, 68, 68, 0.12)',
-                border: '1px solid rgba(239, 68, 68, 0.35)',
+                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#FCA5A5',
                 padding: '0.85rem 1.1rem',
                 borderRadius: '8px',
@@ -109,8 +113,9 @@ export const LoginPage: React.FC = () => {
 
           <form onSubmit={handleLogin}>
             <div className="form-group">
-              <label className="form-label">Admission User ID</label>
+              <label className="form-label" htmlFor="patientLoginUserId">Admission User ID</label>
               <input
+                id="patientLoginUserId"
                 type="text"
                 required
                 placeholder="e.g. RAHU2026-001"
@@ -122,8 +127,9 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Registered Mobile Number</label>
+              <label className="form-label" htmlFor="patientLoginMobile">Registered Mobile Number</label>
               <input
+                id="patientLoginMobile"
                 type="tel"
                 required
                 placeholder="10-digit registered number"

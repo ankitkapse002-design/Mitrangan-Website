@@ -6,7 +6,8 @@ export const registrationSchema = z.object({
   mobileNumber: z.string().trim().regex(/^[0-9+\s-]{10,15}$/, "Please enter a valid mobile number (at least 10 digits)"),
   address: z.string().trim().min(5, "Address must be at least 5 characters"),
   programPreference: z.string().optional().default("General Rehabilitation"),
-  pickupRequired: z.boolean().optional().default(false)
+  pickupRequired: z.boolean().optional().default(false),
+  hpField: z.string().optional()
 });
 
 export type RegistrationInput = z.infer<typeof registrationSchema>;

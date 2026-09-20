@@ -1,10 +1,19 @@
-/api/*                             /.netlify/functions/api/:splat   200
+/api/*                                                                       /.netlify/functions/api/:splat   200
+/llms.txt                                                                    /llms.txt                        200
+/robots.txt                                                                  /robots.txt                      200
+/sitemap.xml                                                                 /sitemap.xml                     200
 
 # Legacy & Canonical 301 Redirects
-/about-us                          /about                           301
-/contact-us                        /contact                         301
-/press-or-government-program       /press                           301
+/about-us                                                                    /about                           301
+/contact-us                                                                  /contact                         301
+/press-or-government-program                                                 /press                           301
+/google-ads                                                                  /contact                         301
+/google-ads/                                                                 /contact                         301
+/best-nasha-mukti-kendra-chhindwara-complete-guide-to-addiction-recovery      /blogs/chhindwara-recovery-guide 301
+/best-nasha-mukti-kendra-chhindwara-complete-guide-to-addiction-recovery/     /blogs/chhindwara-recovery-guide 301
+/signs-someone-needs-a-nasha-mukti-centre-in-nagpur                          /blogs/signs-addiction-nagpur    301
+/signs-someone-needs-a-nasha-mukti-centre-in-nagpur/                         /blogs/signs-addiction-nagpur    301
+/privacy-policy                                                              /privacy                         301
 
 # Single Page App fallback
-/*                                 /index.html                      200
-
+/*                                                                           /index.html                      200

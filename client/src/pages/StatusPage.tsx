@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Search, Clock, CheckCircle2, AlertCircle, Phone, User, Calendar, MapPin } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import type { AdmissionStatus } from '@shared/types';
 
 interface StatusResult {
@@ -116,6 +117,11 @@ export const StatusPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8.5rem', paddingBottom: '6rem', minHeight: '90vh' }}>
+      <SEO
+        title="Check Admission Status | Mitrangan Rehabilitation Nagpur"
+        description="Verify real-time confidential admission application status using your unique Mitrangan patient ID."
+        canonicalPath="/status"
+      />
       <div className="container" style={{ maxWidth: '780px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -132,13 +138,16 @@ export const StatusPage: React.FC = () => {
         <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2.5rem', border: '1px solid var(--border-gold)' }}>
           <form onSubmit={handleSearch} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem' }}>
             <div style={{ flex: '1 1 280px', position: 'relative' }}>
+              <label htmlFor="userIdStatusInput" className="sr-only">Enter User ID</label>
               <input
+                id="userIdStatusInput"
                 type="text"
                 placeholder="Enter User ID (e.g. RAHU2026-001)"
                 value={userIdInput}
                 onChange={e => setUserIdInput(e.target.value.toUpperCase())}
                 className="form-input"
                 style={{ paddingLeft: '2.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}
+                aria-label="Patient User ID"
               />
               <Search size={18} color="var(--accent-gold)" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>

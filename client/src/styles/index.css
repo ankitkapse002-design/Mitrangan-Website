@@ -192,6 +192,26 @@ h1, h2, h3, h4, .font-serif {
   outline: none;
 }
 
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Screen reader only utility (accessible & honeypot concealment) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .btn-gold {
   background: linear-gradient(135deg, #E6C869 0%, #D4AF37 60%, #B89222 100%);
   color: #07120D;

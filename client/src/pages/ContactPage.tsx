@@ -164,17 +164,38 @@ export const ContactPage: React.FC = () => {
               >
                 <CheckCircle2 size={38} color="#10B981" style={{ margin: '0 auto 0.75rem auto' }} />
                 <h4 style={{ fontSize: '1.3rem', color: 'var(--text-ivory)', marginBottom: '0.5rem' }}>
-                  Message Transmitted
+                  Message Transmitted Successfully
                 </h4>
-                <p style={{ color: 'var(--text-cream)', fontSize: '0.92rem', lineHeight: 1.6 }}>
-                  Thank you for reaching out. A Mitrangan counselor will review your message and reach out confidentially.
+                <p style={{ color: 'var(--text-cream)', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  Thank you for reaching out. A Mitrangan counselor will review your message and reach out confidentially. For immediate emergency support, you can also call our 24/7 helpline directly.
                 </p>
+                <a
+                  href="tel:+919767362388"
+                  className="btn btn-emerald"
+                  style={{ padding: '0.65rem 1.4rem', fontSize: '0.9rem' }}
+                >
+                  <Phone size={15} />
+                  <span>Call 24/7 Helpline: +91 9767362388</span>
+                </a>
               </div>
             ) : (
               <form onSubmit={handleContactSubmit}>
-                <div className="form-group">
-                  <label className="form-label">Your Name</label>
+                {/* Honeypot field */}
+                <div className="sr-only" aria-hidden="true">
+                  <label htmlFor="contact_website_token">Leave this field blank</label>
                   <input
+                    type="text"
+                    id="contact_website_token"
+                    name="contact_website_token"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="contactName">Your Name</label>
+                  <input
+                    id="contactName"
                     type="text"
                     required
                     placeholder="e.g. Ankit"
@@ -185,8 +206,9 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Contact Mobile / Phone</label>
+                  <label className="form-label" htmlFor="contactPhone">Contact Mobile / Phone</label>
                   <input
+                    id="contactPhone"
                     type="tel"
                     required
                     placeholder="e.g. 9767362388"
@@ -197,8 +219,9 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Message / Inquiry Details</label>
+                  <label className="form-label" htmlFor="contactMessage">Message / Inquiry Details</label>
                   <textarea
+                    id="contactMessage"
                     rows={4}
                     required
                     placeholder="How can we assist you or your family member?"

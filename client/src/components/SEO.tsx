@@ -11,22 +11,34 @@ interface SEOProps {
   canonicalPath?: string;
   faqSchema?: FAQItem[];
   schemaJson?: object;
+  noindex?: boolean;
 }
 
 const BASE_URL = 'https://nagpurnashamuktikendra.com';
+const DEFAULT_ROBOTS = 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 
 export const SEO: React.FC<SEOProps> = ({
   title,
   description,
   canonicalPath = '',
   faqSchema,
-  schemaJson
+  schemaJson,
+  noindex = false
 }) => {
   useEffect(() => {
     // 1. Update Document Title
     document.title = title;
 
-    // 2. Update Meta Description
+    // 2. Update Robots Meta Tag
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', noindex ? 'noindex, nofollow' : DEFAULT_ROBOTS);
+
+    // 3. Update Meta Description
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
       metaDesc = document.createElement('meta');
@@ -100,8 +112,12 @@ export const SEO: React.FC<SEOProps> = ({
       if (existingScript) {
         existingScript.remove();
       }
+      const robots = document.querySelector('meta[name="robots"]');
+      if (robots) {
+        robots.setAttribute('content', DEFAULT_ROBOTS);
+      }
     };
-  }, [title, description, canonicalPath, faqSchema, schemaJson]);
+  }, [title, description, canonicalPath, faqSchema, schemaJson, noindex]);
 
   return null;
 };

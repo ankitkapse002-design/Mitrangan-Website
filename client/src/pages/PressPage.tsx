@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { Flag, Music, ArrowRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const PressPage: React.FC = () => {
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Press & Government Programs | Mitrangan Rehabilitation Nagpur"
+        description="Public events, newspaper coverage, and governmental de-addiction awareness drives conducted by Mitrangan Rehabilitation Center in Nagpur."
+        canonicalPath="/press"
+      />
       <div className="container">
         {/* Page Hero */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem auto' }}>
@@ -24,6 +30,8 @@ export const PressPage: React.FC = () => {
             <img
               src="/assets/independence_day.jpg"
               alt="Independence Day Celebration at Mitrangan"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '260px', objectFit: 'cover' }}
             />
             <div style={{ padding: '2rem' }}>
@@ -46,7 +54,9 @@ export const PressPage: React.FC = () => {
           <div className="glass-panel" style={{ overflow: 'hidden', borderRadius: '18px' }}>
             <img
               src="/assets/music_night.jpg"
-              alt="Music Night at Mitrangan"
+              alt="Music Night Awareness Event at Mitrangan"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '260px', objectFit: 'cover' }}
             />
             <div style={{ padding: '2rem' }}>
@@ -79,7 +89,9 @@ export const PressPage: React.FC = () => {
             <div className="glass-panel" style={{ padding: '1.5rem' }}>
               <img
                 src="/assets/press_clipping_1.png"
-                alt="Newspaper Clipping 1"
+                alt="Mitrangan newspaper feature on community de-addiction awareness drives"
+                loading="lazy"
+                decoding="async"
                 style={{ width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '1rem', border: '1px solid var(--border-glass)' }}
               />
               <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.35rem' }}>
@@ -93,7 +105,9 @@ export const PressPage: React.FC = () => {
             <div className="glass-panel" style={{ padding: '1.5rem' }}>
               <img
                 src="/assets/press_clipping_2.png"
-                alt="Newspaper Clipping 2"
+                alt="Regional press report highlighting Mitrangan family counseling and residential rehabilitation"
+                loading="lazy"
+                decoding="async"
                 style={{ width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '1rem', border: '1px solid var(--border-glass)' }}
               />
               <h4 style={{ fontSize: '1.15rem', color: 'var(--text-ivory)', marginBottom: '0.35rem' }}>

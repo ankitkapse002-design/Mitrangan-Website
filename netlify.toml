@@ -13,7 +13,7 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
-# Explicitly serve static robots.txt and sitemap.xml
+# Explicitly serve static robots.txt, sitemap.xml, and llms.txt
 [[redirects]]
   from = "/robots.txt"
   to = "/robots.txt"
@@ -24,7 +24,12 @@
   to = "/sitemap.xml"
   status = 200
 
-# Legacy SEO redirects
+[[redirects]]
+  from = "/llms.txt"
+  to = "/llms.txt"
+  status = 200
+
+# Legacy SEO & Canonical 301 Redirects
 [[redirects]]
   from = "/about-us"
   to = "/about"
@@ -38,6 +43,31 @@
 [[redirects]]
   from = "/press-or-government-program"
   to = "/press"
+  status = 301
+
+[[redirects]]
+  from = "/google-ads"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/google-ads/"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/best-nasha-mukti-kendra-chhindwara-complete-guide-to-addiction-recovery"
+  to = "/blogs/chhindwara-recovery-guide"
+  status = 301
+
+[[redirects]]
+  from = "/signs-someone-needs-a-nasha-mukti-centre-in-nagpur"
+  to = "/blogs/signs-addiction-nagpur"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy"
   status = 301
 
 # Single Page App fallback for React client routing
@@ -60,9 +90,16 @@
     Cache-Control = "public, max-age=86400"
 
 [[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
+    X-XSS-Protection = "1; mode=block"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

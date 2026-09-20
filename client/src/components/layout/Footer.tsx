@@ -444,7 +444,11 @@ export const Footer: React.FC = () => {
             Copyright © {new Date().getFullYear()} Mitrangan De-Addiction Cum Rehabilitation Center. All Rights Reserved.
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <Link href="/privacy" style={{ color: 'var(--text-dim)', textDecoration: 'none', transition: 'color 0.2s ease' }} className="footer-nav-link">
+              <span>Privacy Policy</span>
+            </Link>
+
             <Link href="/login" style={{ color: 'var(--text-cream)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
               <span>Patient Login</span>
             </Link>

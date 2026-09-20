@@ -23,6 +23,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage').then(m => ({ default: m.AdminLoginPage })));
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage').then(m => ({ default: m.AdminDashboardPage })));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 // Specialized High-Intent SEO Landing Pages (lazy-loaded)
@@ -33,6 +34,7 @@ const AdmissionProcessPage = lazy(() => import('./pages/AdmissionProcessPage').t
 const SelfAssessmentPage = lazy(() => import('./pages/SelfAssessmentPage').then(m => ({ default: m.SelfAssessmentPage })));
 
 import { MitranganChatbot } from './chatbot';
+import { FloatingHelpWidget } from './components/layout/FloatingHelpWidget';
 
 const PageLoadingFallback: React.FC = () => (
   <div style={{
@@ -107,13 +109,18 @@ export const App: React.FC = () => {
             <Route path="/dashboard" component={DashboardPage} />
             <Route path="/admin/login" component={AdminLoginPage} />
             <Route path="/admin" component={AdminDashboardPage} />
+            <Route path="/privacy" component={PrivacyPolicyPage} />
+            <Route path="/privacy-policy" component={PrivacyPolicyPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </Suspense>
       </div>
 
       {!isAdminRoute && (
-        <MitranganChatbot />
+        <>
+          <FloatingHelpWidget />
+          <MitranganChatbot />
+        </>
       )}
 
       <Footer />

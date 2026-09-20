@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import { Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const AdminLoginPage: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -30,37 +31,43 @@ export const AdminLoginPage: React.FC = () => {
       try {
         data = await res.json();
       } catch {
-        // Fallback for non-JSON responses
+        // Fallback for non-JSON response
       }
 
       if (!res.ok) {
-        throw new Error(data.error || 'Authentication failed. Please check your credentials.');
+        throw new Error(data.error || 'Invalid administrator credentials.');
       }
 
       if (data.token) {
         localStorage.setItem('mitrangan_admin_token', data.token);
       }
 
+      // Redirect to admin dashboard
       setLocation('/admin');
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please check credentials.');
+      setError(err.message || 'Login failed. Please verify credentials.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ paddingTop: '8.5rem', paddingBottom: '6rem', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-      <div className="container" style={{ maxWidth: '480px' }}>
-        <div className="glass-panel-gold" style={{ padding: 'clamp(2rem, 5vw, 3rem)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+    <div style={{ paddingTop: '9rem', paddingBottom: '7rem', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
+      <SEO
+        title="Admin Portal Login | Mitrangan Rehabilitation"
+        description="Administrative authentication portal."
+        noindex={true}
+      />
+      <div className="container" style={{ maxWidth: '440px' }}>
+        <div className="glass-panel" style={{ padding: 'clamp(2rem, 5vw, 3rem)', border: '1px solid var(--border-gold)' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.25rem' }}>
             <div
               style={{
-                width: '60px',
-                height: '60px',
+                width: '56px',
+                height: '56px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(212, 175, 55, 0.15)',
-                border: '1px solid var(--border-gold)',
+                backgroundColor: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -70,12 +77,12 @@ export const AdminLoginPage: React.FC = () => {
               <Lock size={26} color="#D4AF37" />
             </div>
 
-            <span className="section-tag">Clinical Administration</span>
-            <h1 style={{ fontSize: '1.9rem', color: 'var(--text-ivory)', marginTop: '0.4rem' }}>
-              Admin Console Login
+            <span className="section-tag">Clinical Staff &amp; Operations</span>
+            <h1 style={{ fontSize: '1.9rem', marginTop: '0.4rem', color: 'var(--text-ivory)' }}>
+              Administrator Login
             </h1>
-            <p style={{ color: 'var(--text-cream)', fontSize: '0.88rem', marginTop: '0.4rem' }}>
-              Authorized Mitrangan staff and admissions management portal.
+            <p style={{ color: 'var(--text-cream)', fontSize: '0.86rem', marginTop: '0.5rem' }}>
+              Authorized management portal for clinical intake, admission records, and patient statuses.
             </p>
           </div>
 
@@ -101,8 +108,9 @@ export const AdminLoginPage: React.FC = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="form-label">Admin Username</label>
+              <label className="form-label" htmlFor="adminUsername">Admin Username</label>
               <input
+                id="adminUsername"
                 type="text"
                 required
                 placeholder="Username"
@@ -113,8 +121,9 @@ export const AdminLoginPage: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Password</label>
+              <label className="form-label" htmlFor="adminPassword">Password</label>
               <input
+                id="adminPassword"
                 type="password"
                 required
                 placeholder="••••••••••••"

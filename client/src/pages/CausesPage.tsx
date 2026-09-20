@@ -2,10 +2,16 @@ import React from 'react';
 import { SOCIAL_CAUSES } from '../content/causes';
 import { CheckCircle2, HandHeart } from 'lucide-react';
 import { Link } from 'wouter';
+import { SEO } from '../components/SEO';
 
 export const CausesPage: React.FC = () => {
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
+      <SEO
+        title="Social Initiatives & Popular Causes | Mitrangan Rehabilitation Nagpur"
+        description="Explore Mitrangan's community outreach programs: environmental care, free medical checkups, women empowerment, and anti-drug youth seminars across Nagpur."
+        canonicalPath="/causes"
+      />
       <div className="container">
         {/* Page Hero */}
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem auto' }}>

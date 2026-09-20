@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
     setIsUserMenuOpen(false);
   }, [location]);
 
-  // Handle click outside or Escape key to dismiss user dropdown
+  // Handle click outside or Escape key to dismiss menus
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -33,9 +33,10 @@ export const Navbar: React.FC = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsUserMenuOpen(false);
+        setIsMobileOpen(false);
       }
     };
-    if (isUserMenuOpen) {
+    if (isUserMenuOpen || isMobileOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       window.addEventListener('keydown', handleKeyDown);
     }
@@ -43,7 +44,7 @@ export const Navbar: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isUserMenuOpen]);
+  }, [isUserMenuOpen, isMobileOpen]);
 
   const navLinks = [
     { label: 'Home', href: '/' },
@@ -469,6 +470,7 @@ export const Navbar: React.FC = () => {
               }}
               className="mobile-hamburger"
               aria-label="Toggle navigation menu"
+              aria-expanded={isMobileOpen}
             >
               {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>

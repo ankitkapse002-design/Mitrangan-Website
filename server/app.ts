@@ -7,11 +7,13 @@ import authRoutes from './routes/auth.js';
 import registrationRoutes from './routes/registrations.js';
 import blogRoutes from './routes/blogs.js';
 import legacyRedirects from './routes/redirects.js';
+import { securityHeadersMiddleware } from './middleware/security.js';
 
 dotenv.config();
 
 export const app = express();
 
+app.use(securityHeadersMiddleware);
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());

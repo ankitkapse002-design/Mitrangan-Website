@@ -13,6 +13,7 @@ export const RegisterPage: React.FC = () => {
     programPreference: 'General Rehabilitation',
     pickupRequired: false
   });
+  const [hpField, setHpField] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,7 +52,8 @@ export const RegisterPage: React.FC = () => {
           mobileNumber: formData.mobileNumber.trim(),
           address: formData.address.trim(),
           programPreference: formData.programPreference,
-          pickupRequired: formData.pickupRequired
+          pickupRequired: formData.pickupRequired,
+          hpField: hpField.trim()
         })
       });
 
@@ -117,13 +119,28 @@ export const RegisterPage: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit}>
+            {/* Honeypot field - concealed from users, catches bots */}
+            <div className="sr-only" aria-hidden="true">
+              <label htmlFor="user_system_verify_token">Leave this field blank</label>
+              <input
+                type="text"
+                id="user_system_verify_token"
+                name="user_system_verify_token"
+                tabIndex={-1}
+                autoComplete="off"
+                value={hpField}
+                onChange={e => setHpField(e.target.value)}
+              />
+            </div>
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
               {/* Full Name */}
               <div className="form-group">
-                <label className="form-label">
+                <label className="form-label" htmlFor="patientFullName">
                   Full Name of Patient <span style={{ color: 'var(--accent-gold)' }}>*</span>
                 </label>
                 <input
+                  id="patientFullName"
                   type="text"
                   required
                   placeholder="e.g. Rahul Sharma"
@@ -135,10 +152,11 @@ export const RegisterPage: React.FC = () => {
 
               {/* Age */}
               <div className="form-group">
-                <label className="form-label">
+                <label className="form-label" htmlFor="patientAge">
                   Age <span style={{ color: 'var(--accent-gold)' }}>*</span>
                 </label>
                 <input
+                  id="patientAge"
                   type="number"
                   required
                   min="10"
@@ -153,10 +171,11 @@ export const RegisterPage: React.FC = () => {
 
             {/* Mobile Number */}
             <div className="form-group">
-              <label className="form-label">
+              <label className="form-label" htmlFor="patientMobile">
                 Contact Mobile Number <span style={{ color: 'var(--accent-gold)' }}>*</span>
               </label>
               <input
+                id="patientMobile"
                 type="tel"
                 required
                 placeholder="e.g. 9767362388"
@@ -171,10 +190,11 @@ export const RegisterPage: React.FC = () => {
 
             {/* Address */}
             <div className="form-group">
-              <label className="form-label">
+              <label className="form-label" htmlFor="patientAddress">
                 Residential Address <span style={{ color: 'var(--accent-gold)' }}>*</span>
               </label>
               <textarea
+                id="patientAddress"
                 required
                 rows={3}
                 placeholder="Full street address, city, district, pin code (e.g. Godhani Road, Nagpur)"
@@ -186,8 +206,9 @@ export const RegisterPage: React.FC = () => {
 
             {/* Program Preference */}
             <div className="form-group">
-              <label className="form-label">Program of Primary Concern</label>
+              <label className="form-label" htmlFor="programPreference">Program of Primary Concern</label>
               <select
+                id="programPreference"
                 className="form-select"
                 value={formData.programPreference}
                 onChange={e => setFormData({ ...formData, programPreference: e.target.value })}

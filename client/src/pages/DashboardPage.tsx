@@ -3,6 +3,7 @@ import { useLocation, Link } from 'wouter';
 import { UserCheck, ShieldCheck, Phone, LogOut, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
 import type { RegistrationRecord } from '@shared/types';
 import { MITRANGAN_CENTERS } from '../content/siteContent';
+import { SEO } from '../components/SEO';
 
 export const DashboardPage: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -89,6 +90,11 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '8.5rem', paddingBottom: '6rem', minHeight: '90vh' }}>
+      <SEO
+        title={`Patient Portal | ${patient.full_name} | Mitrangan`}
+        description="Confidential patient dashboard and recovery profile."
+        noindex={true}
+      />
       <div className="container" style={{ maxWidth: '920px' }}>
         {/* Top Bar with Logout */}
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '2.5rem' }}>

@@ -9,6 +9,7 @@ import {
   getAuditLogs
 } from '../db/index.js';
 import { requireAdmin, requirePatient, type AuthenticatedAdminRequest, type AuthenticatedPatientRequest } from '../middleware/auth.js';
+import { registrationRateLimiter } from '../middleware/security.js';
 
 const router = Router();
 
@@ -21,12 +22,22 @@ function maskName(name: string): string {
   }).join(' ');
 }
 
-// 1. Public: Create Registration
-router.post('/registrations', async (req, res) => {
+// 1. Public: Create Registration (Protected by Rate Limiter & Honeypot)
+router.post('/registrations', registrationRateLimiter, async (req, res) => {
   try {
     const parseResult = registrationSchema.safeParse(req.body);
     if (!parseResult.success) {
       return res.status(400).json({ error: parseResult.error.errors[0].message });
+    }
+
+    // Anti-spam Honeypot Check: bots fill hidden hpField
+    if (parseResult.data.hpField && parseResult.data.hpField.trim().length > 0) {
+      // Silently pretend success to fool bot scripts without saving spam
+      return res.status(201).json({
+        success: true,
+        message: 'Registration created successfully.',
+        userId: 'VERIFY2026-BOT'
+      });
     }
 
     const newRecord = await createRegistration(parseResult.data);

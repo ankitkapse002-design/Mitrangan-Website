@@ -3,11 +3,12 @@ import bcrypt from 'bcryptjs';
 import { adminLoginSchema, userLoginSchema } from '../../shared/schema.js';
 import { getAdminByUsername, getRegistrationByUserId, logAudit } from '../db/index.js';
 import { signAdminToken, signPatientToken, requireAdmin, requirePatient, type AuthenticatedAdminRequest, type AuthenticatedPatientRequest } from '../middleware/auth.js';
+import { authRateLimiter } from '../middleware/security.js';
 
 const router = Router();
 
-// Admin Login
-router.post('/admin/login', async (req, res) => {
+// Admin Login (Rate-limited against brute-force)
+router.post('/admin/login', authRateLimiter, async (req, res) => {
   try {
     const parseResult = adminLoginSchema.safeParse(req.body);
     if (!parseResult.success) {
@@ -65,8 +66,8 @@ router.post('/admin/logout', (_req, res) => {
   return res.json({ success: true, message: 'Logged out successfully.' });
 });
 
-// Patient Login
-router.post('/user/login', async (req, res) => {
+// Patient Login (Rate-limited against brute-force)
+router.post('/user/login', authRateLimiter, async (req, res) => {
   try {
     const parseResult = userLoginSchema.safeParse(req.body);
     if (!parseResult.success) {
