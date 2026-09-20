@@ -34,7 +34,6 @@ const AdmissionProcessPage = lazy(() => import('./pages/AdmissionProcessPage').t
 const SelfAssessmentPage = lazy(() => import('./pages/SelfAssessmentPage').then(m => ({ default: m.SelfAssessmentPage })));
 
 import { MitranganChatbot } from './chatbot';
-import { FloatingHelpWidget } from './components/layout/FloatingHelpWidget';
 
 const PageLoadingFallback: React.FC = () => (
   <div style={{
@@ -117,10 +116,7 @@ export const App: React.FC = () => {
       </div>
 
       {!isAdminRoute && (
-        <>
-          <FloatingHelpWidget />
-          <MitranganChatbot />
-        </>
+        <MitranganChatbot />
       )}
 
       <Footer />

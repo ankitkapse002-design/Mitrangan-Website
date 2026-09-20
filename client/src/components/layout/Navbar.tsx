@@ -84,11 +84,12 @@ export const Navbar: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            maxWidth: '1380px',
+            maxWidth: '1440px',
+            width: '100%',
             paddingTop: isScrolled ? '0.75rem' : '1.05rem',
             paddingBottom: isScrolled ? '0.75rem' : '1.05rem',
-            paddingLeft: '1.25rem',
-            paddingRight: '1.25rem',
+            paddingLeft: 'clamp(1rem, 2vw, 2rem)',
+            paddingRight: 'clamp(1rem, 2vw, 2rem)',
             transition: 'padding 0.35s ease',
             position: 'relative'
           }}
@@ -196,15 +197,15 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Header Action Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexShrink: 0 }}>
             <Link
               href="/self-assessment"
               className="btn btn-ghost"
               style={{
                 display: 'none',
-                height: '40px',
-                padding: '0 1.05rem',
-                fontSize: '0.86rem',
+                height: '38px',
+                padding: '0 0.95rem',
+                fontSize: '0.84rem',
                 alignItems: 'center',
                 whiteSpace: 'nowrap',
                 lineHeight: 1,
@@ -222,16 +223,17 @@ export const Navbar: React.FC = () => {
               className="btn btn-ghost"
               style={{
                 display: 'none',
-                height: '40px',
-                padding: '0 1.15rem',
-                fontSize: '0.86rem',
+                height: '38px',
+                padding: '0 0.95rem',
+                fontSize: '0.84rem',
                 alignItems: 'center',
                 whiteSpace: 'nowrap',
-                lineHeight: 1
+                lineHeight: 1,
+                border: '1px solid rgba(255, 255, 255, 0.12)'
               }}
               id="desktop-check-status"
             >
-              <ShieldCheck size={16} color="#D4AF37" />
+              <ShieldCheck size={15} color="#D4AF37" />
               <span>Check Status</span>
             </Link>
 
@@ -240,9 +242,9 @@ export const Navbar: React.FC = () => {
               className="btn btn-gold"
               style={{
                 display: 'none',
-                height: '40px',
-                padding: '0 1.35rem',
-                fontSize: '0.86rem',
+                height: '38px',
+                padding: '0 1.15rem',
+                fontSize: '0.85rem',
                 fontWeight: 600,
                 alignItems: 'center',
                 whiteSpace: 'nowrap',
@@ -250,12 +252,12 @@ export const Navbar: React.FC = () => {
               }}
               id="desktop-register"
             >
-              <HeartHandshake size={16} />
+              <HeartHandshake size={15} />
               <span>Admission</span>
             </Link>
 
-            {/* Login / User Icon with Dropdown Menu */}
-            <div ref={userMenuRef} style={{ position: 'relative' }}>
+            {/* Login / User Button with Dropdown Menu */}
+            <div ref={userMenuRef} style={{ position: 'relative', flexShrink: 0 }}>
               <button
                 type="button"
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -265,23 +267,28 @@ export const Navbar: React.FC = () => {
                 title="Account & Login Portals"
                 id="header-login-btn"
                 style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
+                  height: '38px',
+                  padding: '0 0.85rem',
+                  borderRadius: '20px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: isUserMenuOpen ? 'rgba(212, 175, 55, 0.22)' : 'rgba(255, 255, 255, 0.05)',
-                  border: isUserMenuOpen ? '1px solid var(--accent-gold)' : '1px solid rgba(212, 175, 55, 0.32)',
+                  gap: '0.45rem',
+                  background: isUserMenuOpen ? 'rgba(212, 175, 55, 0.22)' : 'rgba(212, 175, 55, 0.08)',
+                  border: isUserMenuOpen ? '1px solid var(--accent-gold)' : '1px solid rgba(212, 175, 55, 0.35)',
                   color: isUserMenuOpen ? 'var(--text-ivory)' : 'var(--accent-gold)',
                   cursor: 'pointer',
                   transition: 'all 0.25s ease',
-                  boxShadow: isUserMenuOpen ? '0 0 16px rgba(212, 175, 55, 0.35)' : '0 4px 12px rgba(0, 0, 0, 0.3)',
-                  flexShrink: 0
+                  boxShadow: isUserMenuOpen ? '0 0 16px rgba(212, 175, 55, 0.35)' : '0 2px 8px rgba(0, 0, 0, 0.25)',
+                  flexShrink: 0,
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  fontFamily: 'var(--font-display)',
+                  lineHeight: 1
                 }}
                 onMouseEnter={(e) => {
                   if (!isUserMenuOpen) {
-                    e.currentTarget.style.background = 'rgba(212, 175, 55, 0.15)';
+                    e.currentTarget.style.background = 'rgba(212, 175, 55, 0.18)';
                     e.currentTarget.style.borderColor = 'var(--accent-gold)';
                     e.currentTarget.style.color = 'var(--text-ivory)';
                     e.currentTarget.style.transform = 'translateY(-1px)';
@@ -289,14 +296,15 @@ export const Navbar: React.FC = () => {
                 }}
                 onMouseLeave={(e) => {
                   if (!isUserMenuOpen) {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.32)';
+                    e.currentTarget.style.background = 'rgba(212, 175, 55, 0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.35)';
                     e.currentTarget.style.color = 'var(--accent-gold)';
                     e.currentTarget.style.transform = 'none';
                   }
                 }}
               >
-                <User size={18} />
+                <User size={15} />
+                <span className="header-login-text">Login</span>
               </button>
 
               {/* Compact Premium Dropdown */}
@@ -306,7 +314,7 @@ export const Navbar: React.FC = () => {
                     position: 'absolute',
                     top: 'calc(100% + 10px)',
                     right: 0,
-                    width: '205px',
+                    width: '215px',
                     background: 'linear-gradient(165deg, rgba(14, 34, 25, 0.98) 0%, rgba(7, 18, 13, 0.99) 100%)',
                     border: '1px solid rgba(212, 175, 55, 0.38)',
                     borderRadius: '14px',
@@ -323,69 +331,13 @@ export const Navbar: React.FC = () => {
                   role="menu"
                   aria-orientation="vertical"
                 >
-                  {/* 1. Check Status */}
-                  <Link
-                    href="/status"
-                    onClick={() => setIsUserMenuOpen(false)}
-                    role="menuitem"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.6rem 0.75rem',
-                      borderRadius: '8px',
-                      color: 'var(--text-cream)',
-                      textDecoration: 'none',
-                      fontSize: '0.88rem',
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 500,
-                      transition: 'all 0.2s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(212, 175, 55, 0.14)';
-                      e.currentTarget.style.color = 'var(--text-ivory)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.color = 'var(--text-cream)';
-                    }}
-                  >
-                    <ShieldCheck size={16} color="var(--accent-gold)" />
-                    <span>Check Status</span>
-                  </Link>
+                  <div style={{ padding: '0.35rem 0.65rem 0.25rem', borderBottom: '1px solid rgba(212, 175, 55, 0.15)', marginBottom: '0.2rem' }}>
+                    <span style={{ fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--accent-gold)', fontWeight: 600 }}>
+                      Portals &amp; Status
+                    </span>
+                  </div>
 
-                  {/* Addiction Screener */}
-                  <Link
-                    href="/self-assessment"
-                    onClick={() => setIsUserMenuOpen(false)}
-                    role="menuitem"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.6rem 0.75rem',
-                      borderRadius: '8px',
-                      color: 'var(--text-cream)',
-                      textDecoration: 'none',
-                      fontSize: '0.88rem',
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 500,
-                      transition: 'all 0.2s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(212, 175, 55, 0.14)';
-                      e.currentTarget.style.color = 'var(--text-ivory)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.color = 'var(--text-cream)';
-                    }}
-                  >
-                    <Activity size={16} color="var(--accent-gold)" />
-                    <span>Addiction Screener</span>
-                  </Link>
-
-                  {/* 2. Patient Login */}
+                  {/* 1. Patient Login */}
                   <Link
                     href="/login"
                     onClick={() => setIsUserMenuOpen(false)}
@@ -394,7 +346,7 @@ export const Navbar: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.65rem',
-                      padding: '0.6rem 0.75rem',
+                      padding: '0.55rem 0.75rem',
                       borderRadius: '8px',
                       color: 'var(--text-cream)',
                       textDecoration: 'none',
@@ -412,13 +364,11 @@ export const Navbar: React.FC = () => {
                       e.currentTarget.style.color = 'var(--text-cream)';
                     }}
                   >
-                    <User size={16} color="var(--accent-gold)" />
+                    <UserCheck size={16} color="var(--accent-gold)" />
                     <span>Patient Login</span>
                   </Link>
 
-                  <div style={{ height: '1px', background: 'rgba(212, 175, 55, 0.18)', margin: '0.2rem 0.35rem' }} />
-
-                  {/* 3. Admin Login */}
+                  {/* 2. Admin Login */}
                   <Link
                     href="/admin/login"
                     onClick={() => setIsUserMenuOpen(false)}
@@ -427,7 +377,7 @@ export const Navbar: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.65rem',
-                      padding: '0.6rem 0.75rem',
+                      padding: '0.55rem 0.75rem',
                       borderRadius: '8px',
                       color: 'var(--text-cream)',
                       textDecoration: 'none',
@@ -447,6 +397,70 @@ export const Navbar: React.FC = () => {
                   >
                     <Lock size={16} color="var(--accent-gold)" />
                     <span>Admin Login</span>
+                  </Link>
+
+                  <div style={{ height: '1px', background: 'rgba(212, 175, 55, 0.15)', margin: '0.2rem 0.35rem' }} />
+
+                  {/* 3. Check Status */}
+                  <Link
+                    href="/status"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    role="menuitem"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      padding: '0.55rem 0.75rem',
+                      borderRadius: '8px',
+                      color: 'var(--text-cream)',
+                      textDecoration: 'none',
+                      fontSize: '0.88rem',
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 500,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(212, 175, 55, 0.14)';
+                      e.currentTarget.style.color = 'var(--text-ivory)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-cream)';
+                    }}
+                  >
+                    <ShieldCheck size={16} color="var(--accent-gold)" />
+                    <span>Check Admission Status</span>
+                  </Link>
+
+                  {/* 4. Addiction Screener */}
+                  <Link
+                    href="/self-assessment"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    role="menuitem"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      padding: '0.55rem 0.75rem',
+                      borderRadius: '8px',
+                      color: 'var(--text-cream)',
+                      textDecoration: 'none',
+                      fontSize: '0.88rem',
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 500,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(212, 175, 55, 0.14)';
+                      e.currentTarget.style.color = 'var(--text-ivory)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-cream)';
+                    }}
+                  >
+                    <Activity size={16} color="var(--accent-gold)" />
+                    <span>Addiction Screener</span>
                   </Link>
                 </div>
               )}
@@ -564,10 +578,11 @@ export const Navbar: React.FC = () => {
 
       {/* Inline styles for responsive visibility */}
       <style>{`
-        @media (min-width: 1320px) {
+        /* Ultra-wide screens (1600px and up) */
+        @media (min-width: 1600px) {
           .desktop-nav {
             display: flex !important;
-            gap: 1.05rem !important;
+            gap: 1.15rem !important;
           }
           #desktop-screener {
             display: inline-flex !important;
@@ -582,36 +597,74 @@ export const Navbar: React.FC = () => {
             display: none !important;
           }
         }
-        @media (min-width: 1080px) and (max-width: 1319px) {
+
+        /* Large desktop screens (1360px to 1599px) */
+        @media (min-width: 1360px) and (max-width: 1599px) {
           .desktop-nav {
             display: flex !important;
-            gap: 0.65rem !important;
-            margin: 0 0.35rem !important;
+            gap: 0.85rem !important;
           }
           .desktop-nav a {
-            font-size: 0.82rem !important;
+            font-size: 0.86rem !important;
+          }
+          #desktop-screener {
+            display: none !important;
           }
           #desktop-check-status {
             display: inline-flex !important;
-            padding: 0 0.85rem !important;
           }
           #desktop-register {
             display: inline-flex !important;
-            padding: 0 0.95rem !important;
           }
           .mobile-hamburger {
             display: none !important;
           }
         }
-        @media (min-width: 1024px) and (max-width: 1079px) {
+
+        /* Standard PC & Laptop screens (1180px to 1359px) */
+        @media (min-width: 1180px) and (max-width: 1359px) {
           .desktop-nav {
             display: flex !important;
             gap: 0.65rem !important;
-            margin: 0 0.35rem !important;
+            margin: 0 0.25rem !important;
           }
           .desktop-nav a {
-            font-size: 0.8rem !important;
-            padding: 0.35rem 0.15rem !important;
+            font-size: 0.82rem !important;
+            padding: 0.35rem 0.12rem !important;
+          }
+          #desktop-screener {
+            display: none !important;
+          }
+          #desktop-check-status {
+            display: inline-flex !important;
+            height: 38px !important;
+            padding: 0 0.85rem !important;
+            font-size: 0.82rem !important;
+          }
+          #desktop-register {
+            display: inline-flex !important;
+            height: 38px !important;
+            padding: 0 0.95rem !important;
+            font-size: 0.83rem !important;
+          }
+          .mobile-hamburger {
+            display: none !important;
+          }
+        }
+
+        /* Compact Desktop & Tablets Landscape (1024px to 1179px) */
+        @media (min-width: 1024px) and (max-width: 1179px) {
+          .desktop-nav {
+            display: flex !important;
+            gap: 0.45rem !important;
+            margin: 0 0.2rem !important;
+          }
+          .desktop-nav a {
+            font-size: 0.78rem !important;
+            padding: 0.3rem 0.08rem !important;
+          }
+          #desktop-screener {
+            display: none !important;
           }
           #desktop-check-status {
             display: none !important;
@@ -624,6 +677,18 @@ export const Navbar: React.FC = () => {
           }
           .mobile-hamburger {
             display: none !important;
+          }
+        }
+
+        /* Small screens (< 520px) - keep login button compact */
+        @media (max-width: 520px) {
+          .header-login-text {
+            display: none !important;
+          }
+          #header-login-btn {
+            width: 38px !important;
+            padding: 0 !important;
+            border-radius: 50% !important;
           }
         }
       `}</style>
