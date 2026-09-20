@@ -210,5 +210,112 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       }
     ]
+  },
+  {
+    slug: "alcohol-withdrawal-delirium-tremens-safety",
+    title: "Alcohol Withdrawal Symptoms Timeline & Medical Detox: Home vs. Hospital Safety Guide",
+    subtitle: "Hour-by-Hour Timeline, Life-Threatening Risks of Cold Turkey, and 24/7 Clinical Stabilization Protocols in Nagpur",
+    date: "September 20, 2026",
+    author: "Mitrangan Clinical Editorial Board",
+    reviewer: "Dr. S. K. Deshmukh, Consulting Neuropsychiatrist",
+    category: "Clinical Detox & Safety",
+    readTime: "8 min read",
+    excerpt: "Quitting alcohol abruptly can trigger severe neurochemical shock, seizures, and Delirium Tremens (DTs). Discover why unmonitored home detox is dangerous and how medical supervision ensures safe recovery.",
+    coverImage: "/assets/facility_walkway.jpg",
+    content: [
+      {
+        sectionHeading: "Why Abrupt Alcohol Cessation (Cold Turkey) is Medically Dangerous",
+        paragraphs: [
+          "When an individual drinks alcohol heavily over prolonged periods, their central nervous system adapts to the persistent depressant effects. The brain dampens GABA (its primary inhibitory neurotransmitter) and enhances glutamate (its excitatory neurotransmitter) to maintain equilibrium.",
+          "If alcohol intake stops suddenly without medical tapering, the brake pedals of the brain vanish instantly while the accelerator is pressed to the floor. This causes severe autonomic hyperactivity, dangerously elevated blood pressure, severe tremors, and life-threatening neurochemical convulsions."
+        ]
+      },
+      {
+        sectionHeading: "The Clinical Alcohol Withdrawal Timeline (Hour-by-Hour)",
+        paragraphs: [
+          "Alcohol withdrawal progresses through distinct clinical stages that vary in severity depending on consumption history and physical health:"
+        ],
+        bulletPoints: [
+          "6 to 12 Hours Post-Drink: Autonomic rebound begins. Common symptoms include trembling hands ('the shakes'), profuse sweating, rapid pulse (>100 bpm), nausea, headache, and severe internal anxiety.",
+          "12 to 24 Hours: Alcoholic hallucinosis may develop. Patients may experience fleeting auditory or visual hallucinations while remaining lucid, alongside intense insomnia and stomach distress.",
+          "24 to 48 Hours: Peak risk for withdrawal seizures (grand mal convulsions). Multiple seizures can occur in rapid succession, carrying acute risk of head trauma, asphyxiation, and hypoxia.",
+          "48 to 72+ Hours: Delirium Tremens (DTs) stage. Occurring in 3% to 5% of chronic drinkers, DTs is a medical emergency marked by severe confusion, agitation, disorientation, tactile sensations (bugs on skin), and dangerous cardiovascular instability."
+        ]
+      },
+      {
+        sectionHeading: "Home Detox vs. Residential Clinical Detoxification",
+        paragraphs: [
+          "Many families attempt to manage alcohol withdrawal at home by locking the patient in a room or administering over-the-counter sedatives. In medical addiction medicine, unmonitored home detox for severe dependency is strongly discouraged due to unpredictable seizure risk and cardiac strain.",
+          "In contrast, residential medical detox at a specialized center provides continuous vital sign monitoring, doctor-prescribed symptom-triggered pharmacotherapy (such as tapering benzodiazepines), electrolyte restoration, and high-dose intravenous Thiamine (Vitamin B1) to prevent irreversible Wernicke-Korsakoff encephalopathy."
+        ]
+      },
+      {
+        sectionHeading: "Clinical Detoxification Protocols at Mitrangan Kendra Nagpur",
+        paragraphs: [
+          "At Mitrangan De-Addiction Kendra in Godhani, Nagpur, our detoxification protocol is grounded in strict clinical safety and compassionate medical oversight:",
+          "Upon admission, every patient undergoes comprehensive vitals screening, liver function review, and continuous CIWA-Ar (Clinical Institute Withdrawal Assessment for Alcohol) monitoring. Our medical staff manages physiological stabilization discreetly before transitioning the patient into structured psychological rehabilitation.",
+          "For families in Vidarbha, Chhindwara, and surrounding districts facing acute withdrawal crises, Mitrangan provides 24/7 medical transport assistance and immediate bed allocation."
+        ]
+      },
+      {
+        sectionHeading: "Emergency Checklist: When to Seek Immediate Hospitalization",
+        paragraphs: [
+          "If your loved one exhibits persistent vomiting, high fever, hallucinations, confusion about time or identity, or any seizure activity, do not delay. Immediate clinical stabilization is required.",
+          "Families can also evaluate the patient's condition using our 2-Minute Confidential Addiction Severity Screener to determine their clinical risk tier and receive immediate guidance from our medical intake team."
+        ]
+      }
+    ]
+  },
+  {
+    slug: "relapse-prevention-recovery-plan",
+    title: "How to Prevent Relapse After Rehab: A 12-Month Recovery Blueprint for Families",
+    subtitle: "Recognizing Subconscious Triggers, the HALT Framework, and Rebuilding Long-Term Family Harmony",
+    date: "September 20, 2026",
+    author: "Mitrangan Clinical Editorial Board",
+    reviewer: "Dr. P. R. Joshi, Senior Addiction Psychologist",
+    category: "Relapse Prevention & Family Care",
+    readTime: "7 min read",
+    excerpt: "Completing residential rehab is the first milestone, but true recovery happens during reintegration. Learn the 3 stages of relapse, warning signs, and practical steps families must take.",
+    coverImage: "/assets/counseling_session.jpg",
+    content: [
+      {
+        sectionHeading: "Understanding Relapse: A Progressive Process, Not an Overnight Event",
+        paragraphs: [
+          "One of the greatest misconceptions about addiction recovery is that relapse begins the moment a person takes a drink or consumes a drug. In reality, physical use is merely the final stage of a subconscious progression that begins weeks earlier.",
+          "Addiction psychologists divide relapse into three distinct phases: Emotional Relapse (denial of feelings, skipping meals, social isolation), Mental Relapse (bargaining, reminiscing about past substance use, lying), and Physical Relapse (driving to a vendor or consuming)."
+        ]
+      },
+      {
+        sectionHeading: "The HALT Clinical Framework for Daily Sobriety",
+        paragraphs: [
+          "In early recovery, recovering individuals are vulnerable to biological and emotional vulnerability traps summarized by the clinical acronym HALT:"
+        ],
+        bulletPoints: [
+          "Hungry: Irregular eating causes blood glucose dips, triggering irritability and biochemical cravings that the brain mistakenly interprets as substance hunger.",
+          "Angry: Suppressed frustration or family conflict triggers acute cortisol surges, driving the desire to escape discomfort through familiar numbing mechanisms.",
+          "Lonely: Isolation and feeling misunderstood by peers or family weakens the psychological resolve to maintain recovery boundaries.",
+          "Tired: Chronic fatigue and disordered sleep cycles diminish prefrontal cortex inhibition, drastically reducing resistance to impulse cravings."
+        ]
+      },
+      {
+        sectionHeading: "How Families Can Support Sobriety Without Enabling",
+        paragraphs: [
+          "The home dynamic plays a pivotal role in post-rehab success. Families must cultivate an environment that balances loving empathy with firm accountability:",
+          "1. Maintain a Zero-Alcohol Household: Never keep alcohol or recreational drugs in the family home for guests or festivals. Removing temptation is an act of solidarity.",
+          "2. Avoid Interrogative Suspicion: Constant cross-examination ('Where did you go? Did you drink?') creates shame and resentment. Instead, set clear, agreed-upon behavioral agreements.",
+          "3. Encourage Routine & Hobbies: Structured waking times, regular physical exercise, morning meditation, and productive hobbies prevent the idle boredom that fuels addictive thinking.",
+          "4. Practice Open Emotional Expression: Provide a safe emotional container where recovering individuals can admit cravings without fear of hysterical family judgment."
+        ]
+      },
+      {
+        sectionHeading: "Mitrangan's 12-Month Continuing Care & Alumni Support in Nagpur",
+        paragraphs: [
+          "Rehabilitation at Mitrangan Kendra does not end upon discharge. Our continuum of care includes structured post-rehab check-ins, monthly alumni peer recovery circles in Nagpur, and dedicated family counseling sessions to reinforce long-term sobriety.",
+          "If warning signs emerge, our clinical team can intervene early with short outpatient stabilization sessions before an emotional lapse escalates into full-scale dependency.",
+          "If you notice early relapse indicators or wish to assess a family member's current vulnerability level, complete our 2-Minute Confidential Screener or call our 24/7 counselor desk directly."
+        ]
+      }
+    ]
   }
 ];
+
