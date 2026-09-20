@@ -13,21 +13,6 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
-# Explicitly serve static robots.txt, sitemap.xml, and llms.txt
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-
-[[redirects]]
-  from = "/llms.txt"
-  to = "/llms.txt"
-  status = 200
 
 # Legacy SEO & Canonical 301 Redirects
 [[redirects]]
@@ -91,6 +76,12 @@
 
 [[headers]]
   for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/llms-full.txt"
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"
     Cache-Control = "public, max-age=86400"
