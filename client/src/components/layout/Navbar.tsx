@@ -220,6 +220,7 @@ export const Navbar: React.FC = () => {
 
             <Link
               href="/status"
+              rel="nofollow"
               className="btn btn-ghost"
               style={{
                 display: 'none',
@@ -340,6 +341,7 @@ export const Navbar: React.FC = () => {
                   {/* 1. Patient Login */}
                   <Link
                     href="/login"
+                    rel="nofollow"
                     onClick={() => setIsUserMenuOpen(false)}
                     role="menuitem"
                     style={{
@@ -371,6 +373,7 @@ export const Navbar: React.FC = () => {
                   {/* 2. Admin Login */}
                   <Link
                     href="/admin/login"
+                    rel="nofollow"
                     onClick={() => setIsUserMenuOpen(false)}
                     role="menuitem"
                     style={{
@@ -404,6 +407,7 @@ export const Navbar: React.FC = () => {
                   {/* 3. Check Status */}
                   <Link
                     href="/status"
+                    rel="nofollow"
                     onClick={() => setIsUserMenuOpen(false)}
                     role="menuitem"
                     style={{
@@ -541,12 +545,12 @@ export const Navbar: React.FC = () => {
               <span>Addiction Screener (Quiz)</span>
             </Link>
 
-            <Link href="/status" className="btn btn-outline-gold" style={{ width: '100%' }}>
+            <Link href="/status" rel="nofollow" className="btn btn-outline-gold" style={{ width: '100%' }}>
               <ShieldCheck size={18} />
               <span>Check Admission Status</span>
             </Link>
 
-            <Link href="/login" className="btn btn-ghost" style={{ width: '100%' }}>
+            <Link href="/login" rel="nofollow" className="btn btn-ghost" style={{ width: '100%' }}>
               <UserCheck size={18} />
               <span>Patient Dashboard Login</span>
             </Link>

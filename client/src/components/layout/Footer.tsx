@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
     { label: 'Admission Guide', href: '/admission-process' },
     { label: 'Addiction Screener (Quiz)', href: '/self-assessment', isSpecial: true },
     { label: 'Articles & FAQs', href: '/blogs' },
-    { label: 'Check Status', href: '/status' }
+    { label: 'Check Status', href: '/status', rel: 'nofollow' }
   ];
 
   const quickNavCol2 = [
@@ -175,6 +175,7 @@ export const Footer: React.FC = () => {
                   <Link
                     key={link.href}
                     href={link.href}
+                    rel={link.rel}
                     className="footer-nav-link"
                     style={{
                       color: link.isSpecial ? 'var(--accent-gold)' : 'var(--text-cream)',
@@ -449,11 +450,11 @@ export const Footer: React.FC = () => {
               <span>Privacy Policy</span>
             </Link>
 
-            <Link href="/login" style={{ color: 'var(--text-cream)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+            <Link href="/login" rel="nofollow" style={{ color: 'var(--text-cream)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
               <span>Patient Login</span>
             </Link>
 
-            <Link href="/admin/login" style={{ color: 'var(--text-dim)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+            <Link href="/admin/login" rel="nofollow" style={{ color: 'var(--text-dim)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
               <Lock size={12} />
               <span>Admin Portal</span>
             </Link>

@@ -6,7 +6,7 @@ import { Calendar, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { FAQSection } from '../components/home/FAQSection';
 
 export const BlogsPage: React.FC = () => {
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<any[]>(BLOG_POSTS);
 
   useEffect(() => {
     const loadBlogs = async () => {

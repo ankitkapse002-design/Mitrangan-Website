@@ -8,29 +8,30 @@ export const BlogPostPage: React.FC = () => {
   const [, params] = useRoute('/blogs/:slug');
   const slug = params?.slug;
 
-  const [post, setPost] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
+  const staticFound = slug ? BLOG_POSTS.find(p => p.slug === slug) : null;
+  const [post, setPost] = useState<any | null>(() => staticFound || null);
+  const [loading, setLoading] = useState<boolean>(() => !staticFound);
 
   useEffect(() => {
     if (!slug) return;
 
+    const staticArticle = BLOG_POSTS.find(p => p.slug === slug);
+    if (staticArticle && !post) {
+      setPost(staticArticle);
+      setLoading(false);
+    }
+
     const loadArticle = async () => {
-      setLoading(true);
       try {
         const res = await fetch(`/api/blogs/${encodeURIComponent(slug)}`);
         if (res.ok) {
           const data = await res.json();
           if (data.blog) {
             setPost(data.blog);
-            return;
           }
         }
-        // Fallback to static
-        const staticFound = BLOG_POSTS.find(p => p.slug === slug);
-        setPost(staticFound || null);
       } catch {
-        const staticFound = BLOG_POSTS.find(p => p.slug === slug);
-        setPost(staticFound || null);
+        // Already initialized with static content fallback
       } finally {
         setLoading(false);
       }

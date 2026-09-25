@@ -8,8 +8,14 @@ if (!rootElement) {
   throw new Error('Failed to find root element');
 }
 
-ReactDOM.createRoot(rootElement).render(
+const appComponent = (
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+
+if (rootElement.hasChildNodes()) {
+  ReactDOM.hydrateRoot(rootElement, appComponent);
+} else {
+  ReactDOM.createRoot(rootElement).render(appComponent);
+}

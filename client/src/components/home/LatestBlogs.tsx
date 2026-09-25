@@ -4,7 +4,7 @@ import { Calendar, Clock, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
 import { BLOG_POSTS } from '../../content/blogs';
 
 export const LatestBlogs: React.FC = () => {
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<any[]>(() => BLOG_POSTS.slice(0, 3));
 
   useEffect(() => {
     const fetchLatest = async () => {

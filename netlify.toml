@@ -55,6 +55,16 @@
   to = "/privacy"
   status = 301
 
+[[redirects]]
+  from = "/addiction-screener"
+  to = "/self-assessment"
+  status = 301
+
+[[redirects]]
+  from = "/addiction-screener/"
+  to = "/self-assessment"
+  status = 301
+
 # Single Page App fallback for React client routing
 [[redirects]]
   from = "/*"
